@@ -74,8 +74,6 @@ Things you may want to cover:
 |birthday_mm|integer|null: false|
 |birthday_dd|integer|null: false|
 |content|text||
-|address|integer|null: false|
-|card|integer|null: false|
 ### Association
 - has_many :products
 - has_many :transactions
