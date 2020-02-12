@@ -74,8 +74,8 @@ Things you may want to cover:
 |birthday_mm|integer|null: false|
 |birthday_dd|integer|null: false|
 |content|text||
-|address_id|integer|null: false|
-|card_id|integer|null: false|
+|address|integer|null: false|
+|card|integer|null: false|
 ### Association
 - has_many :products
 - has_many :transactions
@@ -87,14 +87,16 @@ Things you may want to cover:
 |card_exp_yy|integer|null: false|
 |card_exp_mm|integer|null: false|
 |card_csv|integer|null: false|
+|user_id|integer|null: false|
 ### Association
 - belongs_to :user
 
 ## Addressテーブル
 |post_num|integer|null: false|
 |prefecture|string|null: false|
-|address1|string|null: false|
-|address2|string|null: false|
+|municipality|string|null: false|
+|address|string|null: false|
 |phone_num|string|null: false|
+|user_id|integer|null: false|
 ### Association
 - belongs_to :user
