@@ -43,6 +43,14 @@ Things you may want to cover:
 - belongs_to :transaction
 - belongs_to :category
 
+## imagesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|image|string||
+|product_id|references|null: false, foreign_key: true|
+### Association
+- belongs_to: product
+
 ## Categoriesテーブル
 |Column|Type|Options|
 |------|----|-------|
