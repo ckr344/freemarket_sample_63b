@@ -1,0 +1,106 @@
+footer{
+  height: 421px;
+  width: 100%;
+  background-color: #222222;
+  padding: 0 20px 10px;
+  font-family: "游ゴシック体";
+}
+
+.footer__bottom{
+  height: 30px;
+  margin: 30px 190px 20px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  display: flex;
+  &__lisence{
+    width: 750px;
+    height: 30px;
+    padding-left: 15px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 30px;
+  }
+}
+
+.footer__bottom__top_page__logo{
+  width: 160px;
+  height: 45px;
+  object-fit: cover;
+}
+
+.footer__nav{
+  width: 1020px;
+  margin: 0 calc((100vw - 1060px)/2) 0;
+  height: 330px;
+  display: flex;
+
+  &__privacy{
+    margin-top: 18px;
+    padding-right: 40px;
+    > h2{
+      color: rgb(255, 255, 255);
+    }
+
+    &__box{
+      display: flex;
+      font-size: 12px;
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      opacity: 0.7;
+
+      &__lists{
+        margin-right: 10px;
+        width: 189px;
+
+        &__list{
+          margin-top: 14px;
+          
+          > a{
+            font-size: 12px;
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+          }
+        }
+      }
+    } 
+  }
+
+  &__box{
+    color: rgb(255, 255, 255);
+    margin-top: 18px;
+    padding-right: 40px;
+    width: auto;
+
+    &__sns{
+      margin-top: 30px;
+
+      > a{
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+      }
+
+      &__twitter{
+        margin-right: 20px;
+      }
+    }
+
+    &__privacy{
+      display: flex;
+    }
+
+    &__lists{
+
+      > li{
+        font-size: 12px;
+        margin-top: 14px;
+
+        > a{
+          text-decoration: none;
+          color: rgb(255, 255, 255);
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+}
+
