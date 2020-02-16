@@ -1,0 +1,133 @@
+header{
+  background-color: white;
+	height: 100px;
+	width: 100vw;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  font-family: "游ゴシック体";
+  font-size: 14px;
+}
+
+.header__center{
+	width: 1060px;
+	height: 120px;
+	margin: 0 auto;
+  padding-top: 8px;
+
+  &__up{
+    height: 40px;
+    width: 1020px;
+    display: flex;
+
+    &__mercari_logo{
+      margin-right: 25px;
+    }
+
+    &__search{
+      display: flex;
+      position: relative;
+      right: 0;
+
+      &__keyword{
+        border-radius: 4px;
+        border: 1px solid rgb(204, 204, 204);
+        height: 40px;
+        width: 841px;
+        padding: 0 50px 0 10px;
+        margin-top: 6px;
+        background-color: rgb(245, 245, 245);
+      }
+
+      &__btn{
+        position: absolute;
+        border: none;
+        background-color: transparent;
+        width: 40px;
+        height: 52px;
+        padding: 0;
+        right: 0;
+
+        &__icon{
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+  }
+  &__down{
+    height: 44px;
+    margin-top: 8px;
+    padding: 0 5px 0 15px;
+    line-height: 44px;
+    display: flex;
+    justify-content: space-between;
+
+    &__menu{
+      display: flex;
+
+      &__category{
+        height: 44px;
+        width: 160px;
+        font-size: 14px;
+        font-weight: 600;
+        padding-right: 10px;
+
+        &__icon{
+          height: 12px;
+          color: #2bcbd1;
+        }
+      }
+
+      &__brand{
+        height: 44px;
+        width: 160px;
+        font-size: 14px;
+        font-weight: 600;
+        padding-left: 10px;
+
+        &__icon{
+          height: 12px;
+          color: #2bcbd1;
+        }
+      }
+    }
+    &__user_menu{
+      display: flex;
+      width: 548px;
+      line-height: 44px;
+
+      &__likes{
+        width: 140px;
+
+        &__icon{
+          color: rgb(204, 204, 204);
+        }
+      }
+      &__notify{
+        width: 112px;
+
+        &__icon{
+          color: rgb(204, 204, 204);
+        }
+      }
+      &__todo{
+        width: 150px;
+
+        &__icon{
+          color: rgb(204, 204, 204);
+        }
+      }
+      &__mypage{
+        width: 140px;
+      }
+
+      > li{
+        padding: 0 12px 0;
+        display: flex;
+
+        > svg{
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,9 @@
 class Product < ApplicationRecord
   belongs_to :user
-  belongs_to :transaction
   belongs_to :category
   has_many :images
   validates :name, :price, presence: true
   enum size:{
-    "---": 0,
     "XXS以下": 1,
     "XS(SS)": 2,
     "S": 3,
@@ -18,12 +16,10 @@ class Product < ApplicationRecord
     "FREE SIZE":10
   }
   enum delivery_charge:{
-    "---": 0,
     "送料込み(出品者負担)": 1,
     "着払い(購入者負担)":2
   }
   enum delivery_method:{
-    "---": 0,
     "未定": 1,
     "らくらくメルカリ便": 2,
     "ゆうメール": 3,
@@ -35,7 +31,6 @@ class Product < ApplicationRecord
     "ゆうパケット": 9
   }
   enum delivery_prefecture:{
-    "---": 0,
     "北海道":1,"青森県":2,"岩手県":3,"宮城県":4,"秋田県":5,"山形県":6,"福島県":7,
     "茨城県":8,"栃木県":9,"群馬県":10,"埼玉県":11,"千葉県":12,"東京都":13,"神奈川県":14,
     "新潟県":15,"富山県":16,"石川県":17,"福井県":18,"山梨県":19,"長野県":20,
@@ -47,7 +42,6 @@ class Product < ApplicationRecord
     "沖縄県":47
   }
   enum delivery_days:{
-    "---": 0,
     "1~2日で発送": 1,
     "2~3日で発送": 2,
     "3~7日で発送": 3,
