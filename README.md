@@ -61,7 +61,7 @@ Things you may want to cover:
 ## Transactionテーブル
 |Column|Type|Options|
 |------|----|-------|
-|product_id|integer|null: false|
+|product|references|null: false, foreign_key: true|
 |user|references|null: false, foreign_key: true|
 ### Association
 - belongs_to :product
