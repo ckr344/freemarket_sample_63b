@@ -1,0 +1,92 @@
+.product-show
+  .product-show__main
+    .product-show__content
+      .product-show__top-content
+        .product-show__item-box
+          .product-show__item-box--name
+            サバ缶
+          .product-show__item-box__body
+            .product-show__item-box__body--top-img
+              = image_tag "pict/test-img1.png", class: "product-show__item-top-img"
+            .product-show__item-box__body--list
+              .product-show__item-box__body--sub-img
+                = image_tag "pict/test-img2.png", class: "product-show__item-sub-img"
+              .product-show__item-box__body--sub-img
+                = image_tag "pict/test-img3.png", class: "product-show__item-sub-img"
+              .product-show__item-box__body--sub-img
+                = image_tag "pict/test-img1.png", class: "product-show__item-sub-img"
+          .product-show__item-box--price
+            %span¥1200
+            .product-show__item-box--price-detail
+              %span.product-show__item-box--price-detail-text
+                (税込)
+              %span.product-show__item-box--price-detail-text
+                送料込み
+          .product-show__item-box--item-detail
+            サバ缶
+          %table.product-show__item-box--table
+            %tbody.product-show__item-box--table-body
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  出品者
+                %td.product-show__item-box--table-data
+                  hoge
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  カテゴリー
+                %td.product-show__item-box--table-data
+                  = link_to "レディース", "#", class: "product-show__table-link"
+                  %br
+                  = link_to "トップス", "#", class: "product-show__table-link"
+                  %br
+                  = link_to "シャツ", "#", class: "product-show__table-link"
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  ブランド
+                %td.product-show__item-box--table-data
+                  = link_to "Balenciaga", "#", class: "product-show__table-link"
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  商品のサイズ
+                %td.product-show__item-box--table-data
+                  S
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  商品の状態
+                %td.product-show__item-box--table-data
+                  未使用に近い
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  配送料の負担
+                %td.product-show__item-box--table-data
+                  送料込み（出品者負担）
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  配送の方法
+                %td.product-show__item-box--table-data
+                  クロネコヤマト
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  発送元の地域
+                %td.product-show__item-box--table-data
+                  = link_to "東京都", "#", class: "product-show__prefecture-link"
+              %tr.product-show__item-box--table-list
+                %th.product-show__item-box--table-title
+                  発送日の目安
+                %td.product-show__item-box--table-data
+                  1~2日で発送
+      %ul.product-show__links
+        %li.product-show__links-list
+          = link_to "< 前の商品", "#", class: "product-show__links-link"
+        %li.product-show__links-list
+          = link_to "次の商品 >", "#", class: "product-show__links-link"
+      .product-show__back-link
+        .product-show__back--text
+          = link_to "レディースをもっと見る", "#", class: "product-show__back-link"
+.footer_sell
+  = link_to new_product_path , class:"footer_sell_btn_link" do
+    .footer_sell_btn
+      .footer_sell_btn_word
+        出品
+      .footer_icon
+        = icon('fas fa-camera', class: "camera_icon")
