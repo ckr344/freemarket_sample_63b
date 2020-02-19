@@ -1,33 +1,3 @@
-.product-show__item-top-img{
-  object-fit: cover;
-  height: 346px;
-  width: 560px;
-}
-
-.product-show__item-sub-img{
-  object-fit: cover;
-  height: 87px;
-  width: 140px;
-}
-
-.product-show-link{
-  text-decoration: none;
-  color: #3CCACE;
-}
-
-.product-show__links-link{
-  text-decoration: none;
-  color: #3CCACE;
-}
-
-.product-show__back-link{
-  margin: 24px 0 8px;
-  color: #3CCACE;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 22px;
-}
-
 .product-show{
   background: #f8f8f8;
   &__main{
@@ -110,10 +80,6 @@
       border-color: inherit;
     }
 
-    &--table-list{
-
-    }
-
     &--table-title{
       width: 20%;
       background-color: #eee;
@@ -137,5 +103,40 @@
     list-style: none;
     display: flex;
     justify-content: space-between;
+  }
+
+  &__item-top-img{
+    object-fit: cover;
+    height: 346px;
+    width: 560px;
+  }
+
+  &__item-sub-img{
+    object-fit: cover;
+    height: 87px;
+    width: 140px;
+  }
+
+  &__table-link{
+    text-decoration: none;
+    color: #3CCACE;
+  }
+
+  &__prefecture-link{
+    text-decoration: none;
+    color: #3CCACE;
+  }
+
+  &__links-link{
+    text-decoration: none;
+    color: #3CCACE;
+  }
+
+  &__back-link{
+    margin: 24px 0 8px;
+    color: #3CCACE;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 22px;
   }
 }
