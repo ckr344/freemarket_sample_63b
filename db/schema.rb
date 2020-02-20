@@ -45,10 +45,11 @@ ActiveRecord::Schema.define(version: 2020_02_17_112047) do
   end
 
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "product_id"
+    t.bigint "product_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_transactions_on_product_id"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -77,5 +78,6 @@ ActiveRecord::Schema.define(version: 2020_02_17_112047) do
   end
 
   add_foreign_key "products", "users"
+  add_foreign_key "transactions", "products"
   add_foreign_key "transactions", "users"
 end
