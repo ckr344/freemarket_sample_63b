@@ -1,1 +1,244 @@
-new
+.exhibition
+  %header
+    %a{href: "http://furima.tokyo/"}
+      = image_tag "material/logo/logo.png", class: "exhibition__logo", alt: "furima"
+  %main
+    .exhibition__container__header
+      商品の情報を入力
+    -# 画像
+    .upload__box.exhibition__content__box
+      .upload__box__head
+        出品画像
+        %p.upload__box__head__sub 最大4枚までアップロードできます
+      .upload__box__images
+        .upload__box__image
+          %label{for: "image1"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%"
+          %input#image1{style: "display: none;", type: "file"}
+        .upload__box__image
+          %label{for: "image2"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%"
+          %input#image2{style: "display: none;", type: "file"}
+        .upload__box__image
+          %label{for: "image3"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%"
+          %input#image3{style: "display: none;", type: "file"}
+        .upload__box__image
+          %label{for: "image4"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%"
+          %input#image4{style: "display: none;", type: "file"}
+    -# 商品
+    .exhibition__content__box.product__box
+      -# 商品名
+      .form__group1
+        %label 
+          商品名
+          %span.form-description.form-require 必須
+        %input{placeholder: "商品名（必須 40文字まで)", class: "name__input", maxlength: '40'}
+      -# 説明
+      .form__group1
+        %label 
+          商品の説明
+          %span.form-description.form-require 必須
+        %textarea{placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class: "description__input", maxlength: '1000'}
+    -# 詳細
+    .exhibition__content__box.detail__box
+      .section__head
+        商品の詳細
+      .form__box
+        .form__group2
+          %label 
+            カテゴリー
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "category", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 送料込み(出品者負担)
+              %option{value: "2"} 着払い(購入者負担)
+        .form__group2
+          %label 
+            サイズ
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "size", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} Free/One size
+              %option{value: "2"} ~XS
+              %option{value: "3"} XS
+              %option{value: "4"} S
+              %option{value: "5"} M
+              %option{value: "6"} L
+              %option{value: "7"} XL
+              %option{value: "8"} XXL~
+        .form__group2
+          %label 
+            ブランド
+            %span.form-description.form-optional 任意
+          %input{placeholder: "例) シャネル", class: "brand__input"}
+        .form__group2
+          %label 
+            商品の状態
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "status", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 新品、未使用
+              %option{value: "2"} 未使用に近い
+              %option{value: "3"} 目立った傷や汚れなし
+              %option{value: "4"} やや傷や汚れあり
+              %option{value: "5"} 傷や汚れあり
+              %option{value: "6"} 全体的に状態が悪い
+
+    -# 配送
+    .exhibition__content__box.shipping__box
+      .section__head
+        配送について
+        = link_to "" do
+          = icon('fas', 'question-circle', class: "question__icon") 
+      .form__box
+        .form__group2
+          %label 
+            配送料の負担
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "shipping-charge", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 送料込み(出品者負担)
+              %option{value: "2"} 着払い(購入者負担)
+        .form__group2
+          %label 
+            配送の方法
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "shipping-method", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 未定
+              %option{value: "2"} らくらくフリマ便
+              %option{value: "3"} ゆうメール
+              %option{value: "4"} レターパック
+              %option{value: "5"} 普通郵便(定形、定形外)
+              %option{value: "6"} クロネコヤマト
+              %option{value: "7"} ゆうパック
+              %option{value: "8"} クリックポスト
+              %option{value: "9"} ゆうパケット
+        .form__group2
+          %label 
+            発送元の地域
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "shipping-area", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1" } 北海道
+              %option{value: "2" } 青森県
+              %option{value: "3" } 岩手県
+              %option{value: "4" } 宮城県
+              %option{value: "5" } 秋田県
+              %option{value: "6" } 山形県
+              %option{value: "7" } 福島県
+              %option{value: "8" } 茨城県
+              %option{value: "9" } 栃木県
+              %option{value: "10"} 群馬県
+              %option{value: "11"} 埼玉県
+              %option{value: "12"} 千葉県
+              %option{value: "13"} 東京都
+              %option{value: "14"} 神奈川県
+              %option{value: "15"} 新潟県
+              %option{value: "16"} 富山県
+              %option{value: "17"} 石川県
+              %option{value: "18"} 福井県
+              %option{value: "19"} 山梨県
+              %option{value: "20"} 長野県
+              %option{value: "21"} 岐阜県
+              %option{value: "22"} 静岡県
+              %option{value: "23"} 愛知県
+              %option{value: "24"} 三重県
+              %option{value: "25"} 滋賀県
+              %option{value: "26"} 京都府
+              %option{value: "27"} 大阪府
+              %option{value: "28"} 兵庫県
+              %option{value: "29"} 奈良県
+              %option{value: "30"} 和歌山県
+              %option{value: "31"} 鳥取県
+              %option{value: "32"} 島根県
+              %option{value: "33"} 岡山県
+              %option{value: "34"} 広島県
+              %option{value: "35"} 山口県
+              %option{value: "36"} 徳島県
+              %option{value: "37"} 香川県
+              %option{value: "38"} 愛媛県
+              %option{value: "39"} 高知県
+              %option{value: "40"} 福岡県
+              %option{value: "41"} 佐賀県
+              %option{value: "42"} 長崎県
+              %option{value: "43"} 熊本県
+              %option{value: "44"} 大分県
+              %option{value: "45"} 宮崎県
+              %option{value: "46"} 鹿児島県
+              %option{value: "47"} 沖縄県 
+        .form__group2
+          %label 
+            配送までの日数
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "shipping-days", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 1~2日で発送
+              %option{value: "2"} 2~3日で発送
+              %option{value: "3"} 4~7日で発送
+              
+    -# 価格
+    .exhibition__content__box.price__box
+      .section__head
+        販売価格(300〜9,999,999)
+        = link_to "" do
+          = icon('fas', 'question-circle', class: "question__icon")  
+      .form__box
+        .from__group3.price__form
+          %label.price__form__left 
+            価格
+            %span.form-description.form-require 必須
+          .price__form__right
+            %p.yen ¥
+            %input{placeholder: "例)300" ,class: "price__input"}
+        .from__group3.commission__form
+          .commission__form__left
+            販売手数料(10%)
+          .commission__form__right
+            ¥
+        .from__group3.profit__form
+          .profit__form__left
+            販売利益
+          .profit__form__right
+            ¥
+    -# 出品ボタン
+    .exhibition__btn__box
+      %a{ href: '', id: '' } 禁止されている出品
+      、
+      %a{ href: '', id: '' }行為
+      を必ずご確認ください。
+      %p
+      またブランド品でシリアルナンバー等がある場合はご記載ください。
+      %a{ href: '', id: '' }偽ブランドの販売
+      は犯罪であり処罰される可能性があります。
+      %p
+      また、出品をもちまして
+      %a{ href: '', id: '' }加盟店規約
+      に同意したことになります。
+      .exhibition__area
+        %input{type: "submit", value: "出品する", class: "exhibition__btn determine__btn"}
+      .return__area
+        %input{type: "submit", value: "戻る ", class: "return__btn determine__btn"} 
+  -# footer
+  %footer
+    %ul.footer__links
+      %li
+        %a{href: "", class: "footer__link"} プライバシーポリシー
+      %li.footer__link
+        %a{href: "", class: "footer__link"} フリマ利用規約
+      %li.footer__link
+        %a{href: "", class: "footer__link"} 特定商取引に関する表記
+    .exhibition__footer__cr
+      %a{href: "http://furima.tokyo/"}
+        = image_tag "material/logo/logo.png", alt: "furima", class: "footer__logo" , height: 80, width: 100
+      .footer__last
+        %small © furima, Inc.
