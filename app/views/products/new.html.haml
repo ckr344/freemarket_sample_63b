@@ -215,17 +215,30 @@
             %span.form-description.form-require 必須
           .price__form__right
             %p.yen ¥
-            %input{placeholder: "例)300" ,class: "price__input"}
+            %input{type: "number", placeholder: "例)300", class: "price__input", id: "price__num", onchange: "calcProfit();", min: "300"}
         .from__group3.commission__form
           .commission__form__left
             販売手数料(10%)
-          .commission__form__right
+          .commission__form__right#commition__num
             ¥
         .from__group3.profit__form
           .profit__form__left
             販売利益
-          .profit__form__right
+          .profit__form__right#profit__num
             ¥
+          :javascript
+            function calcProfit() {
+              var price = document.getElementById('price__num').value;
+              price = Number(price);
+              var commision = price * 0.1
+              document.getElementById('commition__num').innerHTML = "¥ " + commision;
+            
+            
+              var price = document.getElementById('price__num').value;
+              price = Number(price);
+              var profit = price * 0.9
+              document.getElementById('profit__num').innerHTML = "¥ " + profit;
+            }  
     -# 出品ボタン
     .exhibition__btn__box
       %a{ href: '', id: '' } 禁止されている出品
