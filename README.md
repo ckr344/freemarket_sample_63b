@@ -43,7 +43,7 @@ Things you may want to cover:
 - belongs_to :transaction
 - belongs_to :category
 
-## imagesテーブル
+## Imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |image|string||
@@ -80,28 +80,20 @@ Things you may want to cover:
 |birthday_yyyy|integer|null: false|
 |birthday_mm|integer|null: false|
 |birthday_dd|integer|null: false|
-|content|text||
-### Association
-- has_many :products
-- has_many :transactions
-- has_one :card
-- has_one :address
-
-## Cardテーブル
-|card_number|integer|null: false|
-|card_exp_yy|integer|null: false|
-|card_exp_mm|integer|null: false|
-|card_csv|integer|null: false|
-|user_id|integer|null: false|
-### Association
-- belongs_to :user
-
-## Addressテーブル
 |post_num|integer|null: false|
 |prefecture|string|null: false|
 |municipality|string|null: false|
 |address|string|null: false|
 |phone_num|string|null: false|
+|introduction|text||
+### Association
+- has_many :products
+- has_many :transactions
+- has_one :card
+
+## Cardテーブル
+|customer_id|string|null: false|
+|card_id|string|null: false|
 |user_id|integer|null: false|
 ### Association
 - belongs_to :user
