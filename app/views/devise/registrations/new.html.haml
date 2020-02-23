@@ -1,21 +1,49 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.user-new
+  .user-new__header
+  %h2 会員情報入力
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "user-new__form"}) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .user-new__field
+      = f.label :nickname, "ニックネーム"
+      %br/
+      = f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "例）メルカリ太郎"
+    .user-new__field
+      = f.label :email, "メールアドレス"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "PC・携帯どちらでも可"
+    .user-new__field
+      = f.label :password, "パスワード"
+      - if @minimum_password_length
+        %em
+          (#{@minimum_password_length} characters minimum)
+      %br/
+      = f.password_field :password, autocomplete: "new-password", placeholder: "７文字以上の半角英数字"
+    .user-new__field
+      = f.label :password_confirmation
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "もう一度入力して下さい"
+    .user-new__field
+      %h3 本人確認
+      %p1 安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
+    .user-new__field
+      = f.label :first_name, "お名前（全角）"
+      %br/
+      = f.text_field :first_name, autofocus: true, placeholder: "例）山田" 
+      = f.text_field :last_name, autofocus: true, placeholder: "彩"
+    .user-new__field
+      = f.label :first_name, "お名前（全角カナ）"
+      %br/
+      = f.text_field :first_name_kana, autofocus: true, placeholder: "例）ヤマダ" 
+      = f.text_field :last_name_kana, autofocus: true, placeholder: "アヤ" 
+    .user-new__field
+      = f.label "生年月日"
+      %br/
+      = f.select :birthday_yyyy, ["----", "1989"], {}, {class: ""}
+      = f.label :birthday_yyyy, "年"
+      = f.select :birthday_mm, ["--", "11"], {}, {class: ""}
+      = f.label :birthday_mm, "月"
+      = f.select :birthday_dd, ["--", "11"], {}, {class: ""}
+      = f.label :birthday_dd, "日"
+    .actions
+      = f.submit "Sign up"
+  = render "devise/shared/links"
