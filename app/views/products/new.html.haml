@@ -219,7 +219,7 @@
         .from__group3.commission__form
           .commission__form__left
             販売手数料(10%)
-          .commission__form__right#commition__num
+          .commission__form__right#commission__num
             ¥
         .from__group3.profit__form
           .profit__form__left
@@ -230,13 +230,13 @@
             function calcProfit() {
               var price = document.getElementById('price__num').value;
               price = Number(price);
-              var commision = price * 0.1
-              document.getElementById('commition__num').innerHTML = "¥ " + commision;
+              var com = price * 0.1;
+              document.getElementById('commission__num').innerHTML = "¥ " + com;
             
             
               var price = document.getElementById('price__num').value;
               price = Number(price);
-              var profit = price * 0.9
+              var profit = price * 0.9;
               document.getElementById('profit__num').innerHTML = "¥ " + profit;
             }  
     -# 出品ボタン
