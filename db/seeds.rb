@@ -637,7 +637,7 @@ end
 
 
 
-matome,pet,food,drink,nitiyou,untic,bunbou,jimu,sonota = sonota1.children.create([{name: "まとめ売り"},{name: "ペット用品"},{name: "食品"},{name: "飲料/酒"},{name: "日用品/生活雑貨/旅行"},{name: "アンティーク/コレクション"},{name: "文房具/事務用品"},{name: "事務"},{name: ""}])
+matome,pet,food,drink,nitiyou,untic,bunbou,jimu,sonota = sonota1.children.create([{name: "まとめ売り"},{name: "ペット用品"},{name: "食品"},{name: "飲料/酒"},{name: "日用品/生活雑貨/旅行"},{name: "アンティーク/コレクション"},{name: "文房具/事務用品"},{name: "事務"}])
 
 ["ペットフード","犬用品","猫用品","魚用品/水草","小動物用品","爬虫類/両生類用品","かご/おり","鳥用品","虫類用品","その他"].each do |name|
   pet.children.create(name: name)
