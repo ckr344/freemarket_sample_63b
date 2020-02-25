@@ -19,8 +19,7 @@
         - categories.children.each do |child|
           .category_list_box_individual_sub_category_name
             %h4
-              = link_to "categories/#{child.id}" do
-                = child.name
+              = child.name
           .category_list_box_individual_sub_sub_category_box
             .category_list_box_individual_sub_sub_category_name
               - child.children.each do |grandchild|
