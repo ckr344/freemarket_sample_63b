@@ -3,57 +3,26 @@
     .category_list_title
       カテゴリー一覧
       %ul.category_name_list
-        %li.category_name
-          =  link_to "#" do
-            %div メンズ
-          -# 実際は不要
-        %li.category_name
-          =  link_to "#" do
-            %div レディース
-        %li.category_name
-          =  link_to "#" do
-            %div 結構な長文でも横幅が大きさが変動していく
-        %li.category_name
-          =  link_to "#" do
-            %div 行も勝手に変えてくれる
-          -# ここまで不要
+        - @categories.each do |categories|
+          %li.category_name
+            =  link_to categories_path(categories) do
+              %div #{categories.name}
     -# ここからカテゴリー別ゾーン
+  - @categories.each do |categories|
     .category_list_box
       %ul.category_list_box_title
-        %li メンズ
+        %li #{categories.name}
       .category_list_box_individual
         %div
-          = link_to "#" do
+          = link_to categories_path(categories) do
             すべて
-        .category_list_box_individual_sub_category_name
-          %h4
-            トップス
-        .category_list_box_individual_sub_sub_category_box
-          .category_list_box_individual_sub_sub_category_name
-            %div
-              = link_to "#" do
-                すべて
-            %div
-              = link_to "#" do
-                Tシャツ/カットソー（半袖/袖なし）
-                
-        -# カテゴリー別ゾーン　以下は不要
-    .category_list_box
-      %ul.category_list_box_title
-        %li メンズ
-      .category_list_box_individual
-        %p
-          = link_to "#" do
-            すべて
-        .category_list_box_individual_sub_category_name
-          %h4
-            トップス
-        .category_list_box_individual_sub_sub_category_box
-          .category_list_box_individual_sub_sub_category_name
-            %div
-              = link_to "#" do
-                すべて
-            %div
-              = link_to "#" do
-                Tシャツ/カットソー（半袖/袖なし）
-              -# カテゴリー別ゾーン　ここまで不要
+        - categories.children.each do |child|
+          .category_list_box_individual_sub_category_name
+            %h4
+              = child.name
+          .category_list_box_individual_sub_sub_category_box
+            .category_list_box_individual_sub_sub_category_name
+              - child.children.each do |grandchild|
+                %div
+                  = link_to categories_path(grandchild) do
+                    = grandchild.name
