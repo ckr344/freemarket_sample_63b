@@ -76,3 +76,5 @@ group :production do
   gem 'unicorn', '5.4.1'
 end
 gem 'payjp'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem "jquery-rails"
