@@ -5,7 +5,7 @@
       %ul.category_name_list
         - @categories.each do |categories|
           %li.category_name
-            =  link_to "categories/#{categories.id}" do
+            =  link_to categories_path(categories) do
               %div #{categories.name}
     -# ここからカテゴリー別ゾーン
   - @categories.each do |categories|
@@ -14,7 +14,7 @@
         %li #{categories.name}
       .category_list_box_individual
         %div
-          = link_to "categories/#{categories.id}" do
+          = link_to categories_path(categories) do
             すべて
         - categories.children.each do |child|
           .category_list_box_individual_sub_category_name
@@ -24,5 +24,5 @@
             .category_list_box_individual_sub_sub_category_name
               - child.children.each do |grandchild|
                 %div
-                  = link_to "categories/#{grandchild.id}" do
+                  = link_to categories_path(grandchild) do
                     = grandchild.name
