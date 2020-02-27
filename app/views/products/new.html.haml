@@ -1,1 +1,170 @@
-new
+%script{src: "product/new.js", type: "text/javascript"}
+.exhibition
+  .exhibition__logo__box
+    = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),"http://furima.tokyo/", class: "exhibition__logo"
+  %main
+    .exhibition__container__header
+      商品の情報を入力
+    -# 画像
+    .upload__box.exhibition__content__box
+      .upload__box__head
+        出品画像
+        %p.upload__box__head__sub 最大3枚までアップロードできます
+      .upload__box__images
+        .upload__box__image
+          %label{for: "image1"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
+          %input#image1{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"} 
+        .upload__box__image
+          %label{for: "image2"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
+          %input#image2{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
+        .upload__box__image
+          %label{for: "image3"}
+            = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
+          %input#image3{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
+    -# 商品
+    .exhibition__content__box.product__box
+      -# 商品名
+      .form__group1
+        %label 
+          商品名
+          %span.form-description.form-require 必須
+        %input{placeholder: "商品名（必須 40文字まで)", class: "name__input", maxlength: '40'}
+      -# 説明
+      .form__group1
+        %label 
+          商品の説明
+          %span.form-description.form-require 必須
+        %textarea{placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class: "description__input", maxlength: '1000'}
+    -# 詳細
+    .exhibition__content__box.detail__box
+      .section__head
+        商品の詳細
+      .form__box
+        .form__group2
+          %label 
+            カテゴリー
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "category", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} レディース
+              %option{value: "2"} メンズ
+              %option{value: "3"} ベビー・キッズ
+              %option{value: "4"} インテリア・住まい・小物
+              %option{value: "5"} 本・音楽・ゲーム
+              %option{value: "6"} おもちゃ・ホビー・グッズ
+              %option{value: "7"} コスメ・香水・美容
+              %option{value: "8"} 家電・スマホ・カメラ
+              %option{value: "9" } スポーツ・レジャー
+              %option{value: "10"} ハンドメイド
+              %option{value: "11"} チケット
+              %option{value: "12"} 自動車・オートバイ
+              %option{value: "13"} その他
+        .form__group2
+          %label 
+            サイズ
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "size", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} Free/One size
+              %option{value: "2"} ~XS
+              %option{value: "3"} XS
+              %option{value: "4"} S
+              %option{value: "5"} M
+              %option{value: "6"} L
+              %option{value: "7"} XL
+              %option{value: "8"} XXL~
+        .form__group2
+          %label 
+            ブランド
+            %span.form-description.form-optional 任意
+          %input{placeholder: "例) シャネル", class: "brand__input"}
+        .form__group2
+          %label 
+            商品の状態
+            %span.form-description.form-require 必須
+          %form{class: "select", method: "post"}
+            %select.exhibition__select{name: "status", size: "1"}
+              %option{value: "0"} 選択してください
+              %option{value: "1"} 新品、未使用
+              %option{value: "2"} 未使用に近い
+              %option{value: "3"} 目立った傷や汚れなし
+              %option{value: "4"} やや傷や汚れあり
+              %option{value: "5"} 傷や汚れあり
+              %option{value: "6"} 全体的に状態が悪い
+    -# 配送
+    .exhibition__content__box.shipping__box
+      .section__head
+        配送について
+        = link_to "" do
+          = icon('fas', 'question-circle', class: "question__icon") 
+      .form__box
+        .form__group2
+          %label 
+            配送料の負担
+            %span.form-description.form-require 必須
+          = form_for(@product) do |f|
+            = f.select :delivery_charge, Product.delivery_charges.keys,{ include_blank: '選択してください'},{class: "exhibition__select"}
+        .form__group2
+          %label 
+            配送の方法
+            %span.form-description.form-require 必須
+          = form_for(@product) do |f|
+            = f.select :delivery_method, Product.delivery_methods.keys,{ include_blank: '選択してください'},{class: "exhibition__select"}
+        .form__group2
+          %label 
+            発送元の地域
+            %span.form-description.form-require 必須
+          = form_for(@product) do |f|
+            = f.select :delivery_prefecture, Product.delivery_prefectures.keys,{ include_blank: '選択してください'},{class: "exhibition__select"}
+        .form__group2
+          %label 
+            配送までの日数
+            %span.form-description.form-require 必須
+          = form_for(@product) do |f|
+            = f.select :delivery_days, Product.delivery_days.keys,{ include_blank: '選択してください'},{class: "exhibition__select"}
+    -# 価格
+    .exhibition__content__box.price__box
+      .section__head
+        販売価格(300〜9,999,999)
+        = link_to "" do
+          = icon('fas', 'question-circle', class: "question__icon")  
+      .form__box
+        .from__group3.price__form
+          %label.price__form__left 
+            価格
+            %span.form-description.form-require 必須
+          .price__form__right
+            %p.yen ¥
+            %input{type: "number", placeholder: "例)300", class: "price__input", id: "price__num", onchange: "calcProfit();", min: "300"}
+        .from__group3.commission__form
+          .commission__form__left
+            販売手数料(10%)
+          .commission__form__right#commission__num
+            ¥
+        .from__group3.profit__form
+          .profit__form__left
+            販売利益
+          .profit__form__right#profit__num
+            ¥
+    -# 出品ボタン
+    .exhibition__btn__box
+      = link_to '禁止されている出品',''
+      、
+      = link_to '行為',''
+      を必ずご確認ください。
+      %p
+      またブランド品でシリアルナンバー等がある場合はご記載ください。
+      = link_to '偽ブランドの販売',''
+      は犯罪であり処罰される可能性があります。
+      %p
+      また、出品をもちまして
+      = link_to '加盟店規約',''
+      に同意したことになります。
+      .exhibition__area
+        %input{type: "submit", value: "出品する", class: "exhibition__btn determine__btn"}
+      .return__area
+        %input{type: "submit", value: "戻る ", class: "return__btn determine__btn"} 
