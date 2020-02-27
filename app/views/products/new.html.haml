@@ -1,8 +1,7 @@
 %script{src: "product/new.js", type: "text/javascript"}
 .exhibition
-  %header
-    %a{href: "http://furima.tokyo/"}
-      = image_tag "logo/logo.png", class: "exhibition__logo", alt: "furima"
+  .exhibition__logo__box
+    = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),"http://furima.tokyo/", class: "exhibition__logo"
   %main
     .exhibition__container__header
       商品の情報を入力
