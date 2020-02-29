@@ -1,12 +1,29 @@
-html{
-  background-color: rgb(245, 245, 245);
+header{
+  display: none;
+}
+
+footer{
+  display: none;
 }
 
 .user-new{
-  height: 1150px;
-  width: 700px;
-  margin: 0 auto;
-  background-color: #fff;
+  height: 1310x;
+  width: 100vw;
+  background-color: #ffffff;
+  border-right: calc((100vw - 700px)/2) solid rgb(245, 245, 245);
+  border-left: calc((100vw - 700px)/2) solid rgb(245, 245, 245);
+  &__logo{
+    width: 700px;
+    height: 100px;
+    padding: 30px 257px 10px;
+    background-color: rgb(245, 245, 245);
+    > img{
+      height: 49px;
+      width: 185px;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
   &__header{
     width: 100%;
     height: 97px;
@@ -22,7 +39,7 @@ html{
   }
   &__main{
     width: 423px;
-    height: 808px;
+    height: 970px;
     padding: 0 40px 64px;
     margin: 0 auto;
     font-size: 14px;
@@ -94,6 +111,21 @@ html{
     &--end{
       text-align: center;
       width: 340px;
+    }
+  }
+  &__licence{
+    height: 110px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    padding: 20px 250px 0;
+    text-align: center;
+    > img{
+      height: 55px;
+      width: 200px;
+    }
+    > small{
+      font-size: 10px;
+      width: 150px;
     }
   }
 }
