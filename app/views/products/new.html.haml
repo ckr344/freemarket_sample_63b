@@ -146,6 +146,4 @@
         .exhibition__area
           = f.submit '出品する', class: 'exhibition__btn determine__btn', id: 'send'
         .return__area
-          -# %input{type: "submit", value: "戻る ", class: "return__btn determine__btn"}
           = link_to "戻る", root_path, class: 'return__btn determine__btn'
-          
