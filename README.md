@@ -42,12 +42,13 @@ Things you may want to cover:
 - belongs_to :user
 - belongs_to :transaction
 - belongs_to :category
+- has_many: images
 
 ## Imagesテーブル
 |Column|Type|Options|
 |------|----|-------|
 |image|string||
-|product_id|references|null: false, foreign_key: true|
+|product|references|null: false, foreign_key: true|
 ### Association
 - belongs_to: product
 
