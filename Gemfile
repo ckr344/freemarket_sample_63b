@@ -78,3 +78,4 @@ end
 gem 'payjp'
 gem 'fog-aws'
 gem "jquery-rails"
+gem "pry-rails"
