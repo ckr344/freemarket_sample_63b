@@ -5,6 +5,7 @@ class CardsController < ApplicationController
   before_action :set_card, only: [:new, :show, :pay_show, :destroy]
 
   def new
+    gon.payjp_key = ENV['PAYJP_KEY']
     redirect_to action: "show" if @set_card.exists?
   end
 
