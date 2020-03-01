@@ -10,15 +10,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    # @product = Product.new(product_params)
-    Product.create!(product_params)
-    # if @product.save
+    Product.create(product_params)
     redirect_to root_path
-    # else
-      # flash.now[:alert] = "必須項目が入力されているかもう一度確認してください。"
-      # render :new
-    # end
-    
   end
 
   def show
