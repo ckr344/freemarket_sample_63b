@@ -82,3 +82,4 @@ gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'fog-aws'
 gem "jquery-rails"
 gem 'gon'
+gem "pry-rails"
