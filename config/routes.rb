@@ -10,4 +10,11 @@ Rails.application.routes.draw do
       post 'pay', to: 'cards#pay'
     end
   end
+  resources :transactions do
+    collection do
+      get 'pay_index', to: 'transactions#pay_index'
+      post 'pay', to: 'transactions#pay'
+      get 'done', to: 'transactions#done'
+    end
+  end
 end
