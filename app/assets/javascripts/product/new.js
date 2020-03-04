@@ -1,7 +1,23 @@
-function previewImage(obj){
+function previewImage1(obj){
   var fileReader = new FileReader();
   fileReader.onload = (function() {
-    document.getElementById('preview').src = fileReader.result;
+    document.getElementById('preview1').src = fileReader.result;
+  });
+  fileReader.readAsDataURL(obj.files[0]);
+}
+
+function previewImage2(obj){
+  var fileReader = new FileReader();
+  fileReader.onload = (function() {
+    document.getElementById('preview2').src = fileReader.result;
+  });
+  fileReader.readAsDataURL(obj.files[0]);
+}
+
+function previewImage3(obj){
+  var fileReader = new FileReader();
+  fileReader.onload = (function() {
+    document.getElementById('preview3').src = fileReader.result;
   });
   fileReader.readAsDataURL(obj.files[0]);
 }
