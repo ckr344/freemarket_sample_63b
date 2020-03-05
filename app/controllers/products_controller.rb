@@ -30,7 +30,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.user_id == current_user.id
+    if product.user_id == current_user.id
       @product.update(product_params)
       redirect_to product_path
     else
@@ -39,12 +39,13 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.user_id == current_user.id
-      @product.destroy
-      redirect_to root_path
-    else
-      render 'show'
-    end
+    # 保留です
+    # if product.user_id == current_user.id
+    #   @product.destroy
+    #   redirect_to root_path
+    # else
+    #   render 'show'
+    # end
   end
 
   private
