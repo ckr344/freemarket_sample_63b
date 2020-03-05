@@ -12,18 +12,19 @@
           出品画像
           %p.upload__box__head__sub 最大3枚までアップロードできます
         .upload__box__images
-          .upload__box__image
-            %label{for: "image1"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image1{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"} 
-          .upload__box__image
-            %label{for: "image2"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image2{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
-          .upload__box__image
-            %label{for: "image3"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image3{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
+          = f.fields_for :images do |c|
+            .upload__box__image
+              %label{for: "image1"}
+                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview1", class: "preview-image"
+              = c.file_field :image, multiple: true, id:"image1", type: "file", accept: "image/*", onchange: "previewImage1(this);", style: "display: none;"
+            .upload__box__image
+              %label{for: "image2"}
+                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview2", class: "preview-image"
+              = c.file_field :image, multiple: true, id:"image2", type: "file", accept: "image/*", onchange: "previewImage2(this);", style: "display: none;"
+            .upload__box__image
+              %label{for: "image3"}
+                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview3", class: "preview-image"
+              = c.file_field :image, multiple: true, id:"image3", type: "file", accept: "image/*", onchange: "previewImage3(this);", style: "display: none;"
       -# 商品
       .exhibition__content__box.product__box
         -# 商品名

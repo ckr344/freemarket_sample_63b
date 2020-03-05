@@ -1,7 +1,5 @@
 class CardsController < ApplicationController
-
   require "payjp"
-
   before_action :set_card, only: [:new, :show, :pay_show, :destroy]
 
   def new
@@ -56,5 +54,4 @@ class CardsController < ApplicationController
   def set_card
     @set_card = Card.where(user_id: current_user.id)
   end
-
 end

@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
-  has_many :images
+  has_many :images, inverse_of: :product
+  accepts_nested_attributes_for :images
   validates :name, :price, presence: true
   enum size:{
     "XXS以下": 1,
