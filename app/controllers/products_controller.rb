@@ -2,7 +2,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index]
 
   def index
-    
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
   end
 
   def new
