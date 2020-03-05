@@ -8,7 +8,7 @@ $(function(){
 $(function(){
       function buildChildHTML(child){//二層目のカテゴリーを追加する
       var html =`<a class="children_list" id="${child.ancestry}/${child.id}" 
-                  href="/category/${child.id}">${child.name}</a>`;
+                  href="/categories/${child.id}">${child.name}</a>`;
       return html;
     }
   $(".header__center__down__menu__category").hover(//
@@ -46,7 +46,7 @@ $(function(){
   $(function(){
     function buildGrandChildHTML(child){
       var html =`<a class="Grandchild" 
-                  href="/category/${child.id}">${child.name}</a>`;
+                  href="/categories/${child.id}">${child.name}</a>`;
       return html;
     }
       $(document).on("mouseover",".children_list",function(){
