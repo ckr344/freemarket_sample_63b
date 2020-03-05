@@ -49,6 +49,10 @@ main{
   }
 }
 
+.preview-image{
+  object-fit: cover;
+}
+
 // 商品名box
 .product__box{
   height: 350px;

@@ -10,4 +10,12 @@ Rails.application.routes.draw do
       post 'pay', to: 'cards#pay'
     end
   end
+  # indexアクションは後ほど取引一覧表示で使用する
+  resources :transactions, only: [:index] do
+    collection do
+      get 'pay_index', to: 'transactions#pay_index'
+      post 'pay', to: 'transactions#pay'
+      get 'done', to: 'transactions#done'
+    end
+  end
 end
