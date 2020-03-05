@@ -44,6 +44,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
   gem 'capistrano3-unicorn'
+  gem 'rspec-rails'
 end
 
 
@@ -54,6 +55,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  
 end
 
 group :test do
@@ -76,6 +78,9 @@ group :production do
   gem 'unicorn', '5.4.1'
 end
 gem 'payjp'
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'fog-aws'
 gem "jquery-rails"
-gem 'pry-rails'
+gem 'gon'
+gem "pry-rails"
+gem 'ransack'

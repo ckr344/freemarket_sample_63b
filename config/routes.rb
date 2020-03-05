@@ -4,6 +4,18 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :update]
   resources :products
   resources :categories
-
-
+  resources :cards, only: [:new, :show, :destroy] do
+    collection do
+      post 'pay_show', to: 'cards#pay_show'
+      post 'pay', to: 'cards#pay'
+    end
+  end
+  # indexアクションは後ほど取引一覧表示で使用する
+  resources :transactions, only: [:index] do
+    collection do
+      get 'pay_index', to: 'transactions#pay_index'
+      post 'pay', to: 'transactions#pay'
+      get 'done', to: 'transactions#done'
+    end
+  end
 end
