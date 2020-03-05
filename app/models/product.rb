@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :user
-  belongs_to :category
-  has_many :images
+  belongs_to :category, optional: true
+  has_many :images, inverse_of: :product
+  accepts_nested_attributes_for :images
   validates :name, :price, presence: true
   enum size:{
     "XXS以下": 1,
@@ -45,5 +46,13 @@ class Product < ApplicationRecord
     "1~2日で発送": 1,
     "2~3日で発送": 2,
     "3~7日で発送": 3,
+  }
+  enum status:{
+    "新品、未使用": 1,
+    "未使用に近い": 2,
+    "目立った傷や汚れなし": 3,
+    "やや傷や汚れあり": 4,
+    "傷や汚れあり": 5,
+    "全体的に状態が悪い": 6
   }
 end

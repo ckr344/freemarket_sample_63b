@@ -1,0 +1,123 @@
+.user-new{
+  height: 1310px;
+  width: 100vw;
+  background-color: #ffffff;
+  border-right: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
+  border-left: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
+  &__logo{
+    width: 700px;
+    height: 100px;
+    padding: 30px 257px 10px;
+    background-color: rgb(245, 245, 245);
+    > img{
+      height: 49px;
+      width: 185px;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+  &__header{
+    width: 100%;
+    height: 97px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0 auto;
+    border-bottom: 1px solid rgb(245, 245, 245);
+    padding: 32px;
+    > h2{
+      line-height: 45px;
+    }
+  }
+  &__main{
+    width: 423px;
+    height: 970px;
+    padding: 0 40px 64px;
+    margin: 0 auto;
+    font-size: 14px;
+  }
+  &__field{
+    height: 70px;
+    width: 360px;
+    margin-top: 32px;
+    > h2{
+      color: #888888;
+      margin-top: 8px;
+    }
+    &--title{
+      font-weight: bold;
+    }
+    &--input{
+      width: 341px;
+      height: 46px;
+      padding: 10px 16px 8px;
+      margin-top: 8px;
+      border-radius: 3px;
+      border: 1px solid rgb(204, 204, 204);
+    }
+    &--req{
+      background-color: #EA352D;
+      color: #fff;
+      width: 32px;
+      height: 19px;
+      margin-left: 8px;
+      font-size: 12px;
+      line-height: 19px;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+    &--name{
+      width: 164px;
+      height: 46px;
+      padding: 10px 16px 8px;
+      border-radius: 4px;
+      border: 1px solid rgb(204, 204, 204);
+      margin-top: 8px;
+      margin-right: 8px;
+    }
+    &--confirm{
+      margin-top: 65px;
+      > h3{
+        font-weight: bold;
+      }
+    }
+    &--birth{
+      width: 74px;
+      height: 46px;
+      padding: 0 10px;
+      margin-top: 8px;
+    }
+    &--note{
+      color: #888888;
+      width: 95%;
+    }
+    &--send{
+      width: 341px;
+      height: 48px;
+      line-height: 48px;
+      background-color: #EA352D;
+      color: white;
+      font-size: bold;
+      text-align: center;
+    }
+    &--end{
+      text-align: center;
+      width: 340px;
+    }
+  }
+  &__licence{
+    height: 110px;
+    width: 100%;
+    background-color: rgb(245, 245, 245);
+    padding: 20px 250px 0;
+    text-align: center;
+    > img{
+      height: 55px;
+      width: 200px;
+    }
+    > small{
+      font-size: 10px;
+      width: 150px;
+    }
+  }
+}

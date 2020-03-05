@@ -30,24 +30,27 @@ ActiveRecord::Schema.define(version: 2020_02_24_120458) do
 
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "image"
-    t.integer "product_id"
+    t.bigint "product_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_images_on_product_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
-    t.integer "condition", limit: 1, default: 0, null: false
-    t.integer "delivery_charge", limit: 1, default: 0, null: false
+    t.integer "status", limit: 1, default: 0, null: false
+    t.integer "delivery_charge", limit: 1, default: 0
     t.integer "delivery_method", limit: 1, default: 0, null: false
     t.integer "delivery_prefecture", limit: 1, default: 0, null: false
     t.integer "delivery_days", limit: 1, default: 0, null: false
+    t.integer "size", limit: 1, default: 0, null: false
+    t.string "brand"
     t.integer "price", null: false
     t.integer "transaction_id"
-    t.integer "main_category_id", null: false
-    t.integer "second_category_id", null: false
-    t.integer "third_category_id", null: false
+    t.integer "main_category_id"
+    t.integer "second_category_id"
+    t.integer "third_category_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -91,6 +94,7 @@ ActiveRecord::Schema.define(version: 2020_02_24_120458) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "images", "products"
   add_foreign_key "products", "users"
   add_foreign_key "transactions", "products"
   add_foreign_key "transactions", "users"
