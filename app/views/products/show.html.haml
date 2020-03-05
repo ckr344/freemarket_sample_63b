@@ -4,7 +4,7 @@
       .product-show__top-content
         .product-show__item-box
           .product-show__item-box--name
-            サバ缶
+            = @product.name
           .product-show__item-box__body
             .product-show__item-box__body--top-img
               = image_tag "pict/test-img1.png", class: "product-show__item-top-img"
@@ -16,21 +16,22 @@
               .product-show__item-box__body--sub-img
                 = image_tag "pict/test-img1.png", class: "product-show__item-sub-img"
           .product-show__item-box--price
-            %span¥1200
+            %span 
+            = "#{@product.price}円"
             .product-show__item-box--price-detail
               %span.product-show__item-box--price-detail-text
-                (税込)
+                (税込),
               %span.product-show__item-box--price-detail-text
-                送料込み
+                = @product.delivery_charge
           .product-show__item-box--item-detail
-            サバ缶
+            = @product.name
           %table.product-show__item-box--table
             %tbody.product-show__item-box--table-body
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   出品者
                 %td.product-show__item-box--table-data
-                  hoge
+                  = @user.nickname
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   カテゴリー
@@ -44,22 +45,22 @@
                 %th.product-show__item-box--table-title
                   ブランド
                 %td.product-show__item-box--table-data
-                  = link_to "Balenciaga", "#", class: "product-show__table-link"
+                  = link_to "#{@product.brand}", "#", class: "product-show__table-link"
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   商品のサイズ
                 %td.product-show__item-box--table-data
-                  S
+                  = @product.size
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   商品の状態
                 %td.product-show__item-box--table-data
-                  未使用に近い
+                  = @product.status
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   配送料の負担
                 %td.product-show__item-box--table-data
-                  送料込み（出品者負担）
+                  = @product.delivery_charge
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   配送の方法
@@ -69,20 +70,29 @@
                 %th.product-show__item-box--table-title
                   発送元の地域
                 %td.product-show__item-box--table-data
-                  = link_to "東京都", "#", class: "product-show__prefecture-link"
+                  = link_to "#{@product.delivery_prefecture}", "#", class: "product-show__prefecture-link"
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   発送日の目安
                 %td.product-show__item-box--table-data
-                  1~2日で発送
-      %ul.product-show__links
-        %li.product-show__links-list
-          = link_to "< 前の商品", "#", class: "product-show__links-link"
-        %li.product-show__links-list
-          = link_to "次の商品 >", "#", class: "product-show__links-link"
-      .product-show__back-link
-        .product-show__back--text
-          = link_to "レディースをもっと見る", "#", class: "product-show__back-link"
+                  = @product.delivery_days
+          .product-show__item-box--description
+            = @product.description
+        - if user_signed_in? && (current_user.id == @product.user_id)
+          .seler-dedicated
+            .edit-box
+              = link_to '商品の編集', edit_product_path, method: :get, class: "determine_btn"
+            .delete-box
+              = link_to 'この商品を削除する', root_path, method: :delete, class: "determine_btn", data: {confirm: "本当に削除しますか？"}
+          -# 保留
+          -# %ul.product-show__links
+          -#   %li.product-show__links-list
+          -#     = link_to "< 前の商品", "#", class: "product-show__links-link"
+          -#   %li.product-show__links-list
+          -#     = link_to "次の商品 >", "#", class: "product-show__links-link"
+          -# .product-show__back-link
+          -#   .product-show__back--text
+          -#     = link_to "レディースをもっと見る", "#", class: "product-show__back-link"
 .footer_sell
   = link_to new_product_path , class:"footer_sell_btn_link" do
     .footer_sell_btn
