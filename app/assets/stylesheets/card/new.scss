@@ -1,0 +1,129 @@
+#card_number{
+  height: 48px;
+  width: 100%;
+  padding: 10px 16px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+#exp_month{
+  height: 48px;
+  background: #fff;
+  width: calc(50% - 25px);
+  margin: 8px 0 0;
+  padding: 10px 16px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+#exp_year{
+  height: 48px;
+  background: #fff;
+  width: calc(50% - 25px);
+  margin: 8px 0 0;
+  padding: 10px 16px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+#cvc{
+  height: 48px;
+  width: 100%;
+  padding: 10px 16px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+  margin: 8px 0 0;
+}
+#token_submit{
+  width: 100%;
+  line-height: 48px;
+  font-size: 14px;
+  text-align: center;
+  background: #ea352d;
+  border: 1px solid #ea352d;
+  color: #fff;
+}
+.card-new__form-brand--img{
+  height: 30px;
+  width: 300px;
+  object-fit: cover;
+}
+.card-new{
+  background-color: rgb(245, 245, 245);
+  &__head{
+    height: 50px;
+  }
+  &__content{
+    background-color: #fff;
+    height: 650px;
+    width: 562px;
+    margin: 0 auto;
+  }
+  &__title{
+    height: 60px;
+    width: 100%;
+    font-size: 24px;
+    padding: 12px 24px;
+    text-align: center;
+    font-weight: bold;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  &__form{
+    width: 343px;
+    max-width: 343px;
+    height: 407px;
+    margin: 0 auto;
+  }
+  &__form-group{
+    &--num{
+      margin-top: 40px;
+      width: 343px;
+      height: 104px;
+    }
+    &--deadline{
+      margin-top: 32px;
+    }
+    &--cvc{
+      margin-top: 22px;
+    }
+  }
+  &__form-text{
+    display: flex;
+  }
+  &__form-title{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  &__form-required{
+    font-size: 12px;
+    color: #fff;
+    background: #ea352d;
+    margin: 0 0 0 8px;
+    padding: 2px 4px;
+    border-radius: 2px;
+    vertical-align: top;
+  }
+  &__form-brand{
+    margin: 8px 0 0;
+  }
+  &__form-deadline-day{
+    font-size: 14px;
+    color: #333333;
+  }
+  &__btn-box{
+    margin-top: 60px;
+  }
+  &__foot{
+    height: 60px;
+  }
+}
