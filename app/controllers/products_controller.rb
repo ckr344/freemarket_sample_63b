@@ -30,27 +30,29 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
+    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
     
-    # @product.update(product_params)
-    # redirect_to product_path
-    
-    if @product.user_id == current_user.id
-      @product.update(product_params)
+    if @product.update(product_params)
       redirect_to product_path
     else
       render 'edit'
-    end
+    end  
+    # if @product.user_id == current_user.id
+    #   @product.update(product_params)
+    #   redirect_to product_path
+    # else
+    #   render 'edit'
+    # end
   end
 
   def destroy
     # 保留です
-    # if product.user_id == current_user.id
-    #   @product.destroy
-    #   redirect_to root_path
-    # else
-    #   render 'show'
-    # end
+    if product.user_id == current_user.id
+      @product.destroy
+      redirect_to root_path
+    else
+      render 'show'
+    end
   end
 
   private
