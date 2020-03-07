@@ -37,22 +37,15 @@ class ProductsController < ApplicationController
     else
       render 'edit'
     end  
-    # if @product.user_id == current_user.id
-    #   @product.update(product_params)
-    #   redirect_to product_path
-    # else
-    #   render 'edit'
-    # end
   end
 
   def destroy
-    # 保留です
-    # if product.user_id == current_user.id
-    #   @product.destroy
-    #   redirect_to root_path
-    # else
-    #   render 'show'
-    # end
+    @product = current_user.products.find(params[:id])
+    if @product.destroy
+      redirect_to root_path
+    else
+      render 'show'
+    end
   end
 
   private

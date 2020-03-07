@@ -83,7 +83,7 @@
             .edit-box
               = link_to '商品の編集', edit_product_path, method: :get, class: "determine_btn"
             .delete-box
-              = link_to 'この商品を削除する', root_path, method: :delete, class: "determine_btn", data: {confirm: "本当に削除しますか？"}
+              = link_to 'この商品を削除する', product_path(@product), method: :delete, class: "determine_btn", data: {confirm: "本当に削除しますか？"}
           -# 保留
           -# %ul.product-show__links
           -#   %li.product-show__links-list
