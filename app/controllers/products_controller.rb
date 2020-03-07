@@ -47,12 +47,12 @@ class ProductsController < ApplicationController
 
   def destroy
     # 保留です
-    if product.user_id == current_user.id
-      @product.destroy
-      redirect_to root_path
-    else
-      render 'show'
-    end
+    # if product.user_id == current_user.id
+    #   @product.destroy
+    #   redirect_to root_path
+    # else
+    #   render 'show'
+    # end
   end
 
   private
