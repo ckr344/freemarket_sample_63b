@@ -1,0 +1,10 @@
+.categories-header-nav-parent-wrap{id:"header-categories"}
+  .categories-header_main-categories
+    - @categories.each do |categories|
+      %div.parent_list
+        =  link_to categories_path(categories),id:"#{categories.id}" do
+          #{categories.name}
+  .categories-header_sub-categories
+    %div.children_list
+  .categories-header_sub-sub-categories
+    %div.Grandchild

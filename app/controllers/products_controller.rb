@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index]
 
   def index
-    
+    @categories = Category.all.order("id ASC").limit(13)
   end
 
   def new
