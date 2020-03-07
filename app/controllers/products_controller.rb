@@ -26,14 +26,21 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = current_user.products.find(params[:id])
+    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
   end
 
   def update
-    @product = current_user.products.find(params[:id])
+    # @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
     
-    @product.update(product_params)
-    redirect_to product_path
+    # @product.update(product_params)
+    # redirect_to product_path
+    
+    if @product.user_id == current_user.id
+      @product.update(product_params)
+      redirect_to product_path
+    else
+      render 'edit'
+    end
   end
 
   def destroy
