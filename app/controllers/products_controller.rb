@@ -4,6 +4,8 @@ class ProductsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def index
+    @q = Product.ransack(params[:q])
+    @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
   end
 
