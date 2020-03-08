@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index]
+  before_action :parentCategory
 
   def index
     @categories = Category.all.order("id ASC").limit(13)
