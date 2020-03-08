@@ -1,6 +1,7 @@
 class CardsController < ApplicationController
   require "payjp"
   before_action :set_card, only: [:new, :show, :pay_show, :destroy]
+  before_action :parentCategory
 
   def new
     gon.payjp_key = ENV['PAYJP_KEY']

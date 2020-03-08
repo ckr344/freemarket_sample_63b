@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   require 'payjp'
   before_action :set_card, only: [:pay_index, :pay]
+  before_action :parentCategory
 
   def pay_index
     @card = @set_card.first
