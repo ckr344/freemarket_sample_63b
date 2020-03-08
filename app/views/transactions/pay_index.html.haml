@@ -1,15 +1,48 @@
-%h2 購入を確定しますか？
-%p Apple MacBook Pro 13インチ
-%p ¥135,000(送料込み)
-%br
-%h3 支払い方法
-- if @default_card_information.blank?
-  %br /
-- else
-  = "**** **** **** " + @default_card_information.last4
-  - exp_month = @default_card_information.exp_month.to_s
-  - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
-  = exp_month + " / " + exp_year
-%br
-= form_tag(action: :pay, method: :post) do
-  %button 購入する
+.transaction-pay
+  .transaction-pay__logo
+    = image_tag "logo/logo.png", class: 'transaction-pay__logo-img', alt:"ロゴ"
+  .transaction-pay__content
+    %h2.transaction-pay__title 購入内容の確認
+    .transaction-pay__item
+      .transaction-pay__item-box
+        %img.transaction-pay__item-image{:alt => "", "data-src" => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009", :src => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009"}/
+      .transaction-pay__item-detail
+        %p.transaction-pay__item-detail--name Supreme限定版Tシャツ
+        %p.transaction-pay__item-detail--price
+          %span ￥1,400
+          %span.transaction-pay__item-detail--shipping （税込）送料込み
+    .transaction-pay__table
+      .transaction-pay__table-inner
+        .transaction-pay__table-form
+          .transaction-pay__table-content
+            .transaction-pay__table-pay
+              %p.transaction-pay__table-pay--title 支払い金額
+            .transaction-pay__table-price
+              %p.transaction-pay__table-price--title ￥4,000
+          -# ポイントは後ほど実装
+          -# .transaction-pay__table-point  
+          -#   .transaction-pay__table-point--use
+          -#     .transaction-pay__table-point--frame
+          -#       %input{:name => "course", :type => "checkbox", :value => "html"}ポイントを使用（所持ポイント: P0)
+          .transaction-pay__table-way
+            %h3 支払い方法
+            .transaction-pay__table-register
+              - if @default_card_information.blank?
+                %i.fas.fa-plus-circle
+                %span.icon-register
+                登録してください
+              - else
+                = "**** **** **** " + @default_card_information.last4
+                - exp_month = @default_card_information.exp_month.to_s
+                - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+                = exp_month + " / " + exp_year
+          .transaction-pay__table-way
+            %h3 配送先
+            .transaction-pay__table-register
+              %i.fas.fa-plus-circle
+              %span.icon-register
+              登録してください
+          .transaction-pay__table-buy
+            = form_tag(action: :pay, method: :post) do
+              %button.transaction-pay__table-buy-button 購入する
+  .transaction-pay__botom

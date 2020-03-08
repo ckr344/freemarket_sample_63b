@@ -1,3 +1,15 @@
-%h2 購入が完了しました！
-%p Apple MacBook Pro 13インチ
-%p ¥135,000(送料込み)
+.transaction-done
+  .transaction-done__head
+  .transaction-done__content
+    .transaction-done__text
+      購入が完了しました！
+    .transaction-done__image
+      = image_tag "pict/test-img1.png", alt:"商品画像", class:"transaction-done__image--img"
+    .transaction-done__title
+      Apple MacBook Pro 13インチ
+    .transaction-done__price
+      .transaction-done__price--text
+        ¥135,000
+      .transaction-done__price--info
+        (送料込み)
+  .transaction-done__foot
