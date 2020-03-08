@@ -64,4 +64,8 @@ class ProductsController < ApplicationController
     @user = User.find(@product.user_id)
   end
 
+  def parentCategory
+    @categories = Category.all.order("id ASC").limit(13)
+  end  
+
 end

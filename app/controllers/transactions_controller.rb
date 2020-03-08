@@ -32,4 +32,9 @@ class TransactionsController < ApplicationController
   def set_card
     @set_card = Card.where(user_id: current_user.id)
   end
+
+  def parentCategory
+    @categories = Category.all.order("id ASC").limit(13)
+  end
+  
 end
