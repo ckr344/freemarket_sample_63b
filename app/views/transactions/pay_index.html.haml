@@ -7,10 +7,14 @@
       .transaction-pay__item-box
         %img.transaction-pay__item-image{:alt => "", "data-src" => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009", :src => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009"}/
       .transaction-pay__item-detail
-        %p.transaction-pay__item-detail--name Supreme限定版Tシャツ
-        %p.transaction-pay__item-detail--price
-          %span ￥1,400
-          %span.transaction-pay__item-detail--shipping （税込）送料込み
+        %p.transaction-pay__item-detail--name
+          = @product.name
+        .transaction-pay__item-detail-price
+          .transaction-pay__item-detail-price--text
+            ￥
+          .transaction-pay__item-detail-price--text
+            = @product.price
+          .transaction-pay__item-detail-price--shipping （税込）送料込み
     .transaction-pay__table
       .transaction-pay__table-inner
         .transaction-pay__table-form
@@ -18,7 +22,10 @@
             .transaction-pay__table-pay
               %p.transaction-pay__table-pay--title 支払い金額
             .transaction-pay__table-price
-              %p.transaction-pay__table-price--title ￥4,000
+              %p.transaction-pay__table-price--title
+                ￥
+              %p.transaction-pay__table-price--title
+                = @product.price
           -# ポイントは後ほど実装
           -# .transaction-pay__table-point  
           -#   .transaction-pay__table-point--use
@@ -30,7 +37,7 @@
               - if @default_card_information.blank?
                 %i.fas.fa-plus-circle
                 %span.icon-register
-                登録してください
+                = link_to "登録してください", new_card_path
               - else
                 = "**** **** **** " + @default_card_information.last4
                 - exp_month = @default_card_information.exp_month.to_s
@@ -43,6 +50,6 @@
               %span.icon-register
               登録してください
           .transaction-pay__table-buy
-            = form_tag(action: :pay, method: :post) do
+            = form_tag(action: :pay, method: :post, product_id: @product) do
               %button.transaction-pay__table-buy-button 購入する
   .transaction-pay__botom
