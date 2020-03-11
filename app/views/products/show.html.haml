@@ -13,18 +13,19 @@
                 = image_tag "pict/test-img2.png", class: "product-show__item-sub-img"
               .product-show__item-box__body--sub-img
                 = image_tag "pict/test-img3.png", class: "product-show__item-sub-img"
-              .product-show__item-box__body--sub-img
-                = image_tag "pict/test-img1.png", class: "product-show__item-sub-img"
           .product-show__item-box--price
             %span 
             = "#{@product.price}円"
             .product-show__item-box--price-detail
               %span.product-show__item-box--price-detail-text
-                (税込),
+                (税込)
               %span.product-show__item-box--price-detail-text
                 = @product.delivery_charge
           .product-show__item-box--item-detail
             = @product.name
+          .product-show__transaction
+            .product-show__transaction-box
+              = link_to "購入画面に進む", pay_index_transactions_path(product_id: @product), class: "product-transaction-btn"
           %table.product-show__item-box--table
             %tbody.product-show__item-box--table-body
               %tr.product-show__item-box--table-list
