@@ -1,8 +1,6 @@
 class TransactionsController < ApplicationController
   require 'payjp'
   before_action :set_card, only: [:pay_index, :pay]
-  before_action :parentCategory
-
   def pay_index
     @card = @set_card.first
     if @card.blank?
@@ -33,8 +31,4 @@ class TransactionsController < ApplicationController
     @set_card = Card.where(user_id: current_user.id)
   end
 
-  def parentCategory
-    @categories = Category.all.order("id ASC").limit(13)
-  end
-  
 end

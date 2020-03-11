@@ -2,7 +2,6 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!, except:[:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :parentCategory
   def index
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
@@ -63,9 +62,5 @@ class ProductsController < ApplicationController
   def set_user
     @user = User.find(@product.user_id)
   end
-
-  def parentCategory
-    @categories = Category.all.order("id ASC").limit(13)
-  end  
 
 end

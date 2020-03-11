@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :parentCategory
   def edit
   end
 
@@ -16,9 +15,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:nickname, :first_name, :last_name, :first_name_kana, :last_name_kana, :birthday_yyyy, :birthday_mm, :birthday_dd)
   end
-
-  def parentCategory
-    @categories = Category.all.order("id ASC").limit(13)
-  end
-  
 end

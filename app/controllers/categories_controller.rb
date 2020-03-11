@@ -1,6 +1,4 @@
 class CategoriesController < ApplicationController
-  before_action :parentCategory,onry:[:index]
-
   def index
   
   end
@@ -11,11 +9,6 @@ def new
     format.html
     format.json{render json: @children}
   end
-end
-
-  private
-def parentCategory
-  @categories = Category.all.order("id ASC").limit(13)
 end
 
 end
