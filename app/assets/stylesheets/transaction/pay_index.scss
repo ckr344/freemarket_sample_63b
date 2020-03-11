@@ -51,9 +51,15 @@
       font-size: 14px;
       word-wrap: break-word;
     }
-    &--price{
-      font-size: 12px;
+  }
+  &__item-detail-price{
+    display: flex;
+    &--text{
+      font-size: 13px;
       font-weight: bold;
+    }
+    &--shipping{
+      font-size: 13px;
     }
   }
   &__table-inner{
@@ -80,6 +86,7 @@
     color: #333333;
   }
   &__table-price{
+    display: flex;
     &--title{
       font-size: 25px;
     }
