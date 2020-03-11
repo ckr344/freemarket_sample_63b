@@ -10,6 +10,8 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
+    # 親カテゴリー取得
+    @category = Category.all.order("id ASC").limit(13)
   end
 
   def create
@@ -46,6 +48,14 @@ class ProductsController < ApplicationController
     else
       render 'show'
     end
+  end
+
+  def category_children  
+    @category_children = Category.find(params[:productCategory]).children 
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find(params[:productCategory]).children
   end
 
   private

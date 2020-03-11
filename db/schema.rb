@@ -48,9 +48,7 @@ ActiveRecord::Schema.define(version: 2020_02_24_120458) do
     t.string "brand"
     t.integer "price", null: false
     t.integer "transaction_id"
-    t.integer "main_category_id"
-    t.integer "second_category_id"
-    t.integer "third_category_id"
+    t.integer "category"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
