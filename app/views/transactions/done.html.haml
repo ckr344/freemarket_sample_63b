@@ -6,10 +6,10 @@
     .transaction-done__image
       = image_tag "pict/test-img1.png", alt:"商品画像", class:"transaction-done__image--img"
     .transaction-done__title
-      Apple MacBook Pro 13インチ
+      = @product.name
     .transaction-done__price
       .transaction-done__price--text
-        ¥135,000
+        = @product.price
       .transaction-done__price--info
         (送料込み)
   .transaction-done__foot
