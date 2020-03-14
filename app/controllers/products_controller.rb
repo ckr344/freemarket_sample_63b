@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @product.images.build
-    # 親カテゴリー取得
+    
     @category = Category.all.order("id ASC").limit(13)
   end
 
@@ -60,7 +60,8 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :main_category_id, :second_category_id, :third_category_id,
+    # binding.pry
+    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
       images_attributes: {image: []}).merge(user_id: current_user.id)
   end
 

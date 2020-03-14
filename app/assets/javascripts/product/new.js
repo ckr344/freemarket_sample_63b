@@ -22,16 +22,16 @@ function previewImage3(obj){
   fileReader.readAsDataURL(obj.files[0]);
 }
 
-function calcProfit() {
-  var price = document.getElementById('price__num').value;
-  price = Number(price);
+// function calcProfit() {
+//   var price = document.getElementById('price__num').value;
+//   price = Number(price);
   
-  var com = price * 0.1;
-  document.getElementById('commission__num').innerHTML = "¥ " + com;
+//   var com = price * 0.1;
+//   document.getElementById('commission__num').innerHTML = "¥ " + com;
 
-  var profit = price * 0.9;
-  document.getElementById('profit__num').innerHTML = "¥ " + profit;
-}
+//   var profit = price * 0.9;
+//   document.getElementById('profit__num').innerHTML = "¥ " + profit;
+// }
 
 
 // カテゴリー選択部分
@@ -47,7 +47,7 @@ $(function(){
                       <label for="product_category">カテゴリー
                         <span class="form-description form-optional">任意</span>
                       </label>
-                      <select class="exhibition__select" id="children_category">
+                      <select class="exhibition__select" id="children_category" name='product[category]'>
                         <option value="">選択してください</option>
                         ${insertHTML}
                       </select>
@@ -61,7 +61,7 @@ $(function(){
                             <label for="product_category">カテゴリー
                               <span class="form-description form-optional">任意</span>
                             </label>
-                            <select class="exhibition__select" id="grandchildren_category">
+                            <select class="exhibition__select" id="grandchildren_category" name='product[category_id]'>
                               <option value="">選択してください</option>
                               ${insertHTML}
                             </select>
@@ -70,10 +70,7 @@ $(function(){
   }
   // 親カテゴリー選択時のイベント
   $(document).on('change', '#parent_category', function(){
-    console.log('test')
     var productCategory = document.getElementById('parent_category').value; //選択された親カテゴリーの取得
-    console.log(productCategory)
-
     if (productCategory != ""){ //親カテゴリーが初期値以外
       $.ajax({
         url: 'category_children',
@@ -126,3 +123,14 @@ $(function(){
     }
   });
 });
+
+function calcProfit() {
+  var price = document.getElementById('price__num').value;
+  price = Number(price);
+  
+  var com = price * 0.1;
+  document.getElementById('commission__num').innerHTML = "¥ " + com;
+
+  var profit = price * 0.9;
+  document.getElementById('profit__num').innerHTML = "¥ " + profit;
+}
