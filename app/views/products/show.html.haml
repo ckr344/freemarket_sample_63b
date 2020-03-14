@@ -7,12 +7,11 @@
             = @product.name
           .product-show__item-box__body
             .product-show__item-box__body--top-img
-              = image_tag "pict/test-img1.png", class: "product-show__item-top-img"
+              = image_tag @top_image.image.url, alt:"トップ画像", class: "product-show__item-top-img"
             .product-show__item-box__body--list
-              .product-show__item-box__body--sub-img
-                = image_tag "pict/test-img2.png", class: "product-show__item-sub-img"
-              .product-show__item-box__body--sub-img
-                = image_tag "pict/test-img3.png", class: "product-show__item-sub-img"
+              - @images.each do |image|
+                .product-show__item-box__body--sub-img
+                  = image_tag image.image.url, alt:"サブ画像", class: "product-show__item-sub-img"
           .product-show__item-box--price
             %span 
             = "#{@product.price}円"

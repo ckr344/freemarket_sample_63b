@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
-  has_many :images, inverse_of: :product
+  has_many :images, dependent: :destroy
   accepts_nested_attributes_for :images
   validates :name, :price, presence: true
   enum size:{
