@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
   def new
     @product = Product.new
     @image = @product.images.build
+    @category = Category.all.order("id ASC").limit(13)
   end
 
   def create
@@ -54,11 +55,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def category_children  
+    @category_children = Category.find(params[:productCategory]).children 
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find(params[:productCategory]).children
+  end
+
   private
   
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :main_category_id, :second_category_id, :third_category_id,
+    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
       images_attributes: [:name]).merge(user_id: current_user.id)
+
   end
 
   def set_product
