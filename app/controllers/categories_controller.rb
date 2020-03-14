@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
-  def index 
-  @categories = Category.all.order("id ASC").limit(13)
+  def index
   
-end
+  end
+  
 def new
   @children = Category.where(ancestry: params[:parent_id])
   respond_to do |format|
@@ -10,4 +10,5 @@ def new
     format.json{render json: @children}
   end
 end
+
 end

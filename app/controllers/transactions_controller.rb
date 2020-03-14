@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   require 'payjp'
   before_action :set_card, only: [:pay_index, :pay]
+  before_action :set_product
 
   def pay_index
     @card = @set_card.first
@@ -23,7 +24,7 @@ class TransactionsController < ApplicationController
     :customer => @card.customer_id, #顧客ID
     :currency => 'jpy', #日本円
   )
-  redirect_to action: 'done' #完了画面に移行
+  redirect_to action: 'done', product_id: @product #完了画面に移行
   end
 
   private
@@ -31,4 +32,9 @@ class TransactionsController < ApplicationController
   def set_card
     @set_card = Card.where(user_id: current_user.id)
   end
+
+  def set_product
+    @product = Product.find(params[:product_id])
+  end
+
 end
