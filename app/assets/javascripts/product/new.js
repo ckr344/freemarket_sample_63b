@@ -22,16 +22,16 @@ function previewImage3(obj){
   fileReader.readAsDataURL(obj.files[0]);
 }
 
-// function calcProfit() {
-//   var price = document.getElementById('price__num').value;
-//   price = Number(price);
+function calcProfit() {
+  var price = document.getElementById('price__num').value;
+  price = Number(price);
   
-//   var com = price * 0.1;
-//   document.getElementById('commission__num').innerHTML = "¥ " + com;
+  var com = price * 0.1;
+  document.getElementById('commission__num').innerHTML = "¥ " + com;
 
-//   var profit = price * 0.9;
-//   document.getElementById('profit__num').innerHTML = "¥ " + profit;
-// }
+  var profit = price * 0.9;
+  document.getElementById('profit__num').innerHTML = "¥ " + profit;
+}
 
 
 // カテゴリー選択部分
@@ -123,14 +123,3 @@ $(function(){
     }
   });
 });
-
-function calcProfit() {
-  var price = document.getElementById('price__num').value;
-  price = Number(price);
-  
-  var com = price * 0.1;
-  document.getElementById('commission__num').innerHTML = "¥ " + com;
-
-  var profit = price * 0.9;
-  document.getElementById('profit__num').innerHTML = "¥ " + profit;
-}
