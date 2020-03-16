@@ -7,7 +7,8 @@ FactoryBot.define do
     last_name               {"山田"}
     first_name_kana         {"タロウ"}
     last_name_kana          {"ヤマダ"}
-    # prefecture              {"東京都"}
+    # model検討中のため、以下の複数箇所保留
+    # prefecture              {""}
     # municipality            {""}
     # address                 {""}
     # phone_num               {""}
