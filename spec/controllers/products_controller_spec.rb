@@ -14,7 +14,7 @@ describe ProductsController do
     end
 
     it "ビューに正しく遷移するか" do
-      tweet = create(:product)
+      product = create(:product)
       get :edit, params: { id: product }
       expect(response).to render_template :edit
     end

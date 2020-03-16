@@ -10,7 +10,6 @@ FactoryBot.define do
     size                 {"XXS以下"}
     brand                {"コム・デ・ギャルソン"}
     price                {"100000"}
-    transaction
     category
     user
   end
