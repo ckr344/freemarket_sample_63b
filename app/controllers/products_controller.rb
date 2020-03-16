@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, except:[:index, :show]
+  # before_action :authenticate_user!, except:[:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
@@ -33,7 +33,8 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
+    # @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
+    @product = Product.find(params[:id]).presence || "商品は存在しません"
   end
 
   def update
