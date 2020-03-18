@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 2020_03_14_071553) do
     t.string "brand"
     t.integer "price", null: false
     t.integer "transaction_id"
+    t.integer "main_category_id"
+    t.integer "second_category_id"
+    t.integer "third_category_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,12 +76,16 @@ ActiveRecord::Schema.define(version: 2020_03_14_071553) do
     t.string "last_name"
     t.string "first_name_kana"
     t.string "last_name_kana"
+    t.string "prefecture"
+    t.string "municipality"
+    t.string "address"
+    t.string "phone_num"
+    t.integer "post_num"
     t.integer "birthday_yyyy"
     t.integer "birthday_mm"
     t.integer "birthday_dd"
-    t.integer "address_id"
     t.integer "card_id"
-    t.text "text"
+    t.text "introduction"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
