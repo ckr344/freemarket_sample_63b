@@ -45,7 +45,7 @@ $(function(){
   var childSelectHtml = '';
   childSelectHtml =`<div class="form__group2" id="children_box">
                       <label for="product_category">カテゴリー
-                        <span class="form-description form-optional">任意</span>
+                        <span class="form-description form-require">必須</span>
                       </label>
                       <select class="exhibition__select" id="children_category" name='product[category]'>
                         <option value="">選択してください</option>
@@ -59,7 +59,7 @@ $(function(){
     var grandchildSelectHtml = '';
     grandchildSelectHtml =`<div class="form__group2" id="grandchildren_box">
                             <label for="product_category">カテゴリー
-                              <span class="form-description form-optional">任意</span>
+                              <span class="form-description form-require">必須</span>
                             </label>
                             <select class="exhibition__select" id="grandchildren_category" name='product[category_id]'>
                               <option value="">選択してください</option>
