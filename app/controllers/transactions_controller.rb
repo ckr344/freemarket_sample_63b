@@ -43,8 +43,4 @@ class TransactionsController < ApplicationController
     @product = Product.find(params[:product_id])
   end
 
-  # def transaction_params
-  #   params.require(:transaction).permit(:product_id)
-  # end
-
 end
