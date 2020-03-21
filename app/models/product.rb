@@ -5,8 +5,9 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :images
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, length: { maximum: 1000 }
-  validates :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :price, :category,
+  validates :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :category,
    presence: true
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
   enum delivery_charge:{
     "送料込み(出品者負担)": 1,
