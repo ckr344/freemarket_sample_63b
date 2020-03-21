@@ -21,7 +21,7 @@ class TransactionsController < ApplicationController
     @card = @set_card.first
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     Payjp::Charge.create(
-    :amount => 13500, #支払金額を入力（後ほどproductテーブルに紐づけ）
+    :amount => @product.price, #支払金額を入力（後ほどproductテーブルに紐づけ）
     :customer => @card.customer_id, #顧客ID
     :currency => 'jpy', #日本円
   )
