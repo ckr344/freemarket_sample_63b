@@ -28,7 +28,7 @@
             .product-show__transaction
               .product-show__transaction-box
                 -# 商品購入済みであれば購入させない
-                - if @product_id.present?
+                - if @transaction.present?
                   .product-transaction-btn
                     SOLD OUT
                 - else

@@ -33,8 +33,7 @@ class ProductsController < ApplicationController
     @images = @product.images
 
     # SOLD OUT確認用
-    @product_id = Product.find_by(params[:product_id])
-    @transaction = Transaction.where(product_id: @product_id)
+    @transaction = Transaction.where(product_id: @product.id)
   end
 
   def edit
