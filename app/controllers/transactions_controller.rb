@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   before_action :set_product
 
   def pay_index
+    @top_image = @product.images.first
     @card = @set_card.first
     if @card.blank?
       redirect_to controller: "cards", action: "new"
@@ -25,6 +26,10 @@ class TransactionsController < ApplicationController
     :currency => 'jpy', #日本円
   )
   redirect_to action: 'done', product_id: @product #完了画面に移行
+  end
+
+  def done
+    @top_image = @product.images.first
   end
 
   private
