@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   # before_action :authenticate_user!, except:[:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
   def index
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
@@ -30,10 +31,12 @@ class ProductsController < ApplicationController
   def show
     @top_image = @product.images.first
     @images = @product.images
+
+    # SOLD OUT確認用
+    @transaction = Transaction.where(product_id: @product.id)
   end
 
   def edit
-    # @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
     @product = Product.find(params[:id]).presence || "商品は存在しません"
   end
 
@@ -69,7 +72,6 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
       images_attributes: [:name]).merge(user_id: current_user.id)
-
   end
 
   def set_product

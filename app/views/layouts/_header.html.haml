@@ -12,7 +12,7 @@
         .header__center__down__menu__category
           %svg{width: "20" ,height: "44" ,viewBox: "0 0 20 16" ,class: "header__center__down__menu__category__icon"}
             %path{fill: "currentColor" , d: "M18.799 15.25h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zm0-6h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zm0-6h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zM2 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"}
-          = link_to categories_path do
+          = link_to categories_path id:"header-category-link" do
             = "カテゴリーから探す"
             = render partial:"layouts/categories"
         .header__center__down__menu__brand

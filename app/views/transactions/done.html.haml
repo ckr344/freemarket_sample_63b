@@ -4,7 +4,7 @@
     .transaction-done__text
       購入が完了しました！
     .transaction-done__image
-      = image_tag "pict/test-img1.png", alt:"商品画像", class:"transaction-done__image--img"
+      = image_tag @top_image.image.url, alt:"商品画像", class: "transaction-done__image--img"
     .transaction-done__title
       = @product.name
     .transaction-done__price
