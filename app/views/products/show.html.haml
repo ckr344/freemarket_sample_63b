@@ -22,9 +22,11 @@
                 = @product.delivery_charge
           .product-show__item-box--item-detail
             = @product.name
-          .product-show__transaction
-            .product-show__transaction-box
-              = link_to "購入画面に進む", pay_index_transactions_path(product_id: @product), class: "product-transaction-btn"
+          - if user_signed_in? && (current_user.id == @product.user_id)
+          - else
+            .product-show__transaction
+              .product-show__transaction-box
+                = link_to "購入画面に進む", pay_index_transactions_path(product_id: @product), class: "product-transaction-btn"
           %table.product-show__item-box--table
             %tbody.product-show__item-box--table-body
               %tr.product-show__item-box--table-list
