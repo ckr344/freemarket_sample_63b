@@ -26,7 +26,11 @@
           - else
             .product-show__transaction
               .product-show__transaction-box
-                = link_to "購入画面に進む", pay_index_transactions_path(product_id: @product), class: "product-transaction-btn"
+                - if @product_id.present?
+                  .product-transaction-btn
+                    SOLD OUT
+                - else
+                  = link_to "購入画面に進む", pay_index_transactions_path(product_id: @product), class: "product-transaction-btn"
           %table.product-show__item-box--table
             %tbody.product-show__item-box--table-body
               %tr.product-show__item-box--table-list

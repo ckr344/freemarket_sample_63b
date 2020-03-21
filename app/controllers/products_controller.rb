@@ -31,10 +31,13 @@ class ProductsController < ApplicationController
   def show
     @top_image = @product.images.first
     @images = @product.images
+
+    # SOLD OUT確認用
+    @product_id = Product.find_by(params[:product_id])
+    @transaction = Transaction.where(product_id: @product_id)
   end
 
   def edit
-    # @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
     @product = Product.find(params[:id]).presence || "商品は存在しません"
   end
 

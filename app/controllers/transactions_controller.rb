@@ -30,6 +30,7 @@ class TransactionsController < ApplicationController
 
   def done
     @top_image = @product.images.first
+    Transaction.create(product_id: @product.id, user_id: current_user.id)
   end
 
   private
@@ -41,5 +42,9 @@ class TransactionsController < ApplicationController
   def set_product
     @product = Product.find(params[:product_id])
   end
+
+  # def transaction_params
+  #   params.require(:transaction).permit(:product_id)
+  # end
 
 end
