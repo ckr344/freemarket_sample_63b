@@ -1,4 +1,3 @@
-%script{src: "product/new.js", type: "text/javascript"}
 .exhibition
   = form_with(model: @product, local: true) do |f|
     .exhibition__logo__box
@@ -72,7 +71,7 @@
             = f.label :delivery_charge do
               配送料の負担
               %span.form-description.form-require 必須
-            = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select", id: "parent_category"}
+            = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
           .form__group3
             = f.label :delivery_method do
               配送の方法
