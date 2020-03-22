@@ -1,3 +1,4 @@
+%script{src: "product/new.js", type: "text/javascript"}
 .product-show
   .product-show__main
     .product-show__content
@@ -44,11 +45,11 @@
                 %th.product-show__item-box--table-title
                   カテゴリー
                 %td.product-show__item-box--table-data
-                  = link_to "レディース", "#", class: "product-show__table-link"
+                  = link_to "#{@product.category.root.name}", "#", class: "product-show__table-link"
                   %br
-                  = link_to "トップス", "#", class: "product-show__table-link"
+                  = link_to "#{@product.category.parent.name}", "#", class: "product-show__table-link"
                   %br
-                  = link_to "シャツ", "#", class: "product-show__table-link"
+                  = link_to "#{@product.category.name}", "#", class: "product-show__table-link"
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   ブランド
@@ -73,7 +74,7 @@
                 %th.product-show__item-box--table-title
                   配送の方法
                 %td.product-show__item-box--table-data
-                  クロネコヤマト
+                  = @product.delivery_method
               %tr.product-show__item-box--table-list
                 %th.product-show__item-box--table-title
                   発送元の地域

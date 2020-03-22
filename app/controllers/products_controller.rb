@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
+    @category = Category.all.order("id ASC").limit(13)
       if @product.save
           params[:images]["image"].each do |image|
             @image = @product.images.create!(image: image)
