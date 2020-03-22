@@ -43,6 +43,12 @@
                   = product.price
               .top_contents__genre__items__item__body__name
                 = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @ladies_transaction.present?
+                - if @ladies_transaction.first.product_id == product.id
+                  .transaction-check
+                    .transaction-check--btn
+                      SOLD OUT
   .top_contents__genre
     .top_contents__genre__item-box
       .top_contents__genre__item-box__title
@@ -63,6 +69,12 @@
                   = product.price
               .top_contents__genre__items__item__body__name
                 = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @mens_transaction.present?
+                - if @mens_transaction.first.product_id == product.id
+                  .transaction-check
+                    .transaction-check--btn
+                      SOLD OUT
   .top_contents__genre
     .top_contents__genre__item-box
       .top_contents__genre__item-box__title
@@ -83,6 +95,12 @@
                   = product.price
               .top_contents__genre__items__item__body__name
                 = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @appliances_transaction.present?
+                - if @appliances_transaction.first.product_id == product.id
+                  .transaction-check
+                    .transaction-check--btn
+                      SOLD OUT
 .footer_sell
   = link_to new_product_path , class:"footer_sell_btn_link" do
     .footer_sell_btn

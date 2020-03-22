@@ -155,7 +155,6 @@
 .top_contents__genre__items__item__pict__img{
   vertical-align: bottom;
 }
-
 .top_contents__genre__items__item__link{
   text-decoration: none;
 }
@@ -171,7 +170,17 @@
   height:560px ;
   width:100% ;
 }
-
+.transaction-check{
+  width: 177px;
+  text-align: center;
+  position: absolute;
+  top: -180px;
+  left: 0;
+  background-color: #ea352d;
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+}
 .footer_sell_btn{
   position: fixed;
   bottom: 32px;
