@@ -112,6 +112,13 @@
 
         &__pict{
           height: 179px;
+          width: 177px;
+
+          &__img{
+            height: 179px;
+            width: 177px;
+            object-fit: cover;
+          }
         }
   
         &__body{
