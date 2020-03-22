@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  # before_action :authenticate_user!, except:[:index, :show]
+  before_action :authenticate_user!, except:[:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
@@ -8,8 +8,10 @@ class ProductsController < ApplicationController
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
 
-    # トップページにて使用予定
-    # @ladies_products = Product.where() 
+    # カテゴリー別表示
+    @ladies_products = Product.where(category_id: 20..85).limit(10)
+    @mens_products = Product.where(category_id: 91..144).limit(10)
+    @appliances_products = Product.where(category_id: 408..434).limit(10)
   end
 
   def new
