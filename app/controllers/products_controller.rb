@@ -7,6 +7,9 @@ class ProductsController < ApplicationController
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
+
+    # トップページにて使用予定
+    # @ladies_products = Product.where() 
   end
 
   def new
