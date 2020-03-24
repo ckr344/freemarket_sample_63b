@@ -8,10 +8,15 @@ class ProductsController < ApplicationController
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
 
-    # カテゴリー別表示
+    # カテゴリー別 一覧表示
     @ladies_products = Product.where(category_id: 20..85).limit(10)
     @mens_products = Product.where(category_id: 91..144).limit(10)
     @appliances_products = Product.where(category_id: 408..434).limit(10)
+
+    # カテゴリー別 Sold Out Check
+    @ladies_transaction = Transaction.where(product_id: @ladies_products.ids)
+    @mens_transaction = Transaction.where(product_id: @mens_products.ids)
+    @appliances_transaction = Transaction.where(product_id: @appliances_products.ids)
   end
 
   def new
