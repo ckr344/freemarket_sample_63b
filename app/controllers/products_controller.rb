@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
     @images = @product.images
 
     # SOLD OUT確認用
-    @transaction = Transaction.where(product_id: @product.id)
+    @transaction_check = Transaction.where(product_id: @product.id)
   end
 
   def edit
