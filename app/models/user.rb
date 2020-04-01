@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :cards
   has_many :products
-  has_many :transactions
+  has_many :trade, class_name:"transaction"
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_NAME_KANA = /\A[ア-ン゛゜ァ-ォャ-ョー「」、]+\z/
   VALID_NAME = /\A[ぁ-んァ-ヶー一-龠]+\z/
