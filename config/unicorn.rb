@@ -1,25 +1,11 @@
 #サーバ上でのアプリケーションコードが設置されているディレクトリを変数に入れておく
-RAILS_ROOT = File.expand_path('../../', __FILE__)
 app_path = File.expand_path('../../../', __FILE__)
 
 #アプリケーションサーバの性能を決定する
 worker_processes 1
 
 #アプリケーションの設置されているディレクトリを指定
-working_directory RAILS_ROOT
-# working_directory "#{app_path}/current"
-
-
-
-
-# 実行したファイルの場所からrailsのrootパスを見つける
-# RAILS_ROOT = File.expand_path('../../', __FILE__)
-# ENV['BUNDLE_GEMFILE'] = RAILS_ROOT + "/Gemfile"
-# ここは、RIALS_ROOTが記載されていれば、明示的にかかなくても大丈夫です。
-# 自分が使っている環境でも、下の記載なしにちゃんと動いてますね。
-# working_directory RAILS_ROOT
-
-
+working_directory "#{app_path}/current"
 
 # それぞれ、sharedの中を参照するよう変更
 listen "#{app_path}/shared/tmp/sockets/unicorn.sock"
