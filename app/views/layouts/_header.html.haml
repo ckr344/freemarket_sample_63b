@@ -37,7 +37,11 @@
           %h1.header__center__down__user_menu__todo__word
             = "やることリスト"
         %li.header__center__down__user_menu__mypage{style: "list-style:none"}
-          %svg{height: "40" ,width: "30"}
-            %circle{cx: "15" ,cy: "22" ,r: "10" ,stroke: "black" ,fill: "#2bcbd1"}
           %h1.header__center__down__user_menu__mypage__word
-            = "マイページ"
+            - if user_signed_in?
+              %svg{height: "40" ,width: "30"}
+                %circle{cx: "15" ,cy: "22" ,r: "10" ,stroke: "black" ,fill: "#2bcbd1"}
+              = link_to "マイページ", "/users/#{current_user.id}"
+            - else
+              = link_to "新規登録", new_user_registration_path
+              = link_to "ログイン", new_user_session_path
