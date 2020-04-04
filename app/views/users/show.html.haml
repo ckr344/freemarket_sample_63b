@@ -3,17 +3,17 @@
     %h3.user-show__settings--title
       = "設定"
     %li.user-show__settings--lists
-      = link_to "/users/#{current_user.id}/edit", class:"user-show__settings--profiles" do
+      = link_to edit_user_registration_path, class:"user-show__settings--profiles" do
         = "プロフィール"
         %h1.user-show__settings--arrow
           = ">"
     %li.user-show__settings--lists
-      = link_to "/users/#{current_user.id}/edit", class:"user-show__settings--profiles" do
+      = link_to edit_user_registration_path, class:"user-show__settings--profiles" do
         = "発送元・お届け先住所変更  "
         %h1.user-show__settings--arrow
           = ">"
     %li.user-show__settings--lists
-      = link_to "/users/#{current_user.id}/edit", class:"user-show__settings--profiles" do
+      = link_to edit_user_registration_path, class:"user-show__settings--profiles" do
         = "支払い方法"
         %h1.user-show__settings--arrow
           = ">"
