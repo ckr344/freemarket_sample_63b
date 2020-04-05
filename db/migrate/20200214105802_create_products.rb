@@ -11,10 +11,6 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.integer :size, default: 0, null: false, limit: 1
       t.string :brand
       t.integer :price, null: false
-      t.integer :transaction_id
-      t.integer :main_category_id
-      t.integer :second_category_id
-      t.integer :third_category_id
       t.references :user, null: false, foreign_key: true
       t.timestamps
     end

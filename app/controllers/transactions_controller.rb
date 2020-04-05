@@ -4,6 +4,7 @@ class TransactionsController < ApplicationController
   before_action :set_product
 
   def pay_index
+    @top_image = @product.images.first
     @card = @set_card.first
     if @card.blank?
       redirect_to controller: "cards", action: "new"
@@ -20,11 +21,16 @@ class TransactionsController < ApplicationController
     @card = @set_card.first
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     Payjp::Charge.create(
-    :amount => 13500, #支払金額を入力（後ほどproductテーブルに紐づけ）
+    :amount => @product.price, #支払金額を入力（後ほどproductテーブルに紐づけ）
     :customer => @card.customer_id, #顧客ID
     :currency => 'jpy', #日本円
   )
   redirect_to action: 'done', product_id: @product #完了画面に移行
+  end
+
+  def done
+    @top_image = @product.images.first
+    Transaction.create(product_id: @product.id, user_id: current_user.id)
   end
 
   private

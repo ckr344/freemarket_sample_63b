@@ -1,84 +1,65 @@
-%script{src: "product/new.js", type: "text/javascript"}
 .exhibition
-  = form_for @product do |f|
+  = form_with(model: @product, local: true) do |f|
     .exhibition__logo__box
       = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),root_path, class: "exhibition__logo"
     %main
       .exhibition__container__header
         商品の情報を入力
-      -# 画像
       .upload__box.exhibition__content__box
         .upload__box__head
           出品画像
           %p.upload__box__head__sub 最大3枚までアップロードできます
         .upload__box__images
-          = f.fields_for :images do |c|
+          = f.fields_for :images do |i|
             .upload__box__image
               %label{for: "image1"}
                 = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview1", class: "preview-image"
-              = c.file_field :image, multiple: true, id:"image1", type: "file", accept: "image/*", onchange: "previewImage1(this);", style: "display: none;"
+              = i.file_field :image, multiple: true, id:"image1", type: "file", accept: "image/*", onchange: "previewImage1(this);", style: "display: none;", name: "images[image][]"
             .upload__box__image
               %label{for: "image2"}
                 = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview2", class: "preview-image"
-              = c.file_field :image, multiple: true, id:"image2", type: "file", accept: "image/*", onchange: "previewImage2(this);", style: "display: none;"
+              = i.file_field :image, multiple: true, id:"image2", type: "file", accept: "image/*", onchange: "previewImage2(this);", style: "display: none;", name: "images[image][]"
             .upload__box__image
               %label{for: "image3"}
                 = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview3", class: "preview-image"
-              = c.file_field :image, multiple: true, id:"image3", type: "file", accept: "image/*", onchange: "previewImage3(this);", style: "display: none;"
-      -# 商品
+              = i.file_field :image, multiple: true, id:"image3", type: "file", accept: "image/*", onchange: "previewImage3(this);", style: "display: none;", name: "images[image][]"
       .exhibition__content__box.product__box
-        -# 商品名
         .form__group1
           = f.label :name do
             商品名
             %span.form-description.form-require 必須
           = f.text_field :name, {placeholder: "商品名（必須 40文字まで)", class: "name__input", maxlength: '40'}
-        -# 説明
         .form__group1
           = f.label :description do
             商品の説明
-            %span.form-description.form-require 必須
+            %span.form-description.form-optional 任意
           = f.text_area :description, {placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class: "description__input", maxlength: '1000'}  
-      -# 詳細
       .exhibition__content__box.detail__box
         .section__head
           商品の詳細
-        .form__box
-          .form__group2
-            %label 
-              カテゴリー
-              %span.form-description.form-require 必須
-            %form{class: "select", method: "post"}
-              %select.exhibition__select{name: "main_category_id", size: "1"}
-                %option{value: "0"} 選択してください
-                %option{value: "1"} レディース
-                %option{value: "2"} メンズ
-                %option{value: "3"} ベビー・キッズ
-                %option{value: "4"} インテリア・住まい・小物
-                %option{value: "5"} 本・音楽・ゲーム
-                %option{value: "6"} おもちゃ・ホビー・グッズ
-                %option{value: "7"} コスメ・香水・美容
-                %option{value: "8"} 家電・スマホ・カメラ
-                %option{value: "9" } スポーツ・レジャー
-                %option{value: "10"} ハンドメイド
-                %option{value: "11"} チケット
-                %option{value: "12"} 自動車・オートバイ
-                %option{value: "13"} その他
-          .form__group2
-            = f.label :size do
-              サイズ
-              %span.form-description.form-require 必須
-            = f.select :size, Product.sizes.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
-            = f.label :brand do
-              ブランド
-              %span.form-description.form-optional 必須
-            = f.text_field :brand, {placeholder: "例) シャネル", class: "brand__input"}
-          .form__group2
-            = f.label :status do
-              商品の状態
-              %span.form-description.form-require 必須
-            = f.select :status, Product.statuses.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
+        .form__box.detail__form__box
+          .form__box__above
+            .form__group2
+              = f.label :category do
+                カテゴリー
+                %span.form-description.form-require 必須
+              = f.collection_select :category, @category, :id, :name,{include_blank: '選択してください'},{class: "exhibition__select",id: "parent_category"}
+          .form__box__bellow
+            .form__group2
+              = f.label :size do
+                サイズ
+                %span.form-description.form-require 必須
+              = f.select :size, Product.sizes.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
+            .form__group2
+              = f.label :brand do
+                ブランド
+                %span.form-description.form-optional 任意
+              = f.text_field :brand, {placeholder: "例) シャネル", class: "brand__input exhibition__select"}
+            .form__group2
+              = f.label :status do
+                商品の状態
+                %span.form-description.form-require 必須
+              = f.select :status, Product.statuses.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
       -# 配送
       .exhibition__content__box.shipping__box
         .section__head
@@ -86,51 +67,49 @@
           = link_to "" do
             = icon('fas', 'question-circle', class: "question__icon") 
         .form__box
-          .form__group2
+          .form__group3
             = f.label :delivery_charge do
               配送料の負担
               %span.form-description.form-require 必須
             = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_method do
-              配送料の方法
+              配送の方法
               %span.form-description.form-require 必須
             = f.select :delivery_method, Product.delivery_methods.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_prefecture do
-              配送料の方法
+              発送元の地域
               %span.form-description.form-require 必須
             = f.select :delivery_prefecture, Product.delivery_prefectures.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_days do
-              配送料の方法
+              発送までの日数
               %span.form-description.form-require 必須
             = f.select :delivery_days, Product.delivery_days.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-      -# 価格
       .exhibition__content__box.price__box
         .section__head
           販売価格(300〜9,999,999)
           = link_to "" do
             = icon('fas', 'question-circle', class: "question__icon")  
         .form__box
-          .from__group3.price__form
+          .from__group4.price__form
             %label.price 
               価格
               %span.form-description.form-require 必須
             .price__form__right
               %p.yen ¥
-              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", onchange: "calcProfit();", min: "300"}
-          .from__group3.commission__form
+              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", oninput: "calcProfit();", min: 300, max: 9999999}
+          .from__group4.commission__form
             .commission__form__left
               販売手数料(10%)
             .commission__form__right#commission__num
-              ¥
-          .from__group3.profit__form
+              ¥ 
+          .from__group4.profit__form
             .profit__form__left
               販売利益
             .profit__form__right#profit__num
               ¥
-      -# 出品ボタン
       .exhibition__btn__box
         = link_to '禁止されている出品',''
         、

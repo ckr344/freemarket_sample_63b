@@ -1,21 +1,14 @@
 class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
-  has_many :images, inverse_of: :product
+  has_many :images, dependent: :destroy
+  has_one :trade, class_name:"transaction", dependent: :destroy
   accepts_nested_attributes_for :images
-  validates :name, :price, presence: true
-  enum size:{
-    "XXS以下": 1,
-    "XS(SS)": 2,
-    "S": 3,
-    "M": 4,
-    "L": 5,
-    "XL(LL)": 6,
-    "2XL(3L)": 7,
-    "3XL(4L)": 8,
-    "4XL(5L)以上": 9,
-    "FREE SIZE":10
-  }
+  validates :name, presence: true, length: { maximum: 40 }
+  validates :description, length: { maximum: 1000 }
+  validates :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :category, presence: true
+  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}, presence: true
+
   enum delivery_charge:{
     "送料込み(出品者負担)": 1,
     "着払い(購入者負担)":2
@@ -54,5 +47,17 @@ class Product < ApplicationRecord
     "やや傷や汚れあり": 4,
     "傷や汚れあり": 5,
     "全体的に状態が悪い": 6
+  }
+  enum size:{
+    "XXS以下": 1,
+    "XS(SS)": 2,
+    "S": 3,
+    "M": 4,
+    "L": 5,
+    "XL(LL)": 6,
+    "2XL(3L)": 7,
+    "3XL(4L)": 8,
+    "4XL(5L)以上": 9,
+    "FREE SIZE":10
   }
 end

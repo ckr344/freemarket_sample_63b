@@ -1,266 +1,106 @@
-.top_contents
-  .top_contents__visual
-    .top_contents__visual__image
-      = image_tag "pict/bg-mainVisual-pict_pc.jpg", class: "top_image"
-    .top_contents__visual__content
-      .top_contents__visual__content__subtitle
+.top
+  .top__visual
+    .top__visual-image-area
+      = image_tag "pict/bg-mainVisual-pict_pc.jpg", class: "top__visual-image"
+    .top__visual-content
+      .top__visual-content--subtitle
         人生を変えるフリマアプリ
-      .top_contents__visual__content__text
+      .top__visual-content--text
         FURIMAはだれでもかんたんに出品・購入できる
         %br
         フリマアプリです
-  .top_contents__category
-    .top_contents__category__box
-      .top_contents__category__box__popular
+  .top__category
+    .top__category-box
+      .top__category-popular
         人気のカテゴリー
-      .top_contents__category__box__items
-        %ul.top_contents__category__box__items__list
-          %li.top_contents__category__box__items__list__item
+      .top__category-items
+        %ul.top__category-lists
+          %li.top__category-item
             レディース
-          %li.top_contents__category__box__items__list__item
+          %li.top__category-item
             メンズ
-          %li.top_contents__category__box__items__list__item
+          %li.top__category-item
             家電・スマホ・カメラ
-          %li.top_contents__category__box__items__list__item
+          %li.top__category-item
             おもちゃ・ホビー・グッズ
-  .top_contents__genre
-    .top_contents__genre__item-box
-      .top_contents__genre__item-box__title
+  .top__genre
+    .top__genre-box
+      .top__genre-box-title
         レディース新着アイテム
-      .top_contents__genre__item-box__more
+      .top__genre-box-more
         もっと見る >
-    .top_contents__genre__items
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img1.png"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              サバ缶
-  .top_contents__genre
-    .top_contents__genre__item-box
-      .top_contents__genre__item-box__title
+    .top__genre-items
+      - @ladies_products.each do |product|
+        .top__genre-item
+          = link_to product_path(product.id), class:"top__genre-item-link" do
+            .top__genre-item-pict
+              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+            .top__genre-body
+              .top__genre-body-price
+                .top__genre-body-price--yen
+                  ¥
+                .top__genre-body-price--value
+                  = product.price
+              .top__genre-body-name
+                = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @ladies_transaction.present?
+                - if @ladies_transaction.first.product_id == product.id
+                  .top__transaction-check
+                    .top__transaction-check--btn
+                      SOLD OUT
+  .top__genre
+    .top__genre-box
+      .top__genre-box-title
         メンズ新着アイテム
-      .top_contents__genre__item-box__more
+      .top__genre-box-more
         もっと見る >
-    .top_contents__genre__items
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img2.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              餃子
-  .top_contents__genre
-    .top_contents__genre__item-box
-      .top_contents__genre__item-box__title
+    .top__genre-items
+      - @mens_products.each do |product|
+        .top__genre-items__item
+          = link_to product_path(product.id), class:"top__genre-item-link" do
+            .top__genre-item-pict
+              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+            .top__genre-body
+              .top__genre-body-price
+                .top__genre-body-price--yen
+                  ¥
+                .top__genre-body-price--value
+                  = product.price
+              .top__genre-body-name
+                = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @mens_transaction.present?
+                - if @mens_transaction.first.product_id == product.id
+                  .top__transaction-check
+                    .top__transaction-check--btn
+                      SOLD OUT
+  .top__genre
+    .top__genre-box
+      .top__genre-box-title
         家電・スマホ・カメラ新着アイテム
-      .top_contents__genre__item-box__more
+      .top__genre-box-more
         もっと見る >
-    .top_contents__genre__items
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-      .top_contents__genre__items__item
-        = link_to "#" , class:"top_contents__genre__items__item__link" do
-          .top_contents__genre__items__item__pict
-            = image_tag "pict/test-img3.png", class: "top_contents__genre__items__item__pict__img"
-          .top_contents__genre__items__item__body
-            .top_contents__genre__items__item__body__price
-              .top_contents__genre__items__item__body__price__yen
-                ¥
-              .top_contents__genre__items__item__body__price__value
-                1200
-            .top_contents__genre__items__item__body__name
-              カレー
-
+    .top__genre-items
+      - @appliances_products.each do |product|
+        .top__genre-items__item
+          = link_to product_path(product.id), class:"top__genre-item-link" do
+            .top__genre-item-pict
+              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+            .top__genre-body
+              .top__genre-body-price
+                .top__genre-body-price--yen
+                  ¥
+                .top__genre-body-price--value
+                  = product.price
+              .top__genre-body-name
+                = product.name
+              -# 商品購入済みであればSOLD OUTを表示
+              - if @appliances_transaction.present?
+                - if @appliances_transaction.first.product_id == product.id
+                  .top__transaction-check
+                    .top__transaction-check--btn
+                      SOLD OUT
 .footer_sell
   = link_to new_product_path , class:"footer_sell_btn_link" do
     .footer_sell_btn

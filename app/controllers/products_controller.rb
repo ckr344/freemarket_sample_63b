@@ -11,27 +11,48 @@ class ProductsController < ApplicationController
     @q = Product.search(search_params)
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
+
+    # カテゴリー別 一覧表示
+    @ladies_products = Product.where(category_id: 20..85).limit(10)
+    @mens_products = Product.where(category_id: 91..144).limit(10)
+    @appliances_products = Product.where(category_id: 408..434).limit(10)
+
+    # カテゴリー別 Sold Out Check
+    @ladies_transaction = Transaction.where(product_id: @ladies_products.ids)
+    @mens_transaction = Transaction.where(product_id: @mens_products.ids)
+    @appliances_transaction = Transaction.where(product_id: @appliances_products.ids)
   end
 
   def new
     @product = Product.new
-    @product.images.build
+    @image = @product.images.build
+    @category = Category.all.order("id ASC").limit(13)
   end
 
   def create
     @product = Product.new(product_params)
-    if @product.save
-      redirect_to root_path
-    else
-      render 'new'
-    end    
+    @category = Category.all.order("id ASC").limit(13)
+      if @product.save
+          params[:images]["image"].each do |image|
+            @image = @product.images.create!(image: image)
+          end
+        redirect_to root_path
+      else
+        @product.images.build
+        render action: 'new'
+      end
   end
 
   def show
+    @top_image = @product.images.first
+    @images = @product.images
+
+    # SOLD OUT確認用
+    @transaction_check = Transaction.where(product_id: @product.id)
   end
 
   def edit
-    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
+    @product = Product.find(params[:id]).presence || "商品は存在しません"
   end
 
   def update
@@ -53,12 +74,21 @@ class ProductsController < ApplicationController
     end
   end
 
-  
+
+  def category_children  
+    @category_children = Category.find(params[:productCategory]).children 
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find(params[:productCategory]).children
+  end
+
 
   private
+  
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :main_category_id, :second_category_id, :third_category_id,
-      images_attributes: {image: []}).merge(user_id: current_user.id)
+    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      images_attributes: [:name]).merge(user_id: current_user.id)
   end
 
   def set_product
