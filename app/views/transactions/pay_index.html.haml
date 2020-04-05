@@ -5,7 +5,7 @@
     %h2.transaction-pay__title 購入内容の確認
     .transaction-pay__item
       .transaction-pay__item-box
-        %img.transaction-pay__item-image{:alt => "", "data-src" => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009", :src => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009"}/
+        = image_tag @top_image.image.url, alt:"商品画像", class: "transaction-pay__item-image"
       .transaction-pay__item-detail
         %p.transaction-pay__item-detail--name
           = @product.name
