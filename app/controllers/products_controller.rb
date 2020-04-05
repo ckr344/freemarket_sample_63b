@@ -4,7 +4,11 @@ class ProductsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
   def index
-    @q = Product.ransack(params[:q])
+    @categories = Category.all.order("id ASC").limit(13)
+  end
+
+  def search
+    @q = Product.search(search_params)
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
   end
@@ -14,7 +18,7 @@ class ProductsController < ApplicationController
     @product.images.build
   end
 
-  def create
+  def createｍ
     @product = Product.new(product_params)
     if @product.save
       redirect_to root_path
@@ -49,6 +53,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  
+
   private
   def product_params
     params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :main_category_id, :second_category_id, :third_category_id,
@@ -63,4 +69,7 @@ class ProductsController < ApplicationController
     @user = User.find(@product.user_id)
   end
 
+  def search_params
+    params.require(:q).permit(:name_cont)
+  end
 end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "products#index"
   resources :users, only: [:edit, :update]
   resources :products
+  get 'search', to: 'products#search'
   resources :categories
   resources :cards, only: [:new, :show, :destroy] do
     collection do
