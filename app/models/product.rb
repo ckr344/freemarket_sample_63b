@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
   has_many :images, dependent: :destroy
-  has_one :trade, class_name:"transaction", dependent: :destroy
+  has_one :trade, class_name:"Transaction", dependent: :destroy
   accepts_nested_attributes_for :images
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, length: { maximum: 1000 }
