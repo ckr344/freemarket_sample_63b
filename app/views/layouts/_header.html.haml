@@ -42,7 +42,6 @@
               %svg{height: "40" ,width: "30"}
                 %circle{cx: "15" ,cy: "22" ,r: "10" ,stroke: "black" ,fill: "#2bcbd1"}
               = link_to "マイページ", user_path(current_user.id)
-              -# = link_to image_tag(current_user.image, alt:"user-image", class:"header__user-img"), "/users/#{current_user.id}"
             - else
               = link_to "新規登録", new_user_registration_path
               = link_to "ログイン", new_user_session_path
