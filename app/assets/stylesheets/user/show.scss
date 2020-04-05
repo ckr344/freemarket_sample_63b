@@ -1,0 +1,95 @@
+.user-show{
+  width: 100vw;
+  height: 500px;
+  background-color: whitesmoke;
+  padding: 50px 330px 20px;
+  display: flex;
+  &__settings{
+    height: 100%;
+    width: 200px;
+    &--lists{
+      position: relative;
+    }
+    &--arrow{
+      position: absolute;
+      right: 15px;
+      top: 9px;
+      font-size: 22px;
+      color: rgb(199, 199, 199);
+    }
+    &--title{
+      width: 280px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    &--profiles{
+      display: block;
+      position: relative;
+      width: 240px;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 16px 0 16px 16px;
+      background-color: white;
+      border: 1px solid whitesmoke;
+      color: #333333;
+    }
+    &--addresses{
+      text-decoration: none;
+      font-size: 14px;
+      padding: 16px;
+      display: block;
+      width: 240px;
+      background-color: white;
+      border: 1px solid whitesmoke;
+      color: #333333;
+    }
+    &--pays{
+      text-decoration: none;
+      font-size: 14px;
+      padding: 16px;
+      display: block;
+      width: 240px;
+      background-color: white;
+      border: 1px solid whitesmoke;
+      color: #333333;
+    }
+    &--logouts{
+      text-decoration: none;
+      font-size: 14px;
+      padding: 16px;
+      display: block;
+      width: 240px;
+      background-color: white;
+      border: 1px solid whitesmoke;
+      color: #333333;
+    }
+  }
+  &__myprofile{
+    width: 500px;
+    height: 700px;
+    margin-left: 70px;
+    &--up{
+      height: 150px;
+      background-color: rgb(170, 238, 255);
+    }
+    &--image{
+      height: 80px;
+      width: 80px;
+    }
+    &--bottom{
+      height: 120px;
+    }
+    &--name{
+      padding: 0 215px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #333333;
+    }
+  }
+}
+.fa-user-circle{
+  font-size: 60px;
+  padding: 20px 210px;
+  color: #333333;
+}
