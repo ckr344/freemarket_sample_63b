@@ -1,5 +1,5 @@
 .exhibition
-  = form_with(model: @product, local: true) do |f|
+  = form_with model: @product, local: true do |f|
     .exhibition__logo__box
       = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),root_path, class: "exhibition__logo"
     %main
@@ -39,11 +39,18 @@
           商品の詳細
         .form__box.detail__form__box
           .form__box__above
-            .form__group2
-              = f.label :category do
-                カテゴリー
-                %span.form-description.form-require 必須
-              = f.collection_select :category, Category.all.order("id ASC").limit(13), :id, :name,{include_blank: '選択してください'},{class: "exhibition__select",id: "parent_category"}
+            .form-group-top
+              .form__group2
+                = f.label :カテゴリー, class: "label" do
+                  カテゴリー
+                  %span.form-description.form-require 必須
+                %br
+                = f.select :category_id, options_for_select(@category_parent_array.map{|c|[c, {}]}, @product.category.parent.parent.name), {}, {class: 'exhibition__select', id: 'parent_category'}
+              .form__group2#children_box
+                = f.select :category_id, options_for_select(@category_child_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.parent.id), {}, {class: 'exhibition__select', id: 'children_category'}
+              .form__group2#grandchildren_box
+                = f.select :category_id, options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.id), {}, {class: 'exhibition__select', id: 'grandchildren_category'}
+              = f.text_field :category, id: 'grand_child_result_id', type: 'hidden'
           .form__box__bellow
             .form__group2
               = f.label :size do

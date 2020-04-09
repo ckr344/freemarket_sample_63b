@@ -44,9 +44,6 @@ $(function(){
   function appendChildrenBox(insertHTML){
   var childSelectHtml = '';
   childSelectHtml =`<div class="form__group2" id="children_box">
-                      <label for="product_category">カテゴリー
-                        <span class="form-description form-require">必須</span>
-                      </label>
                       <select class="exhibition__select" id="children_category" name='product[category]'>
                         <option value="">選択してください</option>
                         ${insertHTML}
@@ -58,9 +55,6 @@ $(function(){
   function appendGrandchildrenBox(insertHTML){
     var grandchildSelectHtml = '';
     grandchildSelectHtml =`<div class="form__group2" id="grandchildren_box">
-                            <label for="product_category">カテゴリー
-                              <span class="form-description form-require">必須</span>
-                            </label>
                             <select class="exhibition__select" id="grandchildren_category" name='product[category_id]'>
                               <option value="">選択してください</option>
                               ${insertHTML}
@@ -73,9 +67,9 @@ $(function(){
     var productCategory = document.getElementById('parent_category').value; //選択された親カテゴリーの取得
     if (productCategory != ""){ //親カテゴリーが初期値以外
       $.ajax({
-        url: 'category_children',
+        url: '/products/category_children',
         type: 'GET',
-        data: { productCategory: productCategory},
+        data: { name: productCategory},
         dataType: 'json'
       })
       .done(function(children){
@@ -100,9 +94,9 @@ $(function(){
     var productCategory = document.getElementById('children_category').value; //選択された子カテゴリーの取得
     if (productCategory != ""){ //子カテゴリーが初期値以外
       $.ajax({
-        url: 'category_grandchildren',
+        url: '/products/category_grandchildren',
         type: 'GET',
-        data: { productCategory: productCategory},
+        data: { name: productCategory},
         dataType: 'json'
       })
       .done(function(grandchildren){ //子が変更時、孫を削除
