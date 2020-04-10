@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   belongs_to :user
   belongs_to :category, optional: true
   has_many :images, dependent: :destroy
-  accepts_nested_attributes_for :images
+  accepts_nested_attributes_for :images, allow_destroy: true
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, length: { maximum: 1000 }
   validates :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :category,

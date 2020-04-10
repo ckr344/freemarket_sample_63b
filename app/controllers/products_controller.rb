@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  # before_action :authenticate_user!, except:[:index, :show]
+  before_action :authenticate_user!, except:[:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   
@@ -41,12 +41,39 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @category = Category.all.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
+    
+
+    #カテゴリー編集用
+    # 登録されている商品の孫カテゴリーのレコードを取得し、孫カテゴリー選択肢用の配列作成
+    @selected_category = @product.category
+    @category_grandchildren_array = []
+      Category.find("#{@selected_category.id}").siblings.each do |grandchild|
+        grandchildren_hash = {id: "#{grandchild.id}", name: "#{grandchild.name}"}
+        @category_grandchildren_array << grandchildren_hash
+      end
+    # binding.pry
+    # 選択されている子カテゴリーのレコードを取得し、子カテゴリー選択肢用の配列作成
+    @selected_child_category = @selected_category.parent
+    @category_children_array = []
+      Category.find("#{@selected_child_category.id}").siblings.each do |child|
+        children_hash = {id: "#{child.id}", name: "#{child.name}"}
+        @category_children_array << children_hash
+      end
+    # 選択されている親カテゴリーのレコードを取得し、親カテゴリー選択肢用の配列作成
+    @selected_parent_category = @selected_category.parent
+    @category_parents_array = []
+      Category.find("#{@selected_parent_category.id}").siblings.each do |parent|
+        parent_hash = {id: "#{parent.id}", name: "#{parent.name}"}
+        @category_parents_array << parent_hash
+      end
+
   end
 
   def update
     @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
-    
+    @category = Category.all.order("id ASC").limit(13)
     if @product.update(product_params)
       redirect_to product_path
     else
@@ -75,7 +102,7 @@ class ProductsController < ApplicationController
   
   def product_params
     params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
-      images_attributes: [:name]).merge(user_id: current_user.id)
+      images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
   end
 
   def set_product

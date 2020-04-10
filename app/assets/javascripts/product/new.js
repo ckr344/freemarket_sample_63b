@@ -47,7 +47,7 @@ $(function(){
                       <label for="product_category">カテゴリー
                         <span class="form-description form-require">必須</span>
                       </label>
-                      <select class="exhibition__select" id="children_category" name='product[category]'>
+                      <select class="exhibition__select" id="children_category" name=''>
                         <option value="">選択してください</option>
                         ${insertHTML}
                       </select>
