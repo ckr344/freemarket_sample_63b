@@ -48,7 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @category = Category.all.order("id ASC").limit(13)
+    @category = Category.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
 
   end
