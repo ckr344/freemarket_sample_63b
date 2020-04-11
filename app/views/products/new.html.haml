@@ -40,10 +40,12 @@
         .form__box.detail__form__box
           .form__box__above
             .form__group2
-              = f.label :category do
-                カテゴリー
-                %span.form-description.form-require 必須
-              = f.collection_select :category, @category, :id, :name,{include_blank: '選択してください'},{class: "exhibition__select",id: "parent_category"}
+              .form__label
+                = f.label :category do
+                  カテゴリー
+                  %span.form-description.form-require 必須
+              .form__select
+                = f.select :category, @category_parent_array, {}, {class: "exhibition__select",id: "parent_category"}
           .form__box__bellow
             .form__group2
               = f.label :size do

@@ -23,6 +23,13 @@ class ProductsController < ApplicationController
     @product = Product.new
     @image = @product.images.build
     @category = Category.all.order("id ASC").limit(13)
+
+    #セレクトボックスの初期値設定
+    @category_parent_array = ["選択してください"]
+    #データベースから、親カテゴリーのみ抽出し、配列化
+    Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+    end
   end
 
   def create
@@ -49,6 +56,19 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id]).presence || "商品は存在しません"
+
+    # 親セレクトボックスの初期値(配列)
+    @category_parent_array = []
+    # categoriesテーブルから親カテゴリーのみを抽出、配列に格納
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
+
+    # itemに紐づいていいる孫カテゴリーの親である子カテゴリが属している子カテゴリーの一覧を配列で取得
+    @category_child_array = @product.category.parent.parent.children
+
+    # itemに紐づいていいる孫カテゴリーが属している孫カテゴリーの一覧を配列で取得
+    @category_grandchild_array = @product.category.parent.children
   end
 
   def update
@@ -61,6 +81,14 @@ class ProductsController < ApplicationController
     end  
   end
 
+  def category_children 
+    @category_children = Category.find_by(name: "#{params[:name]}", ancestry: nil).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:name]}").children
+  end
+
   def destroy
     @product = current_user.products.find(params[:id])
     if @product.destroy
@@ -68,14 +96,6 @@ class ProductsController < ApplicationController
     else
       render 'show'
     end
-  end
-
-  def category_children  
-    @category_children = Category.find(params[:productCategory]).children 
-  end
-
-  def category_grandchildren
-    @category_grandchildren = Category.find(params[:productCategory]).children
   end
 
   private
