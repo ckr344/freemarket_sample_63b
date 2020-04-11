@@ -29,7 +29,7 @@
             .product-show__transaction
               .product-show__transaction-box
                 -# 商品購入済みであれば購入させない
-                - if @transaction.present?
+                - if @transaction_check.present?
                   .product-transaction-btn
                     SOLD OUT
                 - else
@@ -93,7 +93,7 @@
               = link_to '商品の編集', edit_product_path, method: :get, class: "determine_btn"
             .delete-box
               = link_to 'この商品を削除する', product_path(@product), method: :delete, class: "determine_btn", data: {confirm: "本当に削除しますか？"}
-          -# 保留
+          -# 実装保留
           -# %ul.product-show__links
           -#   %li.product-show__links-list
           -#     = link_to "< 前の商品", "#", class: "product-show__links-link"

@@ -34,7 +34,7 @@
           %h3 本人確認
           %p1 安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
       .user-new__field
-        = f.label :first_name, "お名前（全角）", class: "user-new__field--title", class: "user-new__field--title"
+        = f.label :first_name, "お名前（全角）", class: "user-new__field--title"
         = f.label :req, "必須", class: "user-new__field--req"
         %br/
         = f.text_field :first_name, autofocus: true, placeholder: "例）山田", class: "user-new__field--name"

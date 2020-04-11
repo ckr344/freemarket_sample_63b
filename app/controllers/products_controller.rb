@@ -8,8 +8,15 @@ class ProductsController < ApplicationController
     @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
 
-    # トップページにて使用予定
-    # @ladies_products = Product.where() 
+    # カテゴリー別 一覧表示
+    @ladies_products = Product.where(category_id: 20..85).limit(10)
+    @mens_products = Product.where(category_id: 91..144).limit(10)
+    @appliances_products = Product.where(category_id: 408..434).limit(10)
+
+    # カテゴリー別 Sold Out Check
+    @ladies_transaction = Transaction.where(product_id: @ladies_products.ids)
+    @mens_transaction = Transaction.where(product_id: @mens_products.ids)
+    @appliances_transaction = Transaction.where(product_id: @appliances_products.ids)
   end
 
   def new
@@ -37,7 +44,7 @@ class ProductsController < ApplicationController
     @images = @product.images
 
     # SOLD OUT確認用
-    @transaction = Transaction.where(product_id: @product.id)
+    @transaction_check = Transaction.where(product_id: @product.id)
   end
 
   def edit
@@ -101,8 +108,10 @@ class ProductsController < ApplicationController
   private
   
   def product_params
+
     params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
       images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+
   end
 
   def set_product
