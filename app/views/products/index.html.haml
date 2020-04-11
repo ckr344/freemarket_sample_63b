@@ -57,7 +57,7 @@
         もっと見る >
     .top__genre-items
       - @mens_products.each do |product|
-        .top__genre-items__item
+        .top__genre-item
           = link_to product_path(product.id), class:"top__genre-item-link" do
             .top__genre-item-pict
               = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
@@ -83,7 +83,7 @@
         もっと見る >
     .top__genre-items
       - @appliances_products.each do |product|
-        .top__genre-items__item
+        .top__genre-item
           = link_to product_path(product.id), class:"top__genre-item-link" do
             .top__genre-item-pict
               = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
