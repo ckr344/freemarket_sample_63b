@@ -55,7 +55,6 @@ class ProductsController < ApplicationController
 
   def update
     @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
-    @category = Category.all.order("id ASC").limit(13)
     if @product.update(product_params)
       redirect_to product_path
     else
