@@ -55,7 +55,9 @@ class ProductsController < ApplicationController
   end
 
   def edit
+    @category = Category.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
+
 
     # 親セレクトボックスの初期値(配列)
     @category_parent_array = []
@@ -69,11 +71,11 @@ class ProductsController < ApplicationController
 
     # itemに紐づいていいる孫カテゴリーが属している孫カテゴリーの一覧を配列で取得
     @category_grandchild_array = @product.category.parent.children
+
   end
 
   def update
     @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
-    
     if @product.update(product_params)
       redirect_to product_path
     else
@@ -101,8 +103,10 @@ class ProductsController < ApplicationController
   private
   
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :category_id,
-      images_attributes: [:name]).merge(user_id: current_user.id)
+
+    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+
   end
 
   def set_product
