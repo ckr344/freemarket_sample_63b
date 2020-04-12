@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   devise_for :users
   root "products#index"
-  resources :users, only: [:edit, :update]
+
+ 
 
   resources :products
   get 'search', to: 'products#search'
+
+
+  resources :users, only: [:show, :edit, :update]
 
   resources :products do
     collection do
