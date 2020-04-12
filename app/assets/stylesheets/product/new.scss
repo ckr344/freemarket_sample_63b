@@ -47,6 +47,13 @@ main{
     border: 1px dotted gray;
     background-color: rgb(245,245,245);
   }
+  &__image-delete{
+    text-align: center;
+    margin-top: 5px;
+    cursor: pointer;
+    border: 1px solid gray;
+    border-radius: 10px;
+  }
 }
 
 .preview-image{
@@ -176,6 +183,7 @@ main{
 }
 .form__group2{
   margin-top: 20px;
+  display: block;
 }
 .form__group3{
   height: 25%;

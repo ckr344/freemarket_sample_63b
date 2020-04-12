@@ -1,5 +1,5 @@
 .exhibition
-  = form_with(model: @product, local: true) do |f|
+  = form_with model: @product, local: true do |f|
     .exhibition__logo__box
       = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),root_path, class: "exhibition__logo"
     %main
@@ -8,21 +8,54 @@
       .upload__box.exhibition__content__box
         .upload__box__head
           出品画像
+          %span.form-description.form-require 必須
           %p.upload__box__head__sub 最大3枚までアップロードできます
+        -# 代替案
+        -# .upload__box__images#image-box
+        -#   - @product.images.each_with_index do |img, index|
+        -#     .upload__box__image
+        -#       %label{for: "image#{img.id} image#{index}"}
+        -#         - if @product.images.present?
+        -#           = image_tag img.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview-image#{index}"
+        -#         - else
+        -#           = image_tag "pict/product_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+        -#       = f.file_field :image, multiple: true, id:"image#{img.id} image#{index}", type: "file", accept: "image/*", style: "display: none;", name: "product[images_attributes][#{index}][id]"
+        -# -#     -# %button.image-remove 削除
+
         .upload__box__images
-          = f.fields_for :images do |i|
-            .upload__box__image
-              %label{for: "image1"}
-                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview1", class: "preview-image"
-              = i.file_field :image, multiple: true, id:"image1", type: "file", accept: "image/*", onchange: "previewImage1(this);", style: "display: none;", name: "images[image][]"
-            .upload__box__image
-              %label{for: "image2"}
-                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview2", class: "preview-image"
-              = i.file_field :image, multiple: true, id:"image2", type: "file", accept: "image/*", onchange: "previewImage2(this);", style: "display: none;", name: "images[image][]"
-            .upload__box__image
-              %label{for: "image3"}
-                = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview3", class: "preview-image"
-              = i.file_field :image, multiple: true, id:"image3", type: "file", accept: "image/*", onchange: "previewImage3(this);", style: "display: none;", name: "images[image][]"
+          -# 1枚目
+          .upload__box__image
+            %label{for: "product_images_attributes_0_image"}
+              - if @product.images.first.present?
+                = image_tag @product.images.first.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+            .upload__box__image-picker
+              = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][0][id]", id: "product_images_attributes_0_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
+          -# 2枚目
+          .upload__box__image
+            %label{for: "product_images_attributes_1_image"}
+              - if @product.images.second.present?
+                = image_tag @product.images.second.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+              .upload__box__image-picker
+                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][1][id]", id: "product_images_attributes_1_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
+          -# 3枚目
+          .upload__box__image
+            %label{for: "product_images_attributes_2_image"}
+              - if @product.images.third.present?
+                = image_tag @product.images.third.image.url, alt: "product upload" ,height: "100%", width: "100%"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+              .upload__box__image-picker
+                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][2][id]", id: "product_images_attributes_2_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
       .exhibition__content__box.product__box
         .form__group1
           = f.label :name do
@@ -39,11 +72,20 @@
           商品の詳細
         .form__box.detail__form__box
           .form__box__above
-            .form__group2
-              = f.label :category do
-                カテゴリー
-                %span.form-description.form-require 必須
-              = f.collection_select :category, Category.all.order("id ASC").limit(13), :id, :name,{include_blank: '選択してください'},{class: "exhibition__select",id: "parent_category"}
+
+            .form-group-top
+              .form__group2
+                = f.label :カテゴリー, class: "label" do
+                  カテゴリー
+                  %span.form-description.form-require 必須
+                %br
+                = f.select :category_id, options_for_select(@category_parent_array.map{|c|[c, {}]}, @product.category.parent.parent.name), {}, {class: 'exhibition__select', id: 'parent_category'}
+              .form__group2#children_box
+                = f.select :category_id, options_for_select(@category_child_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.parent.id), {}, {class: 'exhibition__select', id: 'children_category'}
+              .form__group2#grandchildren_box
+                = f.select :category_id, options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.id), {}, {class: 'exhibition__select', id: 'grandchildren_category'}
+              = f.text_field :category, id: 'grand_child_result_id', type: 'hidden'
+
           .form__box__bellow
             .form__group2
               = f.label :size do

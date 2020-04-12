@@ -23,6 +23,12 @@ class ProductsController < ApplicationController
     @product = Product.new
     @image = @product.images.build
     @category = Category.all.order("id ASC").limit(13)
+    #セレクトボックスの初期値設定
+    @category_parent_array = ["選択してください"]
+    #データベースから、親カテゴリーのみ抽出し、配列化
+    Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+    end
   end
 
   def create
@@ -45,6 +51,7 @@ class ProductsController < ApplicationController
     @transaction_check = Transaction.where(product_id: @product.id)
   end
   def edit
+    @category = Category.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
     # 親セレクトボックスの初期値(配列)
     @category_parent_array = []
@@ -65,6 +72,16 @@ class ProductsController < ApplicationController
       render 'edit'
     end  
   end
+
+  def category_children 
+    @category_children = Category.find_by(name: "#{params[:name]}", ancestry: nil).children
+  end
+
+  def category_grandchildren
+    @category_grandchildren = Category.find("#{params[:name]}").children
+  end
+
+
   def destroy
     @product = current_user.products.find(params[:id])
     if @product.destroy
@@ -73,26 +90,16 @@ class ProductsController < ApplicationController
       render 'show'
     end
   end
-  def category_children 
-    # @category_children = Category.find(params[:productCategory]).children
-    @category_children = Category.find_by(params[:name]).children
-  end
-  def category_grandchildren
-    # @category_grandchildren = Category.find(params[:productCategory]).children
-    @category_grandchildren = Category.find_by(params[:name]).children
-  end
-  # def category_children_update
-  #   # @category_children = Category.find(params[:productCategory]).children 
-  #   @category_children = Category.find_by(params[:productCategory]).children 
-  # end
-  # def category_grandchildren_update
-  #   # @category_grandchildren = Category.find(params[:productCategory]).children
-  #   @category_grandchildren = Category.find_by(params[:productCategory]).children
-  # end
+
+
+
+
   private
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :category_id,
-      images_attributes: [:name]).merge(user_id: current_user.id)
+
+    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+
   end
   def set_product
     @product = Product.find(params[:id])

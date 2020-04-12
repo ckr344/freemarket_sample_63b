@@ -86,3 +86,6 @@ gem "jquery-rails"
 gem 'gon'
 gem "pry-rails"
 gem 'ransack'
+
+gem 'turbolinks', '~> 5'
+
