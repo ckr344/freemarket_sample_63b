@@ -87,5 +87,5 @@ gem 'gon'
 gem "pry-rails"
 gem 'ransack'
 
-gem 'turbolinks', '~> 5'
+
 
