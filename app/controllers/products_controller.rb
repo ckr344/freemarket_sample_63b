@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
   def search
     @q = Product.search(search_params)
     @products = @q.result(distinct: true)
-    @categories = Category.all.order("id ASC").limit(13)
+    @categories = Category.order("id ASC").limit(13)
   end
   def new
     @product = Product.new
