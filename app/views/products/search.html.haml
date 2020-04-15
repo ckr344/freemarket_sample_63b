@@ -1,16 +1,24 @@
-.top_contents__genre__items
-  - @products.each do |product|
-    .top_contents__genre__items__item
-      .contents.row
-      = link_to "#" , class:"top_contents__genre__items__item__link" do
-        .top_contents__genre__items__item__pict
-          = image_tag "pict/test-img1.png", class: "top_contents__genre__items__item__pict__img"
-        .top_contents__genre__items__item__body
-          .top_contents__genre__items__item__body__price
-            .top_contents__genre__items__item__body__price__yen
-              ¥
-            .top_contents__genre__items__item__body__price__value
-              %p #{product.price}
-          .top_contents__genre__items__item__body__name
-            %p #{product.name}
-  
+.top
+  .top__genre
+    .top__genre-box
+      .top__genre-box-title
+        検索結果
+    .top__genre-items
+      - @search_products.each do |product|
+        = link_to product_path(product.id), class:"top__genre-item-link" do
+          .top__genre-item-pict
+            = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+          .top__genre-body
+            .top__genre-body-price
+              .top__genre-body-price--yen
+                ¥
+              .top__genre-body-price--value
+                = product.price
+            .top__genre-body-name
+              = product.name
+            -# -# 商品購入済みであればSOLD OUTを表示
+            -# - if @ladies_transaction.present?
+            -#   - if @ladies_transaction.first.product_id == product.id
+            -#     .top__transaction-check
+            -#       .top__transaction-check--btn
+            -#         SOLD OUT

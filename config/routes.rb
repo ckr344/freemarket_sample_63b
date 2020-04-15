@@ -3,16 +3,13 @@ Rails.application.routes.draw do
   root "products#index"
   get 'search', to: 'products#search'
 
-
   resources :users, only: [:show, :edit, :update]
-
   resources :products do
     collection do
       get 'category_children', defaults: { format: 'json'}
       get 'category_grandchildren', defaults: { format: 'json'}
     end
   end  
-
   resources :categories
   resources :cards, only: [:new, :show, :destroy] do
     collection do
@@ -20,7 +17,6 @@ Rails.application.routes.draw do
       post 'pay', to: 'cards#pay'
     end
   end
-  # indexアクションは後ほど取引一覧表示で使用する
   resources :transactions, only: [:index] do
     collection do
       get 'pay_index', to: 'transactions#pay_index'
