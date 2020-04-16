@@ -4,7 +4,8 @@ class ProductsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true)
+    @search_products = @q.result(distinct: true)
+    # ヘッダーカテゴリー
     @categories = Category.all.order("id ASC").limit(13)
     @ladies_products = Product.where(category_id: 20..85).limit(10)
     @mens_products = Product.where(category_id: 91..144).limit(10)
