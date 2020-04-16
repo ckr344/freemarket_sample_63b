@@ -1,8 +1,7 @@
 %header
   .header__center
     .header__center__up
-
-      = image_tag "logo/logo.png", height: "50px", width: "175px", class: "header__center__up__mercari_logo"
+      = link_to image_tag("logo/logo.png", height: "50px", width: "175px", class: "header__center__up__mercari_logo"), root_path
       = render partial: 'products/search_form'
     .header__center__down
       .header__center__down__menu

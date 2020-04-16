@@ -83,12 +83,12 @@
       }
       }
   
-      &_individual_sub_sub_category_name{
-        padding-left: 20px;
-          padding-right: 20px;
-          padding-bottom: 10px;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-        }
+    &_individual_sub_sub_category_name{
+      padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
   }
-  }
+}
