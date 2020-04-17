@@ -66,6 +66,17 @@
       padding: 2px 4px;
       border-radius: 3px;
     }
+    &--nonreq{
+      background-color: rgb(119, 119, 119);
+      color: #fff;
+      width: 32px;
+      height: 19px;
+      margin-left: 8px;
+      font-size: 12px;
+      line-height: 19px;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
     &--name{
       width: 164px;
       height: 46px;
@@ -100,6 +111,16 @@
       font-size: bold;
       text-align: center;
     }
+    &--sends{
+      width: 341px;
+      height: 48px;
+      line-height: 48px;
+      background-color: #EA352D;
+      color: white;
+      font-size: bold;
+      text-align: center;
+      margin-top: 40px;
+    }
     &--end{
       text-align: center;
       width: 340px;
@@ -120,4 +141,11 @@
       width: 150px;
     }
   }
+}
+.user-news{
+  height: 70%;
+  width: 100vw;
+  background-color: #ffffff;
+  border-right: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
+  border-left: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
 }
