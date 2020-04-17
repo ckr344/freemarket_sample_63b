@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     :sessions => 'users/sessions'
   } 
   root "products#index"
-  resources :users
+  get 'search', to: 'products#search'
+  
+  resources :users, only: [:show, :edit, :update]
   resources :products do
     collection do
       get 'category_children', defaults: { format: 'json'}
