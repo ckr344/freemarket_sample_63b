@@ -15,21 +15,21 @@ $(function () {
     var year = { var: z, txt: String(z) };
     birthday_yyyy.push(year);
   }
-  for (var z = 1; z <= 12; z++) {
-    var month = { var: z, txt: String(z) };
+  for (var y = 1; y <= 12; y++) {
+    var month = { var: y, txt: String(y) };
     birthday_mm.push(month);
   }
   // hamlの年と月のセレクトボックスに配列内容を反映させる
-  for (var z = 0; z < birthday_yyyy.length; z++) {
+  for (var x = 0; x < birthday_yyyy.length; x++) {
     $("<option>", {
-      value: birthday_yyyy[z].var,
-      text: birthday_yyyy[z].txt
+      value: birthday_yyyy[x].var,
+      text: birthday_yyyy[x].txt
     }).appendTo('#select_birth_year');
   }
-  for (var z = 0; z < birthday_mm.length; z++) {
+  for (var r = 0; r < birthday_mm.length; r++) {
     $("<option>", {
-      value: birthday_mm[z].var,
-      text: birthday_mm[z].txt
+      value: birthday_mm[r].var,
+      text: birthday_mm[r].txt
     }).appendTo('#select_birth_month');
   }
 
@@ -58,14 +58,14 @@ $(function () {
       // 日を入れる配列を宣言し、閏年を考慮したデータを格納してhamlの日の
       // セレクトボックスに反映させる
       var birthday_dd = []
-      for (var z = 1; z <= months[month - 1]; z++) {
-        var day = { var: z, txt: String(z) };
+      for (var q = 1; q <= months[month - 1]; q++) {
+        var day = { var: q, txt: String(q) };
         birthday_dd.push(day);
       }
-      for (var z = 0; z < birthday_dd.length; z++) {
+      for (var p = 0; p < birthday_dd.length; p++) {
         $("<option>", {
-          value: birthday_dd[z].var,
-          text: birthday_dd[z].txt
+          value: birthday_dd[p].var,
+          text: birthday_dd[p].txt
         }).appendTo('#select_birth_day');
       };
     };
