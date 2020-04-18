@@ -10,6 +10,8 @@ class TransactionsController < ApplicationController
     @card = @set_card.first
     if @card.blank?
       redirect_to controller: "cards", action: "new"
+    elsif @user.post_num.blank? || @user.prefecture.blank? || @user.municipality.blank? || @user.address.blank? || @user.first_name.blank? || @user.last_name.blank?
+      redirect_to edit_user_registration_path
     else
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
       #保管した顧客IDでpayjpから情報取得
