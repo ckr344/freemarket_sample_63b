@@ -49,11 +49,11 @@
         = f.label "生年月日", class: "user-new__field--title"
         = f.label :req, "必須", class: "user-new__field--req"
         %br/
-        = f.select :birthday_yyyy, ["----", "1989"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_yyyy, ["----"], {}, {class: "user-new__field--birth", id: "select_birth_year"}
         = f.label :birthday_yyyy, "年"
-        = f.select :birthday_mm, ["--", "11"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_mm, ["--"], {}, {class: "user-new__field--birth", id: "select_birth_month"}
         = f.label :birthday_mm, "月"
-        = f.select :birthday_dd, ["--", "11"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_dd, ["--"], {}, {class: "user-new__field--birth", id: "select_birth_day"}
         = f.label :birthday_dd, "日"
       .user-new__field
         .user-new__field--note
