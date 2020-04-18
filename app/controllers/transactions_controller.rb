@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   before_action :set_product
 
   def pay_index
+    @user = current_user
     @top_image = @product.images.first
     @card = @set_card.first
     if @card.blank?

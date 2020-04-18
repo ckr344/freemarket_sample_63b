@@ -111,6 +111,14 @@
       color: #333333;
     }
   }
+  &__user-address-flex{
+    display: flex;
+  }
+  &__user-address-update{
+    padding: 0 3px;
+    text-decoration: none;
+    color: #0099E8;
+  }
   &__table-buy{
     padding-top: 30px;
   }
