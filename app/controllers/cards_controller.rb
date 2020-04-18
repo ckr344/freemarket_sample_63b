@@ -4,7 +4,10 @@ class CardsController < ApplicationController
 
   def new
     gon.payjp_key = ENV['PAYJP_KEY']
-    redirect_to action: "show" if @set_card.exists?
+    if @set_card.exists?
+      @card = @set_card.first
+      redirect_to action: "show", id: @card.id
+    end
   end
 
   def pay #payjpとCardのデータベース作成を実施
