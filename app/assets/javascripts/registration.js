@@ -11,25 +11,25 @@ $(function () {
   var oldest_year = 1900;
 
   // 誕生年月の配列を自動生成
-  for (var i = this_year; i >= oldest_year; i--) {
-    var year = { var: i, txt: String(i) };
+  for (var z = this_year; z >= oldest_year; z--) {
+    var year = { var: z, txt: String(z) };
     birthday_yyyy.push(year);
   }
-  for (var i = 1; i <= 12; i++) {
-    var month = { var: i, txt: String(i) };
+  for (var z = 1; z <= 12; z++) {
+    var month = { var: z, txt: String(z) };
     birthday_mm.push(month);
   }
   // hamlの年と月のセレクトボックスに配列内容を反映させる
-  for (var i = 0; i < birthday_yyyy.length; i++) {
+  for (var z = 0; z < birthday_yyyy.length; z++) {
     $("<option>", {
-      value: birthday_yyyy[i].var,
-      text: birthday_yyyy[i].txt
+      value: birthday_yyyy[z].var,
+      text: birthday_yyyy[z].txt
     }).appendTo('#select_birth_year');
   }
-  for (var i = 0; i < birthday_mm.length; i++) {
+  for (var z = 0; z < birthday_mm.length; z++) {
     $("<option>", {
-      value: birthday_mm[i].var,
-      text: birthday_mm[i].txt
+      value: birthday_mm[z].var,
+      text: birthday_mm[z].txt
     }).appendTo('#select_birth_month');
   }
 
@@ -58,14 +58,14 @@ $(function () {
       // 日を入れる配列を宣言し、閏年を考慮したデータを格納してhamlの日の
       // セレクトボックスに反映させる
       var birthday_dd = []
-      for (var i = 1; i <= months[month - 1]; i++) {
-        var day = { var: i, txt: String(i) };
+      for (var z = 1; z <= months[month - 1]; z++) {
+        var day = { var: z, txt: String(z) };
         birthday_dd.push(day);
       }
-      for (var i = 0; i < birthday_dd.length; i++) {
+      for (var z = 0; z < birthday_dd.length; z++) {
         $("<option>", {
-          value: birthday_dd[i].var,
-          text: birthday_dd[i].txt
+          value: birthday_dd[z].var,
+          text: birthday_dd[z].txt
         }).appendTo('#select_birth_day');
       };
     };
