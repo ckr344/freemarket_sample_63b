@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions'
+  } 
   root "products#index"
   get 'search', to: 'products#search'
 
   resources :users, only: [:show, :edit, :update]
   resources :products do
     collection do
+      get 'search', to: 'products#search'
       get 'category_children', defaults: { format: 'json'}
       get 'category_grandchildren', defaults: { format: 'json'}
     end

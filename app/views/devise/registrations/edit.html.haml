@@ -1,36 +1,46 @@
-%h2
-  Edit #{resource_name.to_s.humanize}
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    %div
-      Currently waiting confirmation for: #{resource.unconfirmed_email}
-  .field
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-    - if @minimum_password_length
-      %br/
-      %em
-        = @minimum_password_length
-        characters minimum
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .field
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br/
-    = f.password_field :current_password, autocomplete: "current-password"
-  .actions
-    = f.submit "Update"
-%h3 Cancel my account
-%p
-  Unhappy? #{button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete}
+.user-news
+  .user-new__header
+    %h2 配送先登録
+  .user-new__main
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "user-new__form" })  do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .user-new__field
+        = f.label :first_name, "お名前（全角）", class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :first_name, autofocus: true, placeholder: "例）山田", class: "user-new__field--name"
+        = f.text_field :last_name, autofocus: true, placeholder: "彩", class: "user-new__field--name"
+      .user-new__field
+        = f.label :first_name, "お名前（全角カナ）", class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :first_name_kana, autofocus: true, placeholder: "例）ヤマダ", class: "user-new__field--name"
+        = f.text_field :last_name_kana, autofocus: true, placeholder: "アヤ", class: "user-new__field--name"
+      .user-new__field
+        = f.label :郵便番号, class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :post_num, autofocus: true, autocomplete: "post_num", placeholder: "3330000", class: "user-new__field--input"
+      .user-new__field
+        = f.label :都道府県, class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :prefecture, autofocus: true, autocomplete: "prefecture", placeholder: "例）新潟県", class: "user-new__field--input"
+      .user-new__field
+        = f.label :市町村, class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :municipality, autofocus: true, autocomplete: "municipality", placeholder: "例）新潟市", class: "user-new__field--input"
+      .user-new__field
+        = f.label :番地、建物名他, class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.text_field :address, autofocus: true, autocomplete: "address", placeholder: "例）五十嵐二の町 111", class: "user-new__field--input"
+      .user-new__field
+        = f.label :電話番号, class: "user-new__field--title"
+        = f.label :req, "任意", class: "user-new__field--nonreq"
+        %br/
+        = f.text_field :phone_num, autofocus: true, autocomplete: "phone_num", placeholder: "例）09012341234", class: "user-new__field--input"
+      .actions
+        = f.submit "更新", class: "user-new__field--sends"
 = link_to "Back", :back
