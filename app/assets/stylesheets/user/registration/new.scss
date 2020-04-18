@@ -1,5 +1,4 @@
 .user-new{
-  height: 1310px;
   width: 100vw;
   background-color: #ffffff;
   border-right: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
@@ -31,7 +30,6 @@
   }
   &__main{
     width: 423px;
-    height: 970px;
     padding: 0 40px 64px;
     margin: 0 auto;
     font-size: 14px;
@@ -148,4 +146,7 @@
   background-color: #ffffff;
   border-right: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
   border-left: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
+}
+.field_with_errors {
+  display: inline;
 }
