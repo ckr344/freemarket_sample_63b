@@ -35,7 +35,9 @@
         %li.header__center__down__user_menu__mypage{style: "list-style:none"}
           %h1.header__center__down__user_menu__mypage__word
             - if user_signed_in?
-              = link_to "マイページ", user_path(current_user.id)
+              = link_to user_path(current_user.id) do
+                = icon('fa', 'user', class: 'header__mypage-icon')
+                マイページ
             - else
               = link_to "新規登録", new_user_registration_path
               = link_to "ログイン", new_user_session_path
