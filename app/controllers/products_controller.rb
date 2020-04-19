@@ -6,8 +6,7 @@ class ProductsController < ApplicationController
   def index
     # 検索機能
     @q = Product.ransack(params[:q])
-    @search_products = @q.result(distinct: true)
-    # ヘッダーカテゴリー
+    @products = @q.result(distinct: true)
     @categories = Category.all.order("id ASC").limit(13)
     # カテゴリー別 一覧表示
     @ladies_products = Product.where(category_id: 20..85).limit(10)
