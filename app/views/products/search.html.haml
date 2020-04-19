@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 .top
   .top__genre
     .top__genre-box
@@ -26,20 +25,3 @@
               -#     .top__transaction-check
               -#       .top__transaction-check--btn
               -#         SOLD OUT
-=======
-.top_contents__genre__items
-  - @products.each do |product|
-    .top_contents__genre__items__item
-      .contents.row
-      = link_to "#" , class:"top_contents__genre__items__item__link" do
-        .top_contents__genre__items__item__pict
-          = image_tag "pict/test-img1.png", class: "top_contents__genre__items__item__pict__img"
-        .top_contents__genre__items__item__body
-          .top_contents__genre__items__item__body__price
-            .top_contents__genre__items__item__body__price__yen
-              ¥
-            .top_contents__genre__items__item__body__price__value
-              %p #{product.price}
-          .top_contents__genre__items__item__body__name
-            %p #{product.name}
->>>>>>> Stashed changes
