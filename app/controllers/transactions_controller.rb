@@ -1,12 +1,17 @@
 class TransactionsController < ApplicationController
   require 'payjp'
+  before_action :authenticate_user!
   before_action :set_card, only: [:pay_index, :pay]
   before_action :set_product
 
   def pay_index
+    @user = current_user
+    @top_image = @product.images.first
     @card = @set_card.first
     if @card.blank?
       redirect_to controller: "cards", action: "new"
+    elsif @user.post_num.blank? || @user.prefecture.blank? || @user.municipality.blank? || @user.address.blank? || @user.first_name.blank? || @user.last_name.blank?
+      redirect_to edit_user_registration_path
     else
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
       #保管した顧客IDでpayjpから情報取得
@@ -20,11 +25,16 @@ class TransactionsController < ApplicationController
     @card = @set_card.first
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     Payjp::Charge.create(
-    :amount => 13500, #支払金額を入力（後ほどproductテーブルに紐づけ）
+    :amount => @product.price, #支払金額を入力（後ほどproductテーブルに紐づけ）
     :customer => @card.customer_id, #顧客ID
     :currency => 'jpy', #日本円
   )
   redirect_to action: 'done', product_id: @product #完了画面に移行
+  end
+
+  def done
+    @top_image = @product.images.first
+    Transaction.create(product_id: @product.id, user_id: current_user.id)
   end
 
   private

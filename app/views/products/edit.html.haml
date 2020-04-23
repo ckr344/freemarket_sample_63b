@@ -1,83 +1,107 @@
-%script{src: "product/new.js", type: "text/javascript"}
 .exhibition
-  = form_for @product do |f|
+  = form_with model: @product, local: true do |f|
     .exhibition__logo__box
       = link_to image_tag("logo/logo.png", class: "exhibition__logo", alt: "furima"),root_path, class: "exhibition__logo"
     %main
       .exhibition__container__header
         商品の情報を入力
-      -# 画像
       .upload__box.exhibition__content__box
         .upload__box__head
           出品画像
+          %span.form-description.form-require 必須
           %p.upload__box__head__sub 最大3枚までアップロードできます
+        -# 代替案
+        -# .upload__box__images#image-box
+        -#   - @product.images.each_with_index do |img, index|
+        -#     .upload__box__image
+        -#       %label{for: "image#{img.id} image#{index}"}
+        -#         - if @product.images.present?
+        -#           = image_tag img.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview-image#{index}"
+        -#         - else
+        -#           = image_tag "pict/product_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+        -#       = f.file_field :image, multiple: true, id:"image#{img.id} image#{index}", type: "file", accept: "image/*", style: "display: none;", name: "product[images_attributes][#{index}][id]"
+        -# -#     -# %button.image-remove 削除
+
         .upload__box__images
+          -# 1枚目
           .upload__box__image
-            %label{for: "image1"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image1{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"} 
+            %label{for: "product_images_attributes_0_image"}
+              - if @product.images.first.present?
+                = image_tag @product.images.first.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+            .upload__box__image-picker
+              = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][0][id]", id: "product_images_attributes_0_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
+          -# 2枚目
           .upload__box__image
-            %label{for: "image2"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image2{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
+            %label{for: "product_images_attributes_1_image"}
+              - if @product.images.second.present?
+                = image_tag @product.images.second.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+              .upload__box__image-picker
+                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][1][id]", id: "product_images_attributes_1_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
+          -# 3枚目
           .upload__box__image
-            %label{for: "image3"}
-              = image_tag "https://asset.fril.jp/assets/new_web/item_upload_dummy-0f57862f590c6e592ffa657b6b8c6fbdd3c4051a1acc60d72e5a15f4f71f7351.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview"
-            %input#image3{type: "file", accept: "image/*", onchange: "previewImage(this);", style: "display: none;"}
-      -# 商品
+            %label{for: "product_images_attributes_2_image"}
+              - if @product.images.third.present?
+                = image_tag @product.images.third.image.url, alt: "product upload" ,height: "100%", width: "100%"
+              - else
+                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+              .upload__box__image-picker
+                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][2][id]", id: "product_images_attributes_2_image", style: "display: none;"
+            .upload__box__image-delete
+              %span 削除
       .exhibition__content__box.product__box
-        -# 商品名
         .form__group1
           = f.label :name do
             商品名
             %span.form-description.form-require 必須
           = f.text_field :name, {placeholder: "商品名（必須 40文字まで)", class: "name__input", maxlength: '40'}
-        -# 説明
         .form__group1
           = f.label :description do
             商品の説明
-            %span.form-description.form-require 必須
+            %span.form-description.form-optional 任意
           = f.text_area :description, {placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class: "description__input", maxlength: '1000'}  
-      -# 詳細
       .exhibition__content__box.detail__box
         .section__head
           商品の詳細
-        .form__box
-          .form__group2
-            %label 
-              カテゴリー
-              %span.form-description.form-require 必須
-            %form{class: "select", method: "post"}
-              %select.exhibition__select{name: "main_category_id", size: "1"}
-                %option{value: "0"} 選択してください
-                %option{value: "1"} レディース
-                %option{value: "2"} メンズ
-                %option{value: "3"} ベビー・キッズ
-                %option{value: "4"} インテリア・住まい・小物
-                %option{value: "5"} 本・音楽・ゲーム
-                %option{value: "6"} おもちゃ・ホビー・グッズ
-                %option{value: "7"} コスメ・香水・美容
-                %option{value: "8"} 家電・スマホ・カメラ
-                %option{value: "9" } スポーツ・レジャー
-                %option{value: "10"} ハンドメイド
-                %option{value: "11"} チケット
-                %option{value: "12"} 自動車・オートバイ
-                %option{value: "13"} その他
-          .form__group2
-            = f.label :size do
-              サイズ
-              %span.form-description.form-require 必須
-            = f.select :size, Product.sizes.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
-            = f.label :brand do
-              ブランド
-              %span.form-description.form-optional 必須
-            = f.text_field :brand, {placeholder: "例) シャネル", class: "brand__input"}
-          .form__group2
-            = f.label :status do
-              商品の状態
-              %span.form-description.form-require 必須
-            = f.select :status, Product.statuses.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
+        .form__box.detail__form__box
+          .form__box__above
+
+            .form-group-top
+              .form__group2
+                = f.label :カテゴリー, class: "label" do
+                  カテゴリー
+                  %span.form-description.form-require 必須
+                %br
+                = f.select :category_id, options_for_select(@category_parent_array.map{|c|[c, {}]}, @product.category.parent.parent.name), {}, {class: 'exhibition__select', id: 'parent_category'}
+              .form__group2#children_box
+                = f.select :category_id, options_for_select(@category_child_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.parent.id), {}, {class: 'exhibition__select', id: 'children_category'}
+              .form__group2#grandchildren_box
+                = f.select :category_id, options_for_select(@category_grandchild_array.map{|c|[c[:name], c[:id], {'data-category'=>c[:id], 'id'=>c[:id]}]}, @product.category.id), {}, {class: 'exhibition__select', id: 'grandchildren_category'}
+              = f.text_field :category, id: 'grand_child_result_id', type: 'hidden'
+
+          .form__box__bellow
+            .form__group2
+              = f.label :size do
+                サイズ
+                %span.form-description.form-require 必須
+              = f.select :size, Product.sizes.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
+            .form__group2
+              = f.label :brand do
+                ブランド
+                %span.form-description.form-optional 任意
+              = f.text_field :brand, {placeholder: "例) シャネル", class: "brand__input exhibition__select"}
+            .form__group2
+              = f.label :status do
+                商品の状態
+                %span.form-description.form-require 必須
+              = f.select :status, Product.statuses.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
       -# 配送
       .exhibition__content__box.shipping__box
         .section__head
@@ -85,51 +109,49 @@
           = link_to "" do
             = icon('fas', 'question-circle', class: "question__icon") 
         .form__box
-          .form__group2
+          .form__group3
             = f.label :delivery_charge do
               配送料の負担
               %span.form-description.form-require 必須
             = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_method do
-              配送料の方法
+              配送の方法
               %span.form-description.form-require 必須
             = f.select :delivery_method, Product.delivery_methods.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_prefecture do
-              配送料の方法
+              発送元の地域
               %span.form-description.form-require 必須
             = f.select :delivery_prefecture, Product.delivery_prefectures.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-          .form__group2
+          .form__group3
             = f.label :delivery_days do
-              配送料の方法
+              発送までの日数
               %span.form-description.form-require 必須
             = f.select :delivery_days, Product.delivery_days.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
-      -# 価格
       .exhibition__content__box.price__box
         .section__head
           販売価格(300〜9,999,999)
           = link_to "" do
             = icon('fas', 'question-circle', class: "question__icon")  
         .form__box
-          .from__group3.price__form
+          .from__group4.price__form
             %label.price 
               価格
               %span.form-description.form-require 必須
             .price__form__right
               %p.yen ¥
-              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", onchange: "calcProfit();", min: "300"}
-          .from__group3.commission__form
+              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", oninput: "calcProfit();", min: 300, max: 9999999}
+          .from__group4.commission__form
             .commission__form__left
               販売手数料(10%)
             .commission__form__right#commission__num
-              ¥
-          .from__group3.profit__form
+              ¥ #{(@product.price*0.1).to_i}
+          .from__group4.profit__form
             .profit__form__left
               販売利益
             .profit__form__right#profit__num
-              ¥
-      -# 出品ボタン
+              ¥ #{(@product.price*0.9).to_i}
       .exhibition__btn__box
         = link_to '禁止されている出品',''
         、

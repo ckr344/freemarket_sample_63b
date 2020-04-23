@@ -5,7 +5,7 @@
     %h2.transaction-pay__title 購入内容の確認
     .transaction-pay__item
       .transaction-pay__item-box
-        %img.transaction-pay__item-image{:alt => "", "data-src" => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009", :src => "https://static.mercdn.net/thumb/photos/m98429171074_1.jpg?1582774009"}/
+        = image_tag @top_image.image.url, alt:"商品画像", class: "transaction-pay__item-image"
       .transaction-pay__item-detail
         %p.transaction-pay__item-detail--name
           = @product.name
@@ -46,9 +46,51 @@
           .transaction-pay__table-way
             %h3 配送先
             .transaction-pay__table-register
-              %i.fas.fa-plus-circle
-              %span.icon-register
-              登録してください
+              .transaction-pay__user-address
+                - if @user.post_num.blank?
+                  %span.icon-register
+                    = link_to "配送先を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                - else
+                  .transaction-pay__user-address
+                    - if @user.post_num.blank?
+                      %span.icon-register
+                      = link_to "郵便番号を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        〒
+                        = @user.post_num
+                  .transaction-pay__user-address-flex
+                    - if @user.prefecture.blank?
+                      %span.icon-register
+                      = link_to "都道府県を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        = @user.prefecture
+                    - if @user.municipality.blank?
+                      %span.icon-register
+                      = link_to "市区町村を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        = @user.municipality
+                    - if @user.address.blank?
+                      %span.icon-register
+                      = link_to "番地を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        = @user.address
+                  .transaction-pay__user-address-flex
+                    - if @user.first_name.blank?
+                      %span.icon-register
+                      = link_to "名字を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        = @user.first_name
+                    - if @user.last_name.blank?
+                      %span.icon-register
+                      = link_to "名前を登録してください", edit_user_registration_path, class: "transaction-pay__user-address-update"
+                    - else
+                      .transaction-pay__user-address-text
+                        = @user.last_name
           .transaction-pay__table-buy
             = form_tag(action: :pay, method: :post, product_id: @product) do
               %button.transaction-pay__table-buy-button 購入する

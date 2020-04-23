@@ -1,18 +1,14 @@
 %header
   .header__center
     .header__center__up
-      = image_tag "logo/logo.png", height: "50px", width: "175px", class: "header__center__up__mercari_logo"
-      %form.header__center__up__search{action: ""}
-        %input.header__center__up__search__keyword{type: "search", placeholder: "何かお探しですか？"}
-        = button_tag type: "submit", class: "header__center__up__search__btn" do
-          %svg{width:"16" ,height:"16" ,viewBox: "0 0 16 16" ,class: "header__center__up__search__btn__icon"}
-            %path{fill: "currentColor" ,d: "M11.435 10.063h-.723l-.256-.247a5.92 5.92 0 0 0 1.437-3.87 5.946 5.946 0 1 0-5.947 5.947 5.92 5.92 0 0 0 3.87-1.437l.247.256v.723L14.637 16 16 14.637l-4.565-4.574zm-5.489 0A4.111 4.111 0 0 1 1.83 5.946 4.111 4.111 0 0 1 5.946 1.83a4.111 4.111 0 0 1 4.117 4.116 4.111 4.111 0 0 1-4.117 4.117z"}
+      = link_to image_tag("logo/logo.png", height: "50px", width: "175px", class: "header__center__up__mercari_logo"), root_path
+      = render partial: 'products/search_form'
     .header__center__down
       .header__center__down__menu
         .header__center__down__menu__category
           %svg{width: "20" ,height: "44" ,viewBox: "0 0 20 16" ,class: "header__center__down__menu__category__icon"}
             %path{fill: "currentColor" , d: "M18.799 15.25h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zm0-6h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zm0-6h-11.5a1.25 1.25 0 1 1 0-2.5h11.5a1.25 1.25 0 0 1 0 2.5zM2 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0-6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"}
-          = link_to categories_path do
+          = link_to categories_path id:"header-category-link" do
             = "カテゴリーから探す"
             = render partial:"layouts/categories"
         .header__center__down__menu__brand
@@ -37,7 +33,11 @@
           %h1.header__center__down__user_menu__todo__word
             = "やることリスト"
         %li.header__center__down__user_menu__mypage{style: "list-style:none"}
-          %svg{height: "40" ,width: "30"}
-            %circle{cx: "15" ,cy: "22" ,r: "10" ,stroke: "black" ,fill: "#2bcbd1"}
           %h1.header__center__down__user_menu__mypage__word
-            = "マイページ"
+            - if user_signed_in?
+              = link_to user_path(current_user.id) do
+                = icon('fa', 'user', class: 'header__mypage-icon')
+                マイページ
+            - else
+              = link_to "新規登録", new_user_registration_path
+              = link_to "ログイン", new_user_session_path

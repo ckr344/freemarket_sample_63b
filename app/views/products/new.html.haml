@@ -1,4 +1,3 @@
-%script{src: "product/new.js", type: "text/javascript"}
 .exhibition
   = form_with(model: @product, local: true) do |f|
     .exhibition__logo__box
@@ -9,6 +8,7 @@
       .upload__box.exhibition__content__box
         .upload__box__head
           出品画像
+          %span.form-description.form-require 必須
           %p.upload__box__head__sub 最大3枚までアップロードできます
         .upload__box__images
           = f.fields_for :images do |i|
@@ -33,7 +33,7 @@
         .form__group1
           = f.label :description do
             商品の説明
-            %span.form-description.form-require 必須
+            %span.form-description.form-optional 任意
           = f.text_area :description, {placeholder: "商品の説明（必須 1,000文字以内）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。", class: "description__input", maxlength: '1000'}  
       .exhibition__content__box.detail__box
         .section__head
@@ -41,10 +41,13 @@
         .form__box.detail__form__box
           .form__box__above
             .form__group2
-              = f.label :category do
-                カテゴリー
-                %span.form-description.form-optional 任意
-              = f.collection_select :category, @category, :id, :name,{include_blank: '選択してください'},{class: "exhibition__select",id: "parent_category"}
+              .form__label
+                = f.label :category do
+                  カテゴリー
+                  %span.form-description.form-require 必須
+              .form__select
+                = f.select :category, @category_parent_array, {}, {class: "exhibition__select",id: "parent_category"}
+
           .form__box__bellow
             .form__group2
               = f.label :size do
@@ -72,20 +75,20 @@
             = f.label :delivery_charge do
               配送料の負担
               %span.form-description.form-require 必須
-            = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select", id: "parent_category"}
+            = f.select :delivery_charge, Product.delivery_charges.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
           .form__group3
             = f.label :delivery_method do
-              配送料の方法
+              配送の方法
               %span.form-description.form-require 必須
             = f.select :delivery_method, Product.delivery_methods.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
           .form__group3
             = f.label :delivery_prefecture do
-              配送料の方法
+              発送元の地域
               %span.form-description.form-require 必須
             = f.select :delivery_prefecture, Product.delivery_prefectures.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
           .form__group3
             = f.label :delivery_days do
-              配送料の方法
+              発送までの日数
               %span.form-description.form-require 必須
             = f.select :delivery_days, Product.delivery_days.keys,{include_blank: '選択してください'},{class: "exhibition__select"}
       .exhibition__content__box.price__box
@@ -100,12 +103,12 @@
               %span.form-description.form-require 必須
             .price__form__right
               %p.yen ¥
-              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", onchange: "calcProfit();", min: "300"}
+              = f.number_field :price, {placeholder: "例)300", class: "price__input", id: "price__num", oninput: "calcProfit();", min: 300, max: 9999999}
           .from__group4.commission__form
             .commission__form__left
               販売手数料(10%)
             .commission__form__right#commission__num
-              ¥
+              ¥ 
           .from__group4.profit__form
             .profit__form__left
               販売利益

@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(version: 2020_03_14_071553) do
     t.integer "size", limit: 1, default: 0, null: false
     t.string "brand"
     t.integer "price", null: false
-    t.integer "transaction_id"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

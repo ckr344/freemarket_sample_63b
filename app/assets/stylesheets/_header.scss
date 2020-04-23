@@ -7,6 +7,11 @@ header{
   font-size: 14px;
 }
 
+.header__mypage-icon{
+  color: #cccccc;
+  font-size: 17px;
+}
+
 .header__center{
 	width: 1060px;
 	height: 120px;
@@ -60,6 +65,11 @@ header{
     line-height: 44px;
     display: flex;
     justify-content: space-between;
+
+    a {
+      color: #000;
+      text-decoration: none;
+    }
 
     &__menu{
       display: flex;

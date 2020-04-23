@@ -25,4 +25,4 @@
               - child.children.each do |grandchild|
                 %div
                   = link_to categories_path(grandchild) do
-                    = grandchild.name
+                    = link_to grandchild.name, category_path(grandchild)

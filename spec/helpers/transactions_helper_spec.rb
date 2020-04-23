@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# 実装中
 # Specs in this file have access to a helper object that includes
 # the TransactionsHelper. For example:
 #

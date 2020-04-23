@@ -7,7 +7,7 @@
   }
 .user-new
   .user-new__logo
-    %img{src: "/assets/logo/logo.png"}
+    = image_tag "logo/logo.png"
   .user-new__header
     %h2 会員情報入力
   .user-new__main
@@ -28,13 +28,18 @@
         = f.label :req, "必須", class: "user-new__field--req"
         %br/
         = f.password_field :password, autocomplete: "new-password", placeholder: "７文字以上の半角英数字", class: "user-new__field--input"
+      .user-new__field
+        = f.label :password_confirmation, 'パスワード（確認）', class: "user-new__field--title"
+        = f.label :req, "必須", class: "user-new__field--req"
+        %br/
+        = f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "７文字以上の半角英数字", class: "user-new__field--input"
         %h2 ※英字と数字の両方を含めて設定してください
       .user-new__field
         .user-new__field--confirm
           %h3 本人確認
           %p1 安心・安全にご利用いただくために、お客さまの本人情報の登録にご協力ください。他のお客さまに公開されることはありません。
       .user-new__field
-        = f.label :first_name, "お名前（全角）", class: "user-new__field--title", class: "user-new__field--title"
+        = f.label :first_name, "お名前（全角）", class: "user-new__field--title"
         = f.label :req, "必須", class: "user-new__field--req"
         %br/
         = f.text_field :first_name, autofocus: true, placeholder: "例）山田", class: "user-new__field--name"
@@ -49,11 +54,11 @@
         = f.label "生年月日", class: "user-new__field--title"
         = f.label :req, "必須", class: "user-new__field--req"
         %br/
-        = f.select :birthday_yyyy, ["----", "1989"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_yyyy, ["----"], {}, {class: "user-new__field--birth", id: "select_birth_year"}
         = f.label :birthday_yyyy, "年"
-        = f.select :birthday_mm, ["--", "11"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_mm, ["--"], {}, {class: "user-new__field--birth", id: "select_birth_month"}
         = f.label :birthday_mm, "月"
-        = f.select :birthday_dd, ["--", "11"], {}, {class: "user-new__field--birth"}
+        = f.select :birthday_dd, ["--"], {}, {class: "user-new__field--birth", id: "select_birth_day"}
         = f.label :birthday_dd, "日"
       .user-new__field
         .user-new__field--note
@@ -64,6 +69,6 @@
         .user-new__field--end
           %p1 「登録」のボタンを押すことにより、利用規約に同意したものとみなします
   .user-new__licence
-    %img{src: "/assets/logo/logo-white.png"}
+    = image_tag "logo/logo-white.png"
     %small © FRIMA, Inc.
   -# = render "devise/shared/links"

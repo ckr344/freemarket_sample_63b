@@ -1,0 +1,30 @@
+.user-show
+  %ul.user-show__settings
+    %h3.user-show__settings--title
+      = "設定"
+    %li.user-show__settings--lists
+      = link_to edit_user_registration_path, class:"user-show__settings--profiles" do
+        = "プロフィール"
+        %h1.user-show__settings--arrow
+          = ">"
+    %li.user-show__settings--lists
+      = link_to edit_user_registration_path, class:"user-show__settings--profiles" do
+        = "発送元・お届け先住所変更"
+        %h1.user-show__settings--arrow
+          = ">"
+    %li.user-show__settings--lists
+      = link_to new_card_path, class:"user-show__settings--profiles" do
+        = "支払い方法"
+        %h1.user-show__settings--arrow
+          = ">"
+    %li.user-show__settings--lists
+      = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"user-show__settings--profiles"
+      %h1.user-show__settings--arrow
+        = ">"
+  .user-show__myprofile
+    .user-show__myprofile--up
+      .user-show__myprofile--image
+        = icon("far", "user-circle")
+      .user-show__myprofile--name
+        = current_user.nickname
+    .user-show__myprofile--bottom
