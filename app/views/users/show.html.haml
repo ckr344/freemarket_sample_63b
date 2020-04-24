@@ -18,9 +18,10 @@
         %h1.user-show__settings--arrow
           = ">"
     %li.user-show__settings--lists
-      = link_to "ログアウト", destroy_user_session_path, method: :delete, class:"user-show__settings--profiles"
-      %h1.user-show__settings--arrow
-        = ">"
+      = link_to destroy_user_session_path, method: :delete, class:"user-show__settings--profiles" do
+        = "ログアウト"
+        %h1.user-show__settings--arrow
+          = ">"
   .user-show__myprofile
     .user-show__myprofile--up
       .user-show__myprofile--image

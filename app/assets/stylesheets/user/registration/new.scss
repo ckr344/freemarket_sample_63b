@@ -105,16 +105,16 @@
       line-height: 48px;
       background-color: #EA352D;
       color: white;
-      font-size: bold;
+      font-size: 16px;
       text-align: center;
     }
     &--sends{
       width: 341px;
       height: 48px;
-      line-height: 48px;
       background-color: #EA352D;
       color: white;
-      font-size: bold;
+      font-size: 15px;
+      font-weight: bold;
       text-align: center;
       margin-top: 40px;
     }
@@ -145,6 +145,21 @@
   background-color: #ffffff;
   border-right: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
   border-left: calc((100vw - 700px) / 2) solid rgb(245, 245, 245);
+  &__back{
+    margin-top: 30px;
+    height: 50px;
+    width: 341px;
+    background-color: gray;
+    text-align: center;
+    border-radius: 5px;
+  }
+  &__back-link{
+    font-size: 15px;
+    line-height: 50px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
 }
 .field_with_errors {
   display: inline;

@@ -43,4 +43,5 @@
         = f.text_field :phone_num, autofocus: true, autocomplete: "phone_num", placeholder: "例）09012341234", class: "user-new__field--input"
       .actions
         = f.submit "更新", class: "user-new__field--sends"
-= link_to "Back", :back
+      .user-news__back
+        = link_to "マイページに戻る", :back, class: "user-news__back-link"
