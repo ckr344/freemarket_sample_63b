@@ -8,7 +8,7 @@
 
 .user-session
   .user-session__logo
-    %img{src: "/assets/logo/logo.png"}
+    = image_tag "logo/logo.png"
   .user-session__account_yet
     %p アカウントをお持ちでない方はこちら
     = link_to "新規登録画面" ,"sign_up", class: "user-session__account_yet--link"
