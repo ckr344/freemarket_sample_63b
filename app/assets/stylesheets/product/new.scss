@@ -26,35 +26,35 @@ main{
   border-bottom: 2px solid rgb(245,245,245);
 }
 
-// 画像up box
-.upload__box{
-  height: 350px;
-  &__head{
-    font-size: 16px;
-    font-weight: 900;
-    &__sub{
-      font-size: 12px;
-    }
-  }
-  &__images{
-    height: 200px;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  &__image{
-    width: 30%;
-    border: 1px dotted gray;
-    background-color: rgb(245,245,245);
-  }
-  &__image-delete{
-    text-align: center;
-    margin-top: 5px;
-    cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 10px;
-  }
-}
+// // 画像up box
+// .upload__box{
+//   height: 350px;
+//   &__head{
+//     font-size: 16px;
+//     font-weight: 900;
+//     &__sub{
+//       font-size: 12px;
+//     }
+//   }
+//   &__images{
+//     height: 200px;
+//     display: flex;
+//     justify-content: space-between;
+//     margin-top: 10px;
+//   }
+//   &__image{
+//     width: 30%;
+//     border: 1px dotted gray;
+//     background-color: rgb(245,245,245);
+//   }
+//   &__image-delete{
+//     text-align: center;
+//     margin-top: 5px;
+//     cursor: pointer;
+//     border: 1px solid gray;
+//     border-radius: 10px;
+//   }
+// }
 
 .preview-image{
   object-fit: cover;

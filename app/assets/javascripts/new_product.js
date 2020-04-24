@@ -22,8 +22,18 @@
   //products/:i/editページへリンクした際のアクション=======================================
   if (window.location.href.match(/\/products\/\d+\/edit/)){
     //登録済み画像のプレビュー表示欄の要素を取得する
-    var prevContent = $('.label-content').prev();
+    
+    // var prevContent = $('.label-content').prev(".prev-content");
+    // var prevContent = $('.label-content').prev();
+    var prevContent = $('.label-box__text-visible').prev();
+
+    // console.log('こんにちは');
+
+    console.log($(prevContent));
     labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+    
+    // console.log('こんにちは2');
+
     $('.label-content').css('width', labelWidth);
     //プレビューにidを追加
     $('.preview-box').each(function(index, box){
@@ -96,6 +106,9 @@
 
   // 画像の削除
   $(document).on('click', '.delete-box', function() {
+
+    // console.log('削除機能');
+
     var id = $(this).attr('id').replace(/[^0-9]/g, '');
     $(`#preview-box__${id}`).remove();
 
@@ -107,7 +120,7 @@
       //フォームの中身を削除 
       $(`#product_images_attributes_${id}_image`).val("");
     } else {
-      //投稿編集時
+    //投稿編集時
       $(`#product_images_attributes_${id}__destroy`).prop('checked',true);
     }
     var count = $('.preview-box').length;
