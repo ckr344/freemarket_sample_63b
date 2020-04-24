@@ -120,13 +120,13 @@ $(function(){
   });
 });
 
-// // 詳細画面における画像の切替
-// $(document).on('click',function(){
-//   $('.product-show__item-sub-img').click(function () {
-//     var source = $(this).attr('src');
-//     $('.product-show__item-top-img').attr('src', source);
-//   });
-// });
+// 詳細画面における画像の切替
+$(document).on('click',function(){
+  $('.product-show__item-sub-img').click(function () {
+    var source = $(this).attr('src');
+    $('.product-show__item-top-img').attr('src', source);
+  });
+});
 
 // // 画像の削除ボタン
 // $('#clear1').click(
