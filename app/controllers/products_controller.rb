@@ -36,30 +36,62 @@ class ProductsController < ApplicationController
     end
   end
 
+
+  # def create
+  #   @product = Product.new(product_params)
+  #   @category = Category.all.order("id ASC").limit(13)
+  #     if @product.save
+  #         params[:images]["image"].each do |image|
+  #           @image = @product.images.create!(image: image)
+  #         end
+  #       redirect_to root_path
+  #     else
+  #       @product.images.build
+  #       render action: 'new'
+  #     end
+  # end
+
+
   def create
     @product = Product.new(product_params)
-    @category = Category.all.order("id ASC").limit(13)
-      if @product.save
-          params[:images]["image"].each do |image|
-            @image = @product.images.create!(image: image)
-          end
-        redirect_to root_path
-      else
-        @product.images.build
-        render action: 'new'
-      end
+    @product.save
+    redirect_to product_path(@product.id)
   end
 
+  # def create
+  #   @product = Product.new(product_params)
+  #   respond_to do |format|
+  #     if @product.save
+  #         params[:images][:image].each do |image|
+  #           @product.images.create(image: image, product_id: @product.id)
+  #         end
+  #       format.html{redirect_to root_path}
+  #     else
+  #       @product.images.build
+  #       format.html{render action: 'new'}
+  #     end
+  #   end
+  # end
+
   def show
+    # @product = Product.find(params[:id])
+
     @top_image = @product.images.first
     @images = @product.images
     # SOLD OUT確認用
     @transaction_check = Transaction.where(product_id: @product.id)
   end
 
+
+
   def edit
     @category = Category.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
+    # @product = Product.find(params[:id])
+
+    # @product.product_images.build
+    # @product_images = @product.images
+
     # 親セレクトボックスの初期値(配列)
     @category_parent_array = []
     # categoriesテーブルから親カテゴリーのみを抽出、配列に格納
@@ -72,13 +104,23 @@ class ProductsController < ApplicationController
     @category_grandchild_array = @product.category.parent.children
   end
 
+  # def update
+  #   @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
+  #   if @product.update(product_params)
+  #       params[:images]["image"].each do |image|
+  #         @image = @product.images.create!(image: image)
+  #       end
+  #     redirect_to product_path
+  #   else
+  #     @product.images.build
+  #     render 'edit'
+  #   end  
+  # end
+
   def update
-    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
-    if @product.update(product_params)
-      redirect_to product_path
-    else
-      render 'edit'
-    end  
+    @product = Product.find(params[:id])
+    @product.update(product_update_params)
+    redirect_to edit_product_path(@product.id)
   end
 
   def category_children 
@@ -100,9 +142,26 @@ class ProductsController < ApplicationController
 
   private
 
+  # def product_params
+  #   params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+  #     images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+  # end
+
+  # def product_params
+  #   params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+  #     images_attributes: [:image]).merge(user_id: current_user.id)
+  # end
+
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
-      images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+    params.require(:product).permit(
+      :name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      [images_attributes: [:image]]).merge(user_id: current_user.id)
+  end
+
+  def product_update_params
+    params.require(:product).permit(
+      :name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      [images_attributes: [:image, :_destroy, :id]]).merge(user_id: current_user.id)
   end
 
   def set_product

@@ -6,37 +6,77 @@
       .exhibition__container__header
         商品の情報を入力
       .upload__box.exhibition__content__box
-        .sell__block__form__upload
-          %h3.sell__block__form__upload__head
-            出品画像
-            %span.require 必須
-          %p 最大5枚までアップロードできます
-          .post__drop__box__container
-            .prev-content
-              //JSで挿入したhtmlと同じ形　each文でのプレビュー表示
-              - @product.images.each do |image|
-                .preview-box
-                  .upper-box
-                    = image_tag image.image.url, width: "112", height: "112", alt: "preview"
-                  .lower-box
-                    .update-box
-                      %label.edit-btn 編集
-                    .delete-box
-                      .delete-btn
-                        %span 削除
-            .label-content
-              //プレビューの数に合わせてforオプションを指定
-              = f.label :"images_attributes_#{@product.images.length}_image", class: "label-box", id: "label-box--#{@product.images.length}" do
-                %pre.label-box__text-visible クリックしてファイルをアップロード
-            .hidden-content
-              = f.fields_for :images do |i|
-                //プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
-                = i.file_field :image, class: "hidden-field"
-                = i.check_box:_destroy, class: "hidden-checkbox"
+        .upload__box__head
+          出品画像
+          %span.form-description.form-require 必須
+          %p.upload__box__head__sub 最大3枚までアップロードできます
 
-                //5つのfile_fieldを準備するに当たって、足りない分を表示
-              - @product.images.length.upto(4) do |i|
-                %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
+        -# .upload__box__images
+        -#   -# 1枚目
+        -#   .upload__box__image
+        -#     %label{for: "product_images_attributes_0_image"}
+        -#       - if @product.images.first.present?
+        -#         = image_tag @product.images.first.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
+        -#       - else
+        -#         = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
+        -#     .upload__box__image-picker
+        -#       = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][0][id]", id: "product_images_attributes_0_image", style: "display: none;"
+        -#     .upload__box__image-delete
+        -#       %span 削除
+
+        -# .product-show__item-box__body--list
+        -#       - @images.each do |image|
+        -#         .product-show__item-box__body--sub-img
+        -#           = image_tag image.image.url, alt:"サブ画像", class: "product-show__item-sub-img"
+        
+        .upload__box__images
+          - @product.images.each do |image|
+            .upload__box__product-images
+              = image_tag image.image.url, alt:"サブ画像", class: "product-show__item-sub-img"
+          
+          .upload__box__image
+            = file_field :image, name: "product[images_attributes][2][id]", id: "product_images_attributes_2_image", type: "file", multiple: true, accept: "image/*"
+
+
+            = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][0][id]", id: "product_images_attributes_0_image", style: "display: none;"
+
+            <input type="file" name="product[images_attributes][1][image]" id="product_images_attributes_1_image">
+            <input type="hidden" value="70" name="product[images_attributes][0][id]" id="product_images_attributes_0_id">
+          
+          = f.fields_for :images do |i|
+            .upload__box__image
+              = i.file_field :image
+
+            -# .upload__box__image
+            -#   - if @product.images.second.present?
+            -#     = image_tag @product.images.second.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview2"
+            -#     .upload__box__image-delete
+            -#       %span 削除
+            -#   - else
+            -#     %label{for: "image2"}
+            -#       = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview1", class: "preview-image"
+            -#     = i.file_field :image, id:"image2", type: "file", accept: "image/*", onchange: "previewImage2(this);", style: "display: none;", name: "images[image][]"
+            -# .upload__box__image
+            -#   - if @product.images.third.present?
+            -#     = image_tag @product.images.third.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview3"
+            -#     .upload__box__image-delete
+            -#     %span 削除
+            -#   - else
+            -#     %label{for: "image3"}
+            -#       = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview3", class: "preview-image"
+            -#     = i.file_field :image, id:"image3", type: "file", accept: "image/*", onchange: "previewImage3(this);", style: "display: none;", name: "images[image][]"
+
+          -# = f.fields_for :images, @product.images do |i|
+          -#   .upload__box__image
+          -#     - if @product.images.first.present?
+          -#       = image_tag @product.images.first.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview1"
+          -#       .upload__box__image-delete
+          -#         %span 削除
+          -#     - else
+          -#       %label{for: "image1"}
+          -#         = image_tag "pict/item_upload_dummy.png", alt: "Item upload dummy" ,height: "100%", width: "100%", id: "preview1", class: "preview-image"
+          -#       = i.file_field :image, id:"image1", type: "file", accept: "image/*", onchange: "previewImage1(this);", style: "display: none;", name: "images[image][]"
+
 
       .exhibition__content__box.product__box
         .form__group1
