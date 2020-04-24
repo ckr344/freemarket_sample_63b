@@ -27,80 +27,77 @@
     .top__genre-box
       .top__genre-box-title
         レディース新着アイテム
-      .top__genre-box-more
-        もっと見る >
     .top__genre-items
-      - @ladies_products.each do |product|
-        .top__genre-item
-          = link_to product_path(product.id), class:"top__genre-item-link" do
-            .top__genre-item-pict
-              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
-            .top__genre-body
-              .top__genre-body-price
-                .top__genre-body-price--yen
-                  ¥
-                .top__genre-body-price--value
-                  = product.price
-              .top__genre-body-name
-                = product.name
-              -# 商品購入済みであればSOLD OUTを表示
-              - if @ladies_transaction.present?
-                - if @ladies_transaction.first.product_id == product.id
-                  .top__transaction-check
-                    .top__transaction-check--btn
-                      SOLD OUT
+      -if @ladies_products.present?
+        - @ladies_products.each do |product|
+          .top__genre-item
+            = link_to product_path(product.id), class:"top__genre-item-link" do
+              .top__genre-item-pict
+                = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+              .top__genre-body
+                .top__genre-body-price
+                  .top__genre-body-price--yen
+                    ¥
+                  .top__genre-body-price--value
+                    = product.price
+                .top__genre-body-name
+                  = product.name
+                -# 商品購入済みであればSOLD OUTを表示
+                - if @ladies_transaction.present?
+                  - if @ladies_transaction.first.product_id == product.id
+                    .top__transaction-check
+                      .top__transaction-check--btn
+                        SOLD OUT
   .top__genre
     .top__genre-box
       .top__genre-box-title
         メンズ新着アイテム
-      .top__genre-box-more
-        もっと見る >
     .top__genre-items
-      - @mens_products.each do |product|
-        .top__genre-item
-          = link_to product_path(product.id), class:"top__genre-item-link" do
-            .top__genre-item-pict
-              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
-            .top__genre-body
-              .top__genre-body-price
-                .top__genre-body-price--yen
-                  ¥
-                .top__genre-body-price--value
-                  = product.price
-              .top__genre-body-name
-                = product.name
-              -# 商品購入済みであればSOLD OUTを表示
-              - if @mens_transaction.present?
-                - if @mens_transaction.first.product_id == product.id
-                  .top__transaction-check
-                    .top__transaction-check--btn
-                      SOLD OUT
+      -if @mens_products.present?
+        - @mens_products.each do |product|
+          .top__genre-item
+            = link_to product_path(product.id), class:"top__genre-item-link" do
+              .top__genre-item-pict
+                = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+              .top__genre-body
+                .top__genre-body-price
+                  .top__genre-body-price--yen
+                    ¥
+                  .top__genre-body-price--value
+                    = product.price
+                .top__genre-body-name
+                  = product.name
+                -# 商品購入済みであればSOLD OUTを表示
+                - if @mens_transaction.present?
+                  - if @mens_transaction.first.product_id == product.id
+                    .top__transaction-check
+                      .top__transaction-check--btn
+                        SOLD OUT
   .top__genre
     .top__genre-box
       .top__genre-box-title
         家電・スマホ・カメラ新着アイテム
-      .top__genre-box-more
-        もっと見る >
     .top__genre-items
-      - @appliances_products.each do |product|
-        .top__genre-item
-          = link_to product_path(product.id), class:"top__genre-item-link" do
-            .top__genre-item-pict
-              = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
-            .top__genre-body
-              .top__genre-body-price
-                .top__genre-body-price--yen
-                  ¥
-                .top__genre-body-price--value
-                  = product.price
-              .top__genre-body-name
-                = product.name
-              -# 商品購入済みであればSOLD OUTを表示
-              - if @appliances_transaction.present?
-                - if @appliances_transaction.first.product_id == product.id
-                  .top__transaction-check
-                    .top__transaction-check--btn
-                      SOLD OUT
+      -if @appliances_products.present?
+        - @appliances_products.each do |product|
+          .top__genre-item
+            = link_to product_path(product.id), class:"top__genre-item-link" do
+              .top__genre-item-pict
+                = image_tag product.images.first.image.url, alt:"商品画像", class: "top__genre-item-img"
+              .top__genre-body
+                .top__genre-body-price
+                  .top__genre-body-price--yen
+                    ¥
+                  .top__genre-body-price--value
+                    = product.price
+                .top__genre-body-name
+                  = product.name
+                -# 商品購入済みであればSOLD OUTを表示
+                - if @appliances_transaction.present?
+                  - if @appliances_transaction.first.product_id == product.id
+                    .top__transaction-check
+                      .top__transaction-check--btn
+                        SOLD OUT
 .footer_sell
   = link_to new_product_path , class:"footer_sell_btn_link" do
     .footer_sell_btn
