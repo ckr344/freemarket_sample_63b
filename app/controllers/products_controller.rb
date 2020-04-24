@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
         redirect_to product_path(@product.id)
       else
         @product.images.build
-        render action: 'new'
+        redirect_to new_product_path
       end
   end
 
@@ -74,7 +74,7 @@ class ProductsController < ApplicationController
       if @product.update(product_update_params)
         redirect_to product_path(@product.id)
       else
-        render action: 'edit'
+        redirect_to edit_product
       end
   end
 
