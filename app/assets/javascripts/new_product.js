@@ -1,5 +1,11 @@
 // $(document).on('turbolinks:load', function(){
 
+
+$(function(){
+  
+
+
+
   //プレビューのhtmlを定義
   function buildHTML(count) {
     var html = `<div class="preview-box" id="preview-box__${count}">
@@ -23,14 +29,23 @@
   if (window.location.href.match(/\/products\/\d+\/edit/)){
     //登録済み画像のプレビュー表示欄の要素を取得する
     
+    var prevContent = $('.label-content').prev();
+    // var prevContent = $('.label-box__text-visible').prev();
     // var prevContent = $('.label-content').prev(".prev-content");
     // var prevContent = $('.label-content').prev();
-    var prevContent = $('.label-box__text-visible').prev();
+    // var prevContent = $('.label-box__text-visible').prev();
 
     // console.log('こんにちは');
 
-    console.log($(prevContent));
+    // console.log($(prevContent));
     labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
+
+    // // var prevContent = $('.label-content').prev(".prev-content");
+    // var prevContent = $('.label-content').prev();
+    // // var prevContent = $('.label-box__text-visible').prev();
+    // // console.log('こんにちは');
+    // console.log(prevContent);
+    // labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
     
     // console.log('こんにちは2');
 
@@ -134,4 +149,7 @@
     }
     //=============================================================================
   });
+
 // });
+
+})

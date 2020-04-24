@@ -120,7 +120,7 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     @product.update(product_update_params)
-    redirect_to edit_product_path(@product.id)
+    redirect_to product_path(@product.id)
   end
 
   def category_children 
