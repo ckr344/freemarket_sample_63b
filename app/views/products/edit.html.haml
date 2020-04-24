@@ -9,7 +9,7 @@
         .sell__block__form__upload
           %h3.sell__block__form__upload__head
             出品画像
-            %span.require 必須
+            %span.form-description.form-require 必須
             %p 最大5枚までアップロードできます
           .post__drop__box__container
             .prev-content
@@ -19,8 +19,6 @@
                   .upper-box
                     = image_tag image.image.url, width: "112", height: "112", alt: "preview"
                   .lower-box
-                    .update-box
-                      %label.edit-btn 編集
                     .delete-box
                       .delete-btn
                         %span 削除

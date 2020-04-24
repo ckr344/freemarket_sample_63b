@@ -1,27 +1,3 @@
-// function previewImage1(obj){
-//   var fileReader = new FileReader();
-//   fileReader.onload = (function() {
-//     document.getElementById('preview1').src = fileReader.result;
-//   });
-//   fileReader.readAsDataURL(obj.files[0]);
-// }
-
-// function previewImage2(obj){
-//   var fileReader = new FileReader();
-//   fileReader.onload = (function() {
-//     document.getElementById('preview2').src = fileReader.result;
-//   });
-//   fileReader.readAsDataURL(obj.files[0]);
-// }
-
-// function previewImage3(obj){
-//   var fileReader = new FileReader();
-//   fileReader.onload = (function() {
-//     document.getElementById('preview3').src = fileReader.result;
-//   });
-//   fileReader.readAsDataURL(obj.files[0]);
-// }
-
 function calcProfit() {
   var price = document.getElementById('price__num').value;
   price = Number(price);
@@ -127,27 +103,3 @@ $(document).on('click',function(){
     $('.product-show__item-top-img').attr('src', source);
   });
 });
-
-// // 画像の削除ボタン
-// $('#clear1').click(
-//   function() {
-//       $('#image1').after('<input type="file" id="file_new1" name="images[image][]">');
-//       $('#image1').remove();
-//       $('#file_new1').attr('id','file');
-//   }
-// );
-
-// {
-// 	var btn = $('<button type="button" />').text('クリア').on('click', function()
-// 	{
-// 		var c = $(this).prev().clone();
-// 		c.val('');
-// 		$(this).prev().replaceWith(c);
-// 	});
-// 	$('input[type="file"]').after(btn);
-// };
-
-// // function test(){
-// //   var obj = document.getElementById("f1");
-// //   obj.value = "";
-// // }

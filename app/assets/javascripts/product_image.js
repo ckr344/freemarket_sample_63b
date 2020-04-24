@@ -1,10 +1,4 @@
-// $(document).on('turbolinks:load', function(){
-
-
 $(function(){
-  
-
-
 
   //プレビューのhtmlを定義
   function buildHTML(count) {
@@ -13,9 +7,6 @@ $(function(){
                     <img src="" alt="preview">
                   </div>
                   <div class="lower-box">
-                    <div class="update-box">
-                      <label class="edit_btn">編集</label>
-                    </div>
                     <div class="delete-box" id="delete_btn_${count}">
                       <span>削除</span>
                     </div>
@@ -28,27 +19,8 @@ $(function(){
   //products/:i/editページへリンクした際のアクション=======================================
   if (window.location.href.match(/\/products\/\d+\/edit/)){
     //登録済み画像のプレビュー表示欄の要素を取得する
-    
     var prevContent = $('.label-content').prev();
-    // var prevContent = $('.label-box__text-visible').prev();
-    // var prevContent = $('.label-content').prev(".prev-content");
-    // var prevContent = $('.label-content').prev();
-    // var prevContent = $('.label-box__text-visible').prev();
-
-    // console.log('こんにちは');
-
-    // console.log($(prevContent));
     labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
-
-    // // var prevContent = $('.label-content').prev(".prev-content");
-    // var prevContent = $('.label-content').prev();
-    // // var prevContent = $('.label-box__text-visible').prev();
-    // // console.log('こんにちは');
-    // console.log(prevContent);
-    // labelWidth = (620 - $(prevContent).css('width').replace(/[^0-9]/g, ''));
-    
-    // console.log('こんにちは2');
-
     $('.label-content').css('width', labelWidth);
     //プレビューにidを追加
     $('.preview-box').each(function(index, box){
@@ -149,7 +121,4 @@ $(function(){
     }
     //=============================================================================
   });
-
-// });
-
 })
