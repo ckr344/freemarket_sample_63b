@@ -38,12 +38,8 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @category = Category.all.order("id ASC").limit(13)
       if @product.save
-          params[:images]["image"].each do |image|
-            @image = @product.images.create!(image: image)
-          end
-        redirect_to root_path
+        redirect_to product_path(@product.id)
       else
         @product.images.build
         render action: 'new'
@@ -60,6 +56,7 @@ class ProductsController < ApplicationController
   def edit
     @category = Category.order("id ASC").limit(13)
     @product = Product.find(params[:id]).presence || "商品は存在しません"
+
     # 親セレクトボックスの初期値(配列)
     @category_parent_array = []
     # categoriesテーブルから親カテゴリーのみを抽出、配列に格納
@@ -73,12 +70,12 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = current_user.products.find(params[:id]).presence || "商品は存在しません"
-    if @product.update(product_params)
-      redirect_to product_path
-    else
-      render 'edit'
-    end  
+    @product = Product.find(params[:id])
+      if @product.update(product_update_params)
+        redirect_to product_path(@product.id)
+      else
+        render action: 'edit'
+      end
   end
 
   def category_children 
@@ -101,8 +98,15 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
-      images_attributes: [:image, :_destroy, :id]).merge(user_id: current_user.id)
+    params.require(:product).permit(
+      :name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      [images_attributes: [:image]]).merge(user_id: current_user.id)
+  end
+
+  def product_update_params
+    params.require(:product).permit(
+      :name, :description, :status, :delivery_charge, :delivery_method, :delivery_prefecture, :delivery_days, :size, :brand, :price, :transaction_id, :category_id,
+      [images_attributes: [:image, :_destroy, :id]]).merge(user_id: current_user.id)
   end
 
   def set_product

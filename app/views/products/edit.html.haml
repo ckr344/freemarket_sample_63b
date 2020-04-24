@@ -6,56 +6,35 @@
       .exhibition__container__header
         商品の情報を入力
       .upload__box.exhibition__content__box
-        .upload__box__head
-          出品画像
-          %span.form-description.form-require 必須
-          %p.upload__box__head__sub 最大3枚までアップロードできます
-        -# 代替案
-        -# .upload__box__images#image-box
-        -#   - @product.images.each_with_index do |img, index|
-        -#     .upload__box__image
-        -#       %label{for: "image#{img.id} image#{index}"}
-        -#         - if @product.images.present?
-        -#           = image_tag img.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image", id: "preview-image#{index}"
-        -#         - else
-        -#           = image_tag "pict/product_upload_dummy.png", alt: "product upload dummy", size: "210x195"
-        -#       = f.file_field :image, multiple: true, id:"image#{img.id} image#{index}", type: "file", accept: "image/*", style: "display: none;", name: "product[images_attributes][#{index}][id]"
-        -# -#     -# %button.image-remove 削除
+        .sell__block__form__upload
+          %h3.sell__block__form__upload__head
+            出品画像
+            %span.form-description.form-require 必須
+            %p 最大5枚までアップロードできます
+          .post__drop__box__container
+            .prev-content
+              //JSで挿入したhtmlと同じ形　each文でのプレビュー表示
+              - @product.images.each do |image|
+                .preview-box
+                  .upper-box
+                    = image_tag image.image.url, width: "112", height: "112", alt: "preview"
+                  .lower-box
+                    .delete-box
+                      .delete-btn
+                        %span 削除
+            .label-content
+              //プレビューの数に合わせてforオプションを指定
+              = f.label :"images_attributes_#{@product.images.length}_image", class: "label-box", id: "label-box--#{@product.images.length}" do
+                %pre.label-box__text-visible クリックしてファイルをアップロード
+            .hidden-content
+              = f.fields_for :images do |i|
+                //プレビューが出ている分のfile_fieldとdelete用のチェックボックスを設置
+                = i.file_field :image, class: "hidden-field"
+                = i.check_box:_destroy, class: "hidden-checkbox"
+                //5つのfile_fieldを準備するに当たって、足りない分を表示
+              - @product.images.length.upto(4) do |i|
+                %input{name: "product[images_attributes][#{i}][image]", id: "product_images_attributes_#{i}_image", class:"hidden-field", type:"file"}
 
-        .upload__box__images
-          -# 1枚目
-          .upload__box__image
-            %label{for: "product_images_attributes_0_image"}
-              - if @product.images.first.present?
-                = image_tag @product.images.first.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
-              - else
-                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
-            .upload__box__image-picker
-              = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][0][id]", id: "product_images_attributes_0_image", style: "display: none;"
-            .upload__box__image-delete
-              %span 削除
-          -# 2枚目
-          .upload__box__image
-            %label{for: "product_images_attributes_1_image"}
-              - if @product.images.second.present?
-                = image_tag @product.images.second.image.url, alt: "product upload" ,height: "100%", width: "100%", class: "preview-image"
-              - else
-                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
-              .upload__box__image-picker
-                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][1][id]", id: "product_images_attributes_1_image", style: "display: none;"
-            .upload__box__image-delete
-              %span 削除
-          -# 3枚目
-          .upload__box__image
-            %label{for: "product_images_attributes_2_image"}
-              - if @product.images.third.present?
-                = image_tag @product.images.third.image.url, alt: "product upload" ,height: "100%", width: "100%"
-              - else
-                = image_tag "pict/item_upload_dummy.png", alt: "product upload dummy", size: "210x195"
-              .upload__box__image-picker
-                = f.file_field :image, multiple: true, type: "file", accept: "image/*", name: "product[images_attributes][2][id]", id: "product_images_attributes_2_image", style: "display: none;"
-            .upload__box__image-delete
-              %span 削除
       .exhibition__content__box.product__box
         .form__group1
           = f.label :name do
